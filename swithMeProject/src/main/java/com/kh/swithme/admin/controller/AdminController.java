@@ -10,7 +10,7 @@ public class AdminController {
 
 	// 확인
 
-	
+	// 집가고 싶음 
 	
 	
 	
