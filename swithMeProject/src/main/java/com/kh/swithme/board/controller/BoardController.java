@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.swithme.board.model.service.BoardServiceImpl;
 import com.kh.swithme.common.model.vo.PageInfo;
@@ -16,6 +17,17 @@ public class BoardController {
 	
 	@Autowired
 	private BoardServiceImpl boardService;
+	
+	
+	/**
+	 * 자유게시판 게시글 수 조회
+	 * @return 자유게시판
+	 */
+	@ResponseBody
+	@RequestMapping("freeCount.bo")
+	public int freeCount() {
+		return boardService.freeCount();
+	}
 	
 	/**
 	 * 게시판 리스트 불러오기

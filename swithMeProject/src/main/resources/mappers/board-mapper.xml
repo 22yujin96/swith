@@ -4,4 +4,103 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
 
+<resultMap id="boardResultSet" type="board">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="BOARD_TYPE" property="boardType" />
+		<result column="CATEGORY" property="category" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_CONTENT" property="boardContent" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="BOARD_STATUS" property="status" />
+		<result column="BOARD_COUNT" property="count" />
+	</resultMap>
+	
+	<resultMap id="replyResultMap" type="reply">
+		<result column="BOARD_REPLY_NO" property="boardReplyNo" />
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="BOARD_REPLY_CONTENT" property="boardReplyContent" />
+		<result column="BOARD_REPLY_FILE" property="boardReplyFile" />
+		<result column="BOARD_REPLY_CREATE_DATE" property="createDate" />
+		<result column="BOARD_STATUS" property="status" />
+	</resultMap>
+	
+	<!-- 대댓글  -->
+	<resultMap id="reReplyResultMap" type="rereply">
+		<result column="BOARD_RE_REPLY_NO" property="reReplyNo" />
+		<result column="BOARD_REPLY_NO" property="replyNo" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="BOARD_REPLY2_CONTENT" property="reReplyContent" />
+		<result column="BOARD_REPLY2_CREATE_DATE" property="createDate" />
+		<result column="BOARD_REPLY2_FILE" property="reReplyFile" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<!-- 희재 -->
+	
+	
+	<!-- 혜린 -->
+	
+
+
+	<!-- 게시글 수  -->
+	<select id="boardListCount" parameterType="_int" resultType="_int">
+		SELECT
+			  COUNT(*)
+		FROM
+			  MAINBOARD
+		WHERE
+			  <if test="boardType == 1">
+			  BOARD_TYPE = 'free'
+			  </if>
+			   <if test="boardType == 2">
+			  BOARD_TYPE = 'QnA'
+			  </if>
+		  AND
+		  	  BOARD_STATUS = 'Y'
+	</select>
+	
+	<!-- 리스트 불러오기 -->
+	<select id="boardListSelect" parameterType="_int" resultMap="boardResultSet">
+		SELECT
+              BOARD_NO
+             ,NICKNAME AS "MEMBER_ID"
+             ,CATEGORY
+             ,BOARD_TITLE
+             ,BOARD_CONTENT
+             ,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD HH24:MI') AS "CREATE_DATE"
+             ,BOARD_COUNT
+		  FROM
+              MAINBOARD
+		  JOIN
+		      MEMBER USING(MEMBER_ID)
+		 WHERE
+		      BOARD_STATUS = 'Y'
+		   AND
+		   	  <if test="boardType == 1">
+		   	  BOARD_TYPE = 'free'
+			  </if>
+			  <if test="boardType == 2">
+		   	  BOARD_TYPE = 'QnA'
+			  </if>
+		 ORDER
+		    BY
+	          CREATE_DATE DESC
+	</select>
+	
+	<!-- 자유게시판 게시글 수 조회  -->
+	<select id="freeCount" resultType="_int">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  MAINBOARD
+		 WHERE
+		 	  BOARD_TYPE = 'free'
+		 
+	</select>
+	
+	
+	
+	
 </mapper>

@@ -37,4 +37,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.boardListSelect(sqlSession, pi, boardType);
 	}
 	
+	@Override
+	public int freeCount() {
+		return boardDao.freeCount(sqlSession);
+	}
+	
 }

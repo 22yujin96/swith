@@ -8,6 +8,7 @@ import com.kh.swithme.common.model.vo.PageInfo;
 public interface BoardService {
 
 	
+	int freeCount();
 	
 	// 1. 리스트 카운트
 	int boardListCount(int boardType);
