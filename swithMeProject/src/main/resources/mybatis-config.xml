@@ -8,6 +8,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 
+	<!-- report 수정 -->
 	<typeAliases>
 		<typeAlias type="com.kh.swithme.admin.model.vo.Report" alias="report" />
 		<typeAlias type="com.kh.swithme.band.model.vo.Band" alias="band" />
