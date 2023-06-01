@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.swithme.board.model.dao.BoardDao;
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
 @Service
@@ -40,6 +41,20 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int freeCount() {
 		return boardDao.freeCount(sqlSession);
+	}
+
+	
+	
+	// 희재 - 스터디룸 
+	
+	@Override
+	public int sRoomListCount() {
+		return 0;
+	}
+
+	@Override
+	public ArrayList<StudyRoom> selectsRoomList(PageInfo pi) {
+		return null;
 	}
 	
 }
