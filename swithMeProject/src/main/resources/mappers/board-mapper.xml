@@ -39,15 +39,15 @@
 	
 	<!-- 스터디룸 -->
 	<resultMap id="sRoomResultSet" type="studyRoom">
-		<result column="SR_NO" property="sRoomNo" />
-		<result column="SR_NAME" property="sRoomName"/>
-		<result column="SR_LOCATION" property="sRoomLocation" />
-		<result column="SR_ADDRESS" property="sRoomAddress" />
-		<result column="SR_LAT" property="sRoomLat" />
-		<result column="SR_LNG" property="sRoomLng" />
-		<result column="SR_PHONE" property="sRoomPhone" />
-		<result column="SR_INTRODUCE" property="sRoomIntroduce" />
-		<result column="SR_CREATEDATE" property="sRoomCreatedate" />
+		<result column="SR_NO" property="studyRoomNo" />
+		<result column="SR_NAME" property="studyRoomName"/>
+		<result column="SR_LOCATION" property="studyRoomLocation" />
+		<result column="SR_ADDRESS" property="studyRoomAddress" />
+		<result column="SR_LAT" property="studyRoomLat" />
+		<result column="SR_LNG" property="studyRoomLng" />
+		<result column="SR_PHONE" property="studyRoomPhone" />
+		<result column="SR_INTRODUCE" property="studyRoomIntroduce" />
+		<result column="SR_CREATEDATE" property="studyRoomCreatedate" />
 		
 	
 	</resultMap>

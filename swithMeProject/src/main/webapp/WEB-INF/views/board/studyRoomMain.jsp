@@ -51,13 +51,13 @@
 			                        <tbody>
 			                            <tr>
 			                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
-			                                <td style="width: 500px;">${ sRoom.sRoomName }</td>
+			                                <td style="width: 500px;">${sRoom.studyRoomName}</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ sRoom.sRoomAddress }</td>
+			                                <td>${sRoom.studyRoomAddress}</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ sRoom.sRoomPhone }</td>
+			                                <td>${sRoom.studyRoomPhone}</td>
 			                            </tr>
 			                            <tr>
 			                                <td><button>지도보기</button></td>
