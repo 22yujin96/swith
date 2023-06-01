@@ -12,7 +12,7 @@
 	<div id="myMenuBar-area">
 		<ul id="mySide1">
 			<li><a href="profil.me">프로필</a></li>
-			<li><a href="#">알림</a></li>
+			<li><a href="alarm.me">알림</a></li>
 			<li><a href="#">캐릭터</a></li>
 			<li><a href="point.me">포인트</a></li>
 			<li><a href="mail.me">메일</a></li>
