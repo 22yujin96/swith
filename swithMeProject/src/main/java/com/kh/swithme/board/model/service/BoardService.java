@@ -24,7 +24,7 @@ public interface BoardService {
 	int sRoomListCount();
 	
 	// 2. 스터디룸 리스트 불러오기
-	ArrayList<StudyRoom> selectsRoomList(PageInfo pi);
+	ArrayList<StudyRoom> selectSRoomList(PageInfo pi);
 		
 		
 }

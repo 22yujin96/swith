@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
 @Repository
@@ -24,6 +25,20 @@ public class BoardDao {
 	}
 	public int freeCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.freeCount");
+	}
+	
+	
+	
+	
+	// 희재 스터디룸 ------------------------------------------------------------------------
+	public int sRoomListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.sRoomListCount");
+	}
+	
+	public ArrayList<StudyRoom> selectSRoomList(SqlSessionTemplate sqlSession, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSRoomList", rowBounds);
 	}
 	
 	
