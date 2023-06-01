@@ -32,25 +32,25 @@
 						<tr>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button id="testBtn">미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
@@ -58,25 +58,25 @@
 						<tr>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
 							<td>
 								<p>아이템이름</p>		
-								<div><img src="resources/uploadFiles/item/none.jpeg" /></div>	
+								<div><img src="resources/images/member/none.jpeg" /></div>	
 								<button>미착용</button>				
 								<button>삭제</button>				
 							</td>
