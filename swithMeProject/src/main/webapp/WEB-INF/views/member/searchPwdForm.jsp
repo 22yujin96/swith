@@ -4,30 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기 폼</title>
+<title>비밀번호 찾기 폼 </title>
 </head>
 <style>
 
-
-
-
-
-    #serchIdTitle{
+   #searchPwdTitle{
         color: rgb(3, 195, 115);
     }
 
-    #searchIdForm{
+    #searchPwdForm{
         background-color: rgb(240, 240, 240);
         border-radius: 20px;
         width: 490px;
         margin: auto;
     }
     
-    #searchIdForm table td{
+    #searchPwdForm table td{
         width: 150px;
     }
    
-   #searchIdForm button{
+   #searchPwdForm button{
         background-color: rgb(3, 195, 115);
         border: none;
         border-radius: 5px;
@@ -37,7 +33,7 @@
         color: white;
         
     }
-    #searchIdForm input{
+     #searchPwdForm input{
     border-radius: 5px;
     border-color: lightgray;
     border-style: double;
@@ -45,23 +41,24 @@
     width: 200px;
     font-size:12px;
 }
-    #searchIdForm input:focus{
+   #searchPwdForm input:focus{
     border-color:rgb(3, 195, 115);
     outline: none;
+    
 }
-    #searchIdForm a{
+    #searchPwdForm a{
         text-decoration: none;
         color: black;
-        font-size: 14px;
+        font-size: 10px;
         color: rgb(85, 85, 85);
         
     }
     
-    #searchIdForm button:hover{
+     #searchPwdForm button:hover{
         cursor: pointer;
     }
 
-    #idSearchErrorMsg{
+    #PwderrorMsg{
         height: 15px; 
         width: 100px;
         font-size: 14px; 
@@ -70,27 +67,29 @@
         
     }
     
-     #searchIdForm table{
+       #searchPwdForm table{
     	margin-left:90px;
     }
 
 </style>
 <body>
-    
-    <jsp:include page="../common/header.jsp"/><br><br><br>
-    
-    <h1 id="serchIdTitle" align="center">아이디 찾기</h1><br><br>
-    
 
-    <form action="searchId.me" method="post">
-        <div id="searchIdForm">
+	<jsp:include page="../common/header.jsp"/><br><br><br>
+    
+    <h1 id="searchPwdTitle" align="center">비밀번호 찾기</h1><br><br>
+
+    <form action="searchPwd.me" method="post">
+        <div id="searchPwdForm">
             <table  border="0" align="center" width="180px;">
                 <br><br>
                 <tr>
                     <th>이름</th>
                     <td colspan="2"><input type="text" name="memberName"  required placeholder=" 이름을 입력해주세요." ></td>
                 </tr><td><br></td></tr>
-               
+                <tr>
+                    <th>아이디</th>
+                    <td colspan="2"><input type="text" name="memberId"  required placeholder=" 아이디를 입력해주세요." ></td>
+                </tr><td><br></td></tr>
                 
                 <tr>
                     <th>이메일</th>
@@ -98,8 +97,8 @@
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
-                    <td id="idSearchErrorMsg" colspan="3" style="display:n***;" >
-                        * 아이디 또는 이메일을 다시 입력해주세요.
+                    <td id="PwderrorMsg" colspan="3" style="display:n***;" >
+                        * 이름 / 아이디 / 이메일을 다시 입력해주세요.
                     </td>
                  
                 </tr><td><br></td></tr>

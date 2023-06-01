@@ -29,6 +29,7 @@
         border-radius: 5px;
         width: 285px;
         height: 35px;  
+        color : white;
         
     }
     
@@ -40,7 +41,7 @@
     border-style: double;
     height: 23px;
     width: 200px;
-    font-size:10px;
+    font-size:12px;
 }
     #loginMember input:focus{
   	  border-color:rgb(3, 195, 115);
@@ -66,7 +67,7 @@
     
     
 
-    <h1 id="loginTitle" align="center">로그인</h1><br>
+    <h1 id="loginTitle" align="center">로그인</h1><br><br>
     
     <form action="login.me" method="post">
     
@@ -75,7 +76,7 @@
                 <br><br>
                 <tr>
                     <th>아이디</th>
-                    <td colspan="2"><input type="text" name="memberId"  required placeholder="아이디를 입력해주세요." ></td>
+                    <td colspan="2"><input type="text" name="memberId"  required placeholder=" 아이디를 입력해주세요." ></td>
                 </tr>
                 <tr>
                     <td><br></td>
@@ -83,7 +84,7 @@
                 
                 <tr>
                     <th>비밀번호</th>
-                    <td colspan="2"><input type="password" required placeholder="비밀번호를 입력해주세요."></td>
+                    <td colspan="2"><input type="password" required placeholder=" 비밀번호를 입력해주세요."></td>
                 </tr>
                 <tr>
                     <td><br></td>
@@ -91,7 +92,8 @@
                 
                     
                 <tr>
-                    <td colspan="3"><button style="margin-left: 20px; color: white;">로그인</button></td>
+                    <td colspan="3"><button >로그인</button></td>
+                    
                 </tr>
                 <tr>
                     <td><br></td>
@@ -100,7 +102,7 @@
                 <tr>
                   
                     <td style=" text-align:right;"><a href="searchIdForm.me">아이디 찾기 </a></td>
-                    <td style=" width: 120px; text-align:right;"><a href="###">비밀번호 찾기</a></td>
+                    <td style=" width: 120px; text-align:right;"><a href="searchPwdForm.me">비밀번호 찾기</a></td>
                     <td style=" width: 90px; text-align:right;"><a href="memberEnrollForm.me">회원가입</a></td>
                   
                 </tr>
@@ -111,8 +113,8 @@
 
 
             </table>
-        </div>
-
+        </div><br><br><br><br><br><br>
+ 					<jsp:include page="../common/footer.jsp"/>
 
 
 
