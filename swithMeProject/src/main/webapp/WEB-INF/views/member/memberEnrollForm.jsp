@@ -323,6 +323,9 @@
     	nickInput.keyup(function() {
     		
     		console.log(nickInput.val());
+    		
+    		닉네임 버튼 누르면 에이젝스로 디비갔다가 확인
+    		+ 가입하기 버튼(활성화 / 비활성화)
     	});
     
     	
