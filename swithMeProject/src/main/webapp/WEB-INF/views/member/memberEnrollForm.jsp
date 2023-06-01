@@ -24,7 +24,7 @@
     background-color: rgb(240, 240, 240);
     border-radius: 20px;
     width: 490px;
-    height:635px;
+    height:640px;
 }
 
 .btn123{
@@ -80,6 +80,7 @@
         <div id="joinMember">
             <table  style="margin-left: 115px;">
                
+               <br>
                 <tr>
                     <th align="left">아이디</th>
                 </tr>
@@ -111,12 +112,15 @@
                 <tr>
                     <td><input id="writeName" type="text" name="memberName"  style="width:225px" required></td>
                 </tr>
-                 <tr><td><br></td></tr>
+                 <tr>
+                 <tr>
+                  <td style="font-size: 10px; " id="checkName"> </td>
+                </tr><td><br></td></tr>
                 <tr>
                     <th align="left">닉네임</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="nickName"  style="width:160px" required><button style="height: 27px;" class="btn123">중복확인</button></td>
+                    <td><input id="writeNick" type="text" name="nickName"  style="width:160px" required><button style="height: 27px;" class="btn123">중복확인</button></td>
                 </tr>
                 
                 <tr><td><br></td></tr>
@@ -172,14 +176,15 @@
         	//console.log(idInput.val());
 			//공백 
 			if(idInput.val() === '') {
-				idInput.css('border-color','rgb(245, 119, 119)');
+				
+				
 				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
 			
 			//정규표현식에 맞지 않을때
 			}else if(!chkId.test(idInput.val())) {
-				idInput.css('border-color','rgb(245, 119, 119)');
+				idInput.css('border-color','gray');
 				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
@@ -196,7 +201,7 @@
 						console.log(result);
 						
 						if(result === "N"){
-							$('#checkId').css('color','rgb(245, 119, 119)').html('중복된 아이디가 존재합니다.');
+							$('#checkId').css('color','gray').html('중복된 아이디가 존재합니다.');
 							$('#enrollBtn').attr("disabled", true);
 							$('#enrollBtn').css('background-color','gray');
 							
@@ -230,14 +235,14 @@
     		//console.log(pwdInput.val());
     		
     		if(pwdInput.val() === ''){
-    			pwdInput.css('border-color','rgb(245, 119, 119)');
+    			pwdInput.css('border-color','gray');
     			$('#checkPwd').css('color','gray').html('비밀번호는 필수 입력사항입니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
     		
     		}else if(!chkPwd.test(pwdInput.val())) {
     			
-	    		pwdInput.css('border-color','rgb(245, 119, 119)');
+	    		pwdInput.css('border-color','gray');
 				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
@@ -293,6 +298,7 @@
     		
     		
     		if(!chkName.test(nameInput.val())){ //정규표현식에 맞지 않으면
+    			$('#checkName').css('color','gray').html('이름은 필수 입력사항입니다.');
     			nameInput.css('border-color','gray');	
     			$('#enrollBtn').attr("disabled", true);
     			$('#enrollBtn').css('background-color','gray');
@@ -303,13 +309,28 @@
     			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
     		}
     	});
+    });
+    
+    
+    
+    //닉네임
+    $(function() {
     	
+    	let chkNick = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;  //2자 이상 16자 이하, 영어 또는 숫자 또는 한글로 구성, 	*한글 초성 및 모음은 허가하지 않는다.
+	
+    	const nickInput = $('#writeNick');
     	
-    	
-    	
+    	nickInput.keyup(function() {
+    		
+    		console.log(nickInput.val());
+    	});
+    
     	
     	
     });
+    
+    
+   
     
     	
     	
