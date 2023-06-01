@@ -54,4 +54,20 @@ public class BoardController {
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	// -----------희재
+	@RequestMapping("studyRoomMainView.bo")
+	public String studyRoomMainView() {
+		return "board/studyRoomMain";
+	}
+	
+	
+	
+	
+	
 }
