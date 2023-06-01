@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>스터디룸</title>
 <style>
-    div{border: 1px solid red;}
     .content>div{height:100%;float:left;}
     #sRoom-list{width:70%;}
     #sRoom-map{width:30%;}
