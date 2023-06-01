@@ -11,7 +11,7 @@ public class MemberControllerY {
 	private MemberServiceImpl memberService;
 	
 	@RequestMapping("mypage.me")
-	public String myPage() {
+	public String myPageMain() {
 		return "member/myPageMain";
 	}
 	
@@ -33,6 +33,16 @@ public class MemberControllerY {
 	@RequestMapping("history.me")
 	public String myHistoryListView() {
 		return "member/myHistory";
+	}
+	
+	@RequestMapping("qna.me")
+	public String myQnaListView() {
+		return "member/memberQNA";
+	}
+	
+	@RequestMapping("qnaEnroll.me")
+	public String qnaEnrollForm() {
+		return "member/qnaEnrollForm";
 	}
 	
 	

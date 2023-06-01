@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메일 작성폼</title>
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/member/myPoint.css">
 </head>
+
 <style>
 
     #mail{
@@ -58,6 +60,7 @@
         border-radius: 5px;
         border-color: lightgray;
         border-style: double;
+        resize:none;
        
     
     }
@@ -72,30 +75,34 @@
 
     }
 
+	#mailForm input:focus{
+	  	  border-color:rgb(3, 195, 115);
+	  	  outline: none;
+  	  
+}
 
   
    
 
 </style>
 <body>
-
-  	<jsp:include page="../common/header.jsp"/><br><br><br>
-	<jsp:include page="myMenuBar.jsp"/>
-  
-    
-    <div id="mail">
-        <div>
-            메일
-        </div>
-    </div>
-          
-    <br>
-
-     
-    <div id="Mailcontent">
-        <br><br>
-       <form action="mail.me" method="post">
-            <table border="0" id="mailForm">
+	<jsp:include page="../common/header.jsp" />
+	
+	<div class="page-blank"></div>
+		
+	<div class="wrap clear">
+		<div class="mySide">
+			<jsp:include page="myMenuBar.jsp" />
+		</div>
+		
+		<div class="content">
+			<div class="topBlock">메일</div>
+			
+			
+			
+			<div class="block">
+			
+				 <table border="0" id="mailForm">
                 <tr>
                     <th align="right" style="width:100px">받는사람 : </th>
                     <td><input type="eamil" name="mailReceiver" style="width:350px;"placeholder=" 받는 사람의 이메일을 작성해주세요." id="mailReceiver"></td>
@@ -130,10 +137,16 @@
 
 
             </table>
-       </form>
-       
-        <br><br><br><br><br><br>
+		
+				
+			</div>
+			
+			<br><br><br><br><br><br><br><br><br><br><br><br>
  					<jsp:include page="../common/footer.jsp"/>
-     
+
+		</div>
+	</div>
+
+
 </body>
 </html>
