@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,40 +41,32 @@
             </div>
             <div class="content">
                 <div id="sRoom-list">
-                    <table border="1">
-                        <tbody>
-                            <tr>
-                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
-                                <td style="width: 500px;">스터디카페</td>
-                            </tr>
-                            <tr>
-                                <td>주소</td>
-                            </tr>
-                            <tr>
-                                <td>전화번호</td>
-                            </tr>
-                            <tr>
-                                <td><button>지도보기</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table border="1">
-                        <tbody>
-                            <tr>
-                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
-                                <td style="width: 500px;">스터디카페</td>
-                            </tr>
-                            <tr>
-                                <td>주소</td>
-                            </tr>
-                            <tr>
-                                <td>전화번호</td>
-                            </tr>
-                            <tr>
-                                <td><button>지도보기</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                	<c:choose>
+                		<c:when test="${ empty sRoomList }">
+                			조회 결과가 없습니다.
+                		</c:when>
+                		<c:otherwise>
+                			<c:forEach items="${sRoomList}" var="sRoom">
+			                    <table border="1">
+			                        <tbody>
+			                            <tr>
+			                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
+			                                <td style="width: 500px;">${sRoom.studyRoomName}</td>
+			                            </tr>
+			                            <tr>
+			                                <td>${sRoom.studyRoomAddress}</td>
+			                            </tr>
+			                            <tr>
+			                                <td>${sRoom.studyRoomPhone}</td>
+			                            </tr>
+			                            <tr>
+			                                <td><button>지도보기</button></td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+		                    </c:forEach>
+	                    </c:otherwise>
+                    </c:choose>
                 </div>
                 <div id="sRoom-map">
                     지도
