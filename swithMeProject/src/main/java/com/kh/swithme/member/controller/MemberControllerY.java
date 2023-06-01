@@ -10,6 +10,11 @@ public class MemberControllerY {
 
 	private MemberServiceImpl memberService;
 	
+	@RequestMapping("mypage.me")
+	public String myPageMain() {
+		return "member/myPageMain";
+	}
+	
 	@RequestMapping("item.me")
 	public String myItemListView() {
 		return "member/myItem";
