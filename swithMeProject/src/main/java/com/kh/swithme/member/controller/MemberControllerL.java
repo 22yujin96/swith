@@ -33,7 +33,7 @@ public class MemberControllerL {
 	}
 	
 	//마이페이지 알람으로 가기
-	@RequestMapping("alarm.mypage")
+	@RequestMapping("alarm.me")
 	public String myPageAlarm() {
 		return "member/myPageAlarm";
 	}
