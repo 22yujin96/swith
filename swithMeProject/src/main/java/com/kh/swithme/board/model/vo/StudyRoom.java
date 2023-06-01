@@ -8,6 +8,7 @@ public class StudyRoom {
 	private int sRoomNo;
 	private String sRoomName;
 	private String sRoomLocation;
+	private String sRoomAddress;
 	private float sRoomLat;
 	private float sRoomLng;
 	private String sRoomPhone;
