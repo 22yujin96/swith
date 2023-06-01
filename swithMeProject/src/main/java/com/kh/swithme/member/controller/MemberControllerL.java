@@ -31,4 +31,20 @@ public class MemberControllerL {
 	public String searchPwdForm() {
 		return "member/searchPwdForm";
 	}
+	
+	//마이페이지 알람으로 가기
+	@RequestMapping("alarm.mypage")
+	public String myPageAlarm() {
+		return "member/myPageAlarm";
+	}
+	//메일 작성폼으로 이동
+	@RequestMapping("mail.me")
+	public String myPageMail() {
+		return "member/myPageMail";
+	}
+	//마이페이지 프로필로 이동
+	@RequestMapping("profil.me")
+	public String profilMember() {
+		return "member/myPageProfil";
+	}
 }

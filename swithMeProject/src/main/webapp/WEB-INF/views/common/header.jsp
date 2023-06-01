@@ -47,7 +47,7 @@
         
         <ul id="userMenu">
             <li>
-                <a href="#">
+                <a href="alarm.mypage">
                     <img src="resources/images/common/notice.png">
                     <div id="noRead"></div>
                 </a>
