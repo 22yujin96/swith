@@ -25,6 +25,10 @@ public interface BoardService {
 	
 	// 2. 스터디룸 리스트 불러오기
 	ArrayList<StudyRoom> selectSRoomList(PageInfo pi);
+	
+	// 3. 스터디룸 대표이미지 불러오기
+	
+	
 		
 		
 }
