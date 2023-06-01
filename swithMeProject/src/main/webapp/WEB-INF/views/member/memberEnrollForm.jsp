@@ -126,7 +126,7 @@
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px"><button style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn" disabled; >가입하기</button></td>
+                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn" >가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 <tr>
                     <!-- ***모두입력하면 버튼 활성화시키기  -->
@@ -169,22 +169,19 @@
         idInput.keyup(function() {
         	
         	console.log(idInput.val());
-
+			//공백 
 			if(idInput.val() === '') {
 				idInput.css('border-color','rgb(245, 119, 119)');
 				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
 			
-				
-				
+			//정규표현식에 맞지 않을때
 			}else if(!chkId.test(idInput.val())) {
-				
 				idInput.css('border-color','rgb(245, 119, 119)');
 				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
-				
 			}else {
 				
 				
@@ -198,13 +195,11 @@
 						console.log(result);
 						
 						if(result === "N"){
-							
 							$('#checkId').css('color','rgb(245, 119, 119)').html('중복된 아이디가 존재합니다.');
 							$('#enrollBtn').attr("disabled", true);
 							$('#enrollBtn').css('background-color','gray');
 							
 						}else{
-							
 							idInput.css('border-color','rgb(3, 195, 115)');
 							$('#checkId').css('color','rgb(3, 195, 115)').html('사용가능한 아이디입니다.');
 							$('#enrollBtn').removeAttr("disabled", true);
@@ -216,9 +211,9 @@
 					}
 				});
 			   }
-            });
-         });
-    
+		          });
+		       });
+		  
     
     
     
@@ -242,25 +237,50 @@
     		}else if(!chkPwd.test(pwdInput.val())) {
     			
 	    		pwdInput.css('border-color','rgb(245, 119, 119)');
-				$('#checkPwd').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
     		
 		    	} else {
 		    		
 		    		pwdInput.css('border-color','rgb(3, 195, 115)');	
-		    		
+		    		$('#enrollBtn').removeAttr("disabled", true);
+					$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
 		    	}
 		      });
 		    });
     	
     	
+    
+    
     //비밀번호 재확인
+    $(function() {
+    	
+    const pwdChkInput = $('#writePwdCheck');
+    const pwdInput = $('#writePwd');
     
+    pwdChkInput.keyup(function() {
+    	
+    	console.log(pwdChkInput.val());
+    	
+    	if(pwdInput.val() === pwdChkInput.val()){
+    		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
+    		$('#enrollBtn').removeAttr("disabled", true);
+			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+    		
+    	}else{
+    		pwdChkInput.css('border-color','gray');	
+    		$('#enrollBtn').attr("disabled", true);
+			$('#enrollBtn').css('background-color','gray');
+    	}
+    });
+   });
     
     	
     	
-    	
+    
+    //이름
+    
     	
     	
 
