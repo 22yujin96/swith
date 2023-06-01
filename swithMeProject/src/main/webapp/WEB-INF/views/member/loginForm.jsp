@@ -28,10 +28,12 @@
         border: none;
         border-radius: 5px;
         width: 285px;
-        height: 35px;
-       
+        height: 35px;  
         
     }
+    
+  
+     
     #loginMember input{
     border-radius: 5px;
     border-color: lightgray;
@@ -40,9 +42,10 @@
     width: 200px;
     font-size:10px;
 }
-    form > #loginMember input:focus{
-    border-color:rgb(3, 195, 115);
-    outline: none;
+    #loginMember input:focus{
+  	  border-color:rgb(3, 195, 115);
+  	  outline: none;
+  	  
 }
     #loginMember a{
         text-decoration: none;
