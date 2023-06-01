@@ -98,7 +98,7 @@
                     <th align="left">비밀번호</th>
                 </tr>
                 <tr>
-                    <td><input onclick="writePwd();" type="password" nmae="memberPwd" placeholder=" 비밀번호를 입력하세요" style="width:225px" required></td>
+                    <td><input id="writePwd" type="password" name="memberPwd" placeholder=" 비밀번호를 입력하세요" style="width:225px" required></td>
                 </tr>
                 <tr>
                     <td style="font-size: 10px; display:none; " id="pwdMessage">8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</td>
@@ -141,14 +141,19 @@
    </div>
     <script>
     
-    	function writeId() {
-    		$('#idMessage').show();
-    		
-    	}
-    	function writePwd() {
-    		$('#pwdMessage').show();
-    		
-    	}
+ 		$(function() {
+ 			$('#writeId').click(function() {
+ 				$('#idMessage').show();
+ 			});
+ 		});
+ 		
+ 		$(function() {
+ 			$('#writePwd').click(function() {
+ 				$('#pwdMessage').show();
+ 			});
+ 		});
+    	
+    	
     	
     	
     </script>
