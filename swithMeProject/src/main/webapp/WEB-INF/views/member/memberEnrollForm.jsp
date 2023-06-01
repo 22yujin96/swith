@@ -62,10 +62,7 @@
 	color:gray;
 }
 
-#joinMember input:focus{
-    border-color:rgb(3, 195, 115);
-    outline: none;
-}
+
 
 </style>
 <body>
@@ -86,12 +83,12 @@
                     <th align="left">아이디</th>
                 </tr>
                 <tr>
-                    <td><input id="writeId" onclick="writeId();" type="text" name="memberId" placeholder=" 아이디를 입력하세요" style="width:160px" required><button style="height: 27px;" onclick="idCheck" class="btn123">중복확인</button></td><br>
+                    <td><input id="writeId"  type="text" name="memberId" placeholder=" 아이디를 입력하세요" style="width:225px" required><br>
                  
                
                 </tr>
                 <tr>
-                    <td style="font-size: 10px; display:none;" id="idMessage" >5 ~ 20자의 영문 소문자, 숫자 특수기호(_),(-)만 사용 가능합니다.</td>
+                   <td style="font-size: 10px; " id="checkId"> </td>
                 </tr><tr><td><br></td></tr>
 
                 <tr>
@@ -130,13 +127,11 @@
                 <tr>
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px"><button style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
-                <tr>
-                	 <td style="font-size: 10px; display:none; " id="emailMessage">@를 포함하여 입력하세요</td>
-                </tr>
+  
                 
                 <tr><td><br></td></tr>
               
-                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123">가입하기</button></td>
+                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn" disable>가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 <tr>
 
@@ -152,13 +147,8 @@
  					
  					
     <script>
-    
- 		$(function() {
- 			$('#writeId').click(function() {
- 				$('#idMessage').show();
- 			});
- 		});
- 		
+    //input클릭하면 조건메시지 뜨도록
+ 	
  		$(function() {
  			$('#writePwd').click(function() {
  				$('#pwdMessage').show();
@@ -170,8 +160,80 @@
  			});
  		});
     	
+    </script>
+    <script>
     	
+    // 정규표현식에 맞으면 초록색 테두리
+    // 정규표현식에 맞지 않으면 빨간색 테두리
+      
+   
+    $(function() {
+
+    	 let chkId = /^[a-zA-Z0-9\d-_^]{4,,19}$/;
+    	 
+    	const idInput = $('#writeId');
     	
+        idInput.keyup(function() {
+        	
+        	console.log(idInput.val());
+
+			if(idInput.val() === null) {
+				idInput.css('border-color','red');
+				$('#checkId').html('아이디는 필수 입력사항입니다.');
+				
+			}else if(!chkId.test(idInput.val())) {
+				idInput.css('border-color','red');
+				$('#checkId').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+			
+			}else {
+				
+				
+				
+				$.ajax({
+					
+					url : 'idCheck.me',
+					data : {checkId : input.val()},
+					success : result => {
+						
+						console.log('중복 ㄴ');
+						
+					},
+					error : () => {
+						console.log('아이디 중복');
+					}
+					
+					
+				
+				
+				
+				});
+				
+				
+				
+				
+				
+				
+			}
+
+
+        });
+
+
+
+
+
+
+    });
+       
+			
+            	
+              
+           
+       
+
+                      
+        
+    
     </script>
    
 

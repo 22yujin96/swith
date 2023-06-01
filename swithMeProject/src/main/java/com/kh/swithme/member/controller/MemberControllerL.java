@@ -47,4 +47,25 @@ public class MemberControllerL {
 	public String profilMember() {
 		return "member/myPageProfil";
 	}
+	
+	
+	
+	
+	
+	
+	// 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping("idCheck.me")
+	public String idCheck() {
+		
+		int count = memberService.idc
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
