@@ -121,13 +121,20 @@
                 </tr>
                 <tr>
                     <td><input type="text" name="nickName"  style="width:160px" required><button style="height: 27px;" class="btn123">중복확인</button></td>
-                </tr><tr><td><br></td></tr>
+                </tr>
+                
+                <tr><td><br></td></tr>
                 <tr>
                     <th align="left">이메일</th>
                 </tr>
                 <tr>
-                    <td><input type="email" name="userEmail"  style="width:160px" placeholder=" @를 포함하여 입력하세요"><button style="height: 27px;" class="btn123" >메일확인</button></td>
-                </tr><tr><td><br></td></tr>
+                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px"><button style="height: 27px;" class="btn123" >메일확인</button></td>
+                </tr>
+                <tr>
+                	 <td style="font-size: 10px; display:none; " id="emailMessage">@를 포함하여 입력하세요</td>
+                </tr>
+                
+                <tr><td><br></td></tr>
               
                     <td><button style="width:233px; height: 35px; color: white;" required class="btn123">가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
@@ -152,7 +159,11 @@
  				$('#pwdMessage').show();
  			});
  		});
-    	
+ 		$(function() {
+ 			$('#writeEmail').click(function() {
+ 				$('#emailMessage').show();
+ 			});
+ 		});
     	
     	
     	

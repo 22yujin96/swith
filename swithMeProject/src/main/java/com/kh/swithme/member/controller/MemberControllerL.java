@@ -23,7 +23,7 @@ public class MemberControllerL {
 
 	
 	//아이디 찾기 폼으로 이동
-	@RequestMapping("searchIdForm.me.me")
+	@RequestMapping("searchIdForm.me")
 	public String searchIdForm() {
 		return "member/searchIdForm";
 	}
