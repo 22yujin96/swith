@@ -30,7 +30,7 @@
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
-	<div class="content">
+	<div class="wrap clear">
         <div class="inner">
             <br>
             <a class="btn btn-secondary" style="float:left;" href="">목록으로</a>
@@ -60,8 +60,8 @@
                 <table class="table">
                     <tr>
                         <td colspan="2">
-                            카페명
-                            주소
+                            카페명 <br>
+                            주소 <br>
                             웹사이트
                         </td>
                     </tr>
@@ -101,5 +101,6 @@
                 </table>
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>
