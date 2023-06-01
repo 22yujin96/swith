@@ -136,7 +136,7 @@
                 
                 <tr><td><br></td></tr>
               
-                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn" disable>가입하기</button></td>
+                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn"  >가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 <tr>
 
@@ -185,11 +185,18 @@
 			if(idInput.val() === '') {
 				idInput.css('border-color','red');
 				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
+				$('#enrollBtn').attr("disabled", true);
+				$('#enrollBtn').css('background-color','gray');
+			
+				
 				
 			}else if(!chkId.test(idInput.val())) {
+				
 				idInput.css('border-color','red');
 				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-			
+				$('#enrollBtn').attr("disabled", true);
+				$('#enrollBtn').css('background-color','gray');
+				
 			}else {
 				
 				
@@ -205,14 +212,15 @@
 						if(result === "N"){
 							
 							$('#checkId').css('color','red').html('중복된 아이디가 존재합니다.');
-							$('#joinMember button').attr("disabled");
+							$('#enrollBtn').attr("disabled", true);
+							$('#enrollBtn').css('background-color','gray');
 							
 						}else{
 							
 							idInput.css('border-color','rgb(3, 195, 115)');
 							$('#checkId').css('color','rgb(3, 195, 115)').html('사용가능한 아이디입니다.');
-							$('#joinMember button').removeAttr("disabled", true);
-						
+							$('#enrollBtn').removeAttr("disabled", true);
+							$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
 						}
 						
 					},
