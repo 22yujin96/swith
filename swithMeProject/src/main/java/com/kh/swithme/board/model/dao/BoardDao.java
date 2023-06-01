@@ -41,5 +41,9 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectSRoomList", rowBounds);
 	}
 	
+	public StudyRoom selectStudyRoom(SqlSessionTemplate sqlSession, int studyRoomNo) {
+		return sqlSession.selectOne("boardMapper.selectStudyRoom", studyRoomNo);
+	}
+	
 	
 }

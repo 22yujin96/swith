@@ -48,6 +48,7 @@
 		<result column="SR_PHONE" property="studyRoomPhone" />
 		<result column="SR_INTRODUCE" property="studyRoomIntroduce" />
 		<result column="SR_CREATEDATE" property="studyRoomCreatedate" />
+		<result column="SR_WEBSITE" property="studyRoomWebsite" />
 		
 	
 	</resultMap>
@@ -76,6 +77,24 @@
 		ORDER
 		BY
 			SR_CREATEDATE DESC
+	</select>
+	
+	<select id="selectStudyRoom" parameterType="_int" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LNG
+			,SR_PHONE
+			,SR_INTRODUCE
+			,SR_WEBSITE
+		FROM
+			BOARD_STUDYROOM
+		WHERE
+			SR_NO=#{studyRoomNo}
+	
 	</select>
 	
 	

@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>스터디룸 상세</title>
 <style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style> 
@@ -40,16 +39,16 @@
             <br>
             <table id="contentArea" algin="center" class="table">
                 <tr>
-                    <th width="100" >스터디룸명</th>
+                    <th width="100" >${sRoomDetail.studyRoomName}</th>
                 </tr>
                 <tr>
-                    <td >주소</td>
+                    <td >${sRoomDetail.studyRoomAddress}</td>
                 </tr>
                 <tr>
                     <td >이미지</td>
                 </tr>
                 <tr>
-                    <td >상세설명</td>
+                    <td >${sRoomDetail.studyRoomIntroduce}</td>
                 </tr>
             </table>
             <div id="middle-bar">
@@ -59,14 +58,42 @@
             </div>
                 <table class="table">
                     <tr>
-                        <td colspan="2">
-                            카페명 <br>
-                            주소 <br>
-                            웹사이트
+                        <td>
+                            ${sRoomDetail.studyRoomName} <br>
+                            ${sRoomDetail.studyRoomAddress} <br>
+                           ${sRoomDetail.studyRoomWebsite}
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">이미지</td>
+                        <td>
+                        <div id="map" style="width:100%;height:450px;"></div>
+
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8188ba557a9044b5d922513c971fc6ac"></script>
+						<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = { 
+						        center: new kakao.maps.LatLng(${sRoomDetail.studyRoomLat}, ${sRoomDetail.studyRoomLng}), // 지도의 중심좌표
+						        level: 3 // 지도의 확대 레벨
+						    };
+						
+						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+						
+						// 마커가 표시될 위치입니다 
+						var markerPosition  = new kakao.maps.LatLng(${sRoomDetail.studyRoomLat}, ${sRoomDetail.studyRoomLng}); 
+						
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+						    position: markerPosition
+						});
+						
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
+						
+						// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+						// marker.setMap(null);    
+						</script>
+						                        
+                        </td>
                     </tr>
                 </table>
                 <table id="replyArea" class="table" align="center">
@@ -100,7 +127,9 @@
                     </tbody>
                 </table>
         </div>
+        
     </div>
+    <br><br>
     <jsp:include page="../common/footer.jsp" />
 </body>
 </html>
