@@ -12,5 +12,5 @@ public class StudyRoom {
 	private float sRoomLng;
 	private String sRoomPhone;
 	private String sRoomIntroduce;
-	private Date date;
+	private Date sRoomCreatedate;
 }

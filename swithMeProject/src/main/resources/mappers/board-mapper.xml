@@ -59,11 +59,25 @@
 			COUNT(*)
 		FROM
 			BOARD_STUDYROOM
-	
-	
-	
-	
 	</select>
+	
+	<!-- 스터디룸 메인 리스트 -->
+	<select id="selectSRoomList" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LGN
+			,SR_PHONE
+		WHERE
+			BOARD_STUDYROOM
+		ORDER
+		BY
+			SR_CREATEDATE DESC
+	</select>
+	
 	
 	<!-- 혜린 -->
 	
