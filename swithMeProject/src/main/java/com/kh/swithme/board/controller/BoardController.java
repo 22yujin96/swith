@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.swithme.board.model.service.BoardServiceImpl;
 import com.kh.swithme.common.model.vo.PageInfo;
@@ -70,9 +71,11 @@ public class BoardController {
 		return "board/studyRoomMain";
 	}
 	
-	@RequestMapping("studyRoomMap.bo")
-	public String studyRoomMap(String LAT, String LNG, Model m) {
-		return null;
+	
+	@RequestMapping("studyRoomDetail.bo")
+	public String selectStudyRoom(int studyRoomNo, Model model) {
+		model.addAttribute("sRoomDetail", boardService.selectStudyRoom(studyRoomNo));
+		return "board/studyRoomDetail";
 	}
 	
 	

@@ -62,5 +62,10 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Attach> selectSRoomAttachList(int studyRoomNo) {
 		return null;
 	}
+
+	@Override
+	public StudyRoom selectStudyRoom(int studyRoomNo) {
+		return boardDao.selectStudyRoom(sqlSession, studyRoomNo);
+	}
 	
 }

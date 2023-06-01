@@ -21,16 +21,23 @@ public interface BoardService {
 	
 	
 	//// ------------------희재 - 스터디룸 
-	// 1. 스터디룸 리스트 카운트
+	// 스터디룸 리스트 카운트
 	int sRoomListCount();
 	
-	// 2. 스터디룸 리스트 불러오기
+	// 스터디룸 리스트 불러오기
 	ArrayList<StudyRoom> selectSRoomList(PageInfo pi);
 	
-	// 3. 스터디룸 대표이미지 불러오기
+	// 스터디룸 대표이미지 불러오기
 	ArrayList<Attach> selectSRoomAttachList(int studyRoomNo);
 	
-	//
-		
+	// 스터디름 상세 정보 보기 
+	StudyRoom selectStudyRoom(int studyRoomNo);
+	
+	// 댓글(후기) 불러오기
+	
+	// 댓글(후기) 작성하기
+	
+	
+	
 		
 }

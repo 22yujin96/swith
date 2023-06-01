@@ -37,8 +37,8 @@
 					</tr>
 				</table>
 			</form>
-            <br><br>
             </div>
+            <br><br>
             <div class="content">
                 <div id="sRoomList">
                 	<c:choose>
@@ -60,27 +60,19 @@
 			                            <tr>
 			                                <td>${sRoom.studyRoomPhone}</td>
 			                            </tr>
-			                            <tr>
-			                                <td><button type="button" data-toggle="modal" data-target="#mapModal">지도보기</button></td>
-			                            </tr>
 			                        </tbody>
 			                    </table>
 		                    </c:forEach>
 	                    </c:otherwise>
                     </c:choose>
                 </div>
-                
                 <script>
                 	$(function(){
                 		$('.sRoomListTables').click(function(){
-                			//console.log();
-                			location.href="sRoomDetail.bo?studyRoomNo=" + $(this).children().eq(0).val();
+                			location.href="studyRoomDetail.bo?studyRoomNo=" + $(this).children().eq(0).val();
                 		});
                 	});
-                
                 </script>
-                
-                
                 <div id="sRoom-map">
 	                <!-- 지도를 표시할 div 입니다 -->
 					<div id="map" style="width:100%;height:450px;"></div>
@@ -139,50 +131,6 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="../common/footer.jsp" />
-        
-    <div class="modal fade" id="mapModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">지도 상세보기</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="width:100%;height:350px;"></div>
-		
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
-		<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
-		
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		</script>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-</div>
-
-
-   
-        
-        
+        <jsp:include page="../common/footer.jsp" />     
 </body>
 </html>
