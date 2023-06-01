@@ -40,14 +40,15 @@
             <br><br>
             </div>
             <div class="content">
-                <div id="sRoom-list">
+                <div id="sRoomList">
                 	<c:choose>
                 		<c:when test="${ empty sRoomList }">
                 			조회 결과가 없습니다.
                 		</c:when>
                 		<c:otherwise>
                 			<c:forEach items="${sRoomList}" var="sRoom">
-			                    <table border="1">
+			                    <table border="1" class="sRoomListTables">
+			                    <input type="hidden" value="${sRoom.studyRoomNo }">
 			                        <tbody>
 			                            <tr>
 			                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
@@ -60,7 +61,7 @@
 			                                <td>${sRoom.studyRoomPhone}</td>
 			                            </tr>
 			                            <tr>
-			                                <td><button>지도보기</button></td>
+			                                <td><button type="button" data-toggle="modal" data-target="#mapModal">지도보기</button></td>
 			                            </tr>
 			                        </tbody>
 			                    </table>
@@ -68,11 +69,120 @@
 	                    </c:otherwise>
                     </c:choose>
                 </div>
+                
+                <script>
+                	$(function(){
+                		$('.sRoomListTables').click(function(){
+                			//console.log();
+                			location.href="sRoomDetail.bo?studyRoomNo=" + $(this).children().eq(0).val();
+                		});
+                	});
+                
+                </script>
+                
+                
                 <div id="sRoom-map">
-                    지도
+	                <!-- 지도를 표시할 div 입니다 -->
+					<div id="map" style="width:100%;height:450px;"></div>
+					
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8188ba557a9044b5d922513c971fc6ac"></script>
+					<script>
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					    mapOption = { 
+							center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
+					    };
+					
+					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+					var map = new kakao.maps.Map(mapContainer, mapOption); 
+					
+					// 마커를 표시할 위치와 title 객체 배열입니다 
+					var positions = [
+					    {
+					        title: '카카오', 
+					        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+					    },
+					    {
+					        title: '생태연못', 
+					        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+					    },
+					    {
+					        title: '텃밭', 
+					        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+					    },
+					    {
+					        title: '근린공원',
+					        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+					    }
+					];
+
+					// 마커 이미지의 이미지 주소입니다
+					var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+					    
+					for (var i = 0; i < positions.length; i ++) {
+					    
+					    // 마커 이미지의 이미지 크기 입니다
+					    var imageSize = new kakao.maps.Size(24, 35); 
+					    
+					    // 마커 이미지를 생성합니다    
+					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+					    
+					    // 마커를 생성합니다
+					    var marker = new kakao.maps.Marker({
+					        map: map, // 마커를 표시할 지도
+					        position: positions[i].latlng, // 마커를 표시할 위치
+					        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					        image : markerImage // 마커 이미지 
+					    });
+					}
+					</script>
                 </div>
             </div>
         </div>
         <jsp:include page="../common/footer.jsp" />
+        
+    <div class="modal fade" id="mapModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">지도 상세보기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+		<!-- 지도를 표시할 div 입니다 -->
+		<div id="map" style="width:100%;height:350px;"></div>
+		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
+		<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+		
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		</script>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+   
+        
+        
 </body>
 </html>

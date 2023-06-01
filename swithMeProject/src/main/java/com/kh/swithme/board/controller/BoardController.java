@@ -70,8 +70,10 @@ public class BoardController {
 		return "board/studyRoomMain";
 	}
 	
-	
-	
+	@RequestMapping("studyRoomMap.bo")
+	public String studyRoomMap(String LAT, String LNG, Model m) {
+		return null;
+	}
 	
 	
 }
