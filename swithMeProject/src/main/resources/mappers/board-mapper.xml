@@ -37,7 +37,46 @@
 		<result column="STATUS" property="status" />
 	</resultMap>
 	
+	<!-- 스터디룸 -->
+	<resultMap id="sRoomResultSet" type="studyRoom">
+		<result column="SR_NO" property="sRoomNo" />
+		<result column="SR_NAME" property="sRoomName"/>
+		<result column="SR_LOCATION" property="sRoomLocation" />
+		<result column="SR_ADDRESS" property="sRoomAddress" />
+		<result column="SR_LAT" property="sRoomLat" />
+		<result column="SR_LNG" property="sRoomLng" />
+		<result column="SR_PHONE" property="sRoomPhone" />
+		<result column="SR_INTRODUCE" property="sRoomIntroduce" />
+		<result column="SR_CREATEDATE" property="sRoomCreatedate" />
+		
+	
+	</resultMap>
+	
 	<!-- 희재 -->
+	<!-- 스터디룸 게시글 수 -->
+	<select id="sRoomListCount" resultType="_int">
+		SELECT 
+			COUNT(*)
+		FROM
+			BOARD_STUDYROOM
+	</select>
+	
+	<!-- 스터디룸 메인 리스트 -->
+	<select id="selectSRoomList" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LGN
+			,SR_PHONE
+		WHERE
+			BOARD_STUDYROOM
+		ORDER
+		BY
+			SR_CREATEDATE DESC
+	</select>
 	
 	
 	<!-- 혜린 -->

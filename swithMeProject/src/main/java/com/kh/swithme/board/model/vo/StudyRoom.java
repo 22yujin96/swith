@@ -5,12 +5,12 @@ import java.sql.Date;
 import lombok.Data;
 @Data
 public class StudyRoom {
-	private int srNo;
-	private String srName;
-	private String srLocation;
-	private float srLat;
-	private float srLng;
-	private String srPhone;
-	private String srIntroduce;
-	private Date date;
+	private int sRoomNo;
+	private String sRoomName;
+	private String sRoomLocation;
+	private float sRoomLat;
+	private float sRoomLng;
+	private String sRoomPhone;
+	private String sRoomIntroduce;
+	private Date sRoomCreatedate;
 }
