@@ -60,6 +60,7 @@
         border-radius: 5px;
         border-color: lightgray;
         border-style: double;
+        resize:none;
        
     
     }
@@ -74,6 +75,11 @@
 
     }
 
+	#mailForm input:focus{
+	  	  border-color:rgb(3, 195, 115);
+	  	  outline: none;
+  	  
+}
 
   
    
