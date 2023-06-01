@@ -24,7 +24,7 @@
     background-color: rgb(240, 240, 240);
     border-radius: 20px;
     width: 490px;
-    height:655px;
+    height:635px;
 }
 
 .btn123{
@@ -77,10 +77,10 @@
     
 <div id="con">
     <form action="join.mem" method="post">
-    <h1 id="title" align="center">회원가입</h1>
+    <h1 id="title" align="center">회원가입</h1><br>
         <div id="joinMember">
             <table  style="margin-left: 115px;">
-                <br>
+               
 
                 <tr>
                     <th align="left">아이디</th>
@@ -146,6 +146,11 @@
 		</div>
     </form>
    </div>
+   
+   <br><br><br><br><br><br>
+ 					<jsp:include page="../common/footer.jsp"/>
+ 					
+ 					
     <script>
     
  		$(function() {
@@ -171,6 +176,6 @@
    
 
     
-    <br><br><br><br><br><br><br><br><br><br><br>
+  
 </body>
 </html>

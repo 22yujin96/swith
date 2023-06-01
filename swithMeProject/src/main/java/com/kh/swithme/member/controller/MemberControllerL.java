@@ -10,14 +10,12 @@ public class MemberControllerL {
 	//회원가입 작성 폼으로 이동
 	@RequestMapping("memberEnrollForm.me")
 	public String memberEnrollForm() {
-		
 		return "member/memberEnrollForm";
 	}
 	
 	//로그인 폼으로 이동
 	@RequestMapping("loginForm.me")
 	public String loginMemberForm() {
-		
 		return "member/loginForm";
 	}
 
@@ -28,5 +26,9 @@ public class MemberControllerL {
 		return "member/searchIdForm";
 	}
 	
-	
+	//비밀번호 찾기 폼으로 이동
+	@RequestMapping("searchPwdForm.me")
+	public String searchPwdForm() {
+		return "member/searchPwdForm";
+	}
 }
