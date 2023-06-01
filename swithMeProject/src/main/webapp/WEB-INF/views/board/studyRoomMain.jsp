@@ -7,12 +7,9 @@
 <title>스터디룸</title>
 <style>
     div{border: 1px solid red;}
-    .outer{width:100%;height:1200px;}
-    .search{height:10%;}
-    .content{height:90%;}
     .content>div{height:100%;float:left;}
     #sRoom-list{width:70%;}
-    #sRoom-map{width:29%;}
+    #sRoom-map{width:30%;}
     /*검색*/
     table {display: inline-block;}
     .search {text-align: center;}
@@ -24,11 +21,11 @@
     </style>
 </head>
 <body>
-	<div class="wrap">
-		<jsp:include page="../common/header.jsp" />
-    
-        <div class="outer">
+    <jsp:include page="../common/header.jsp" />
+    <br>
+        <div class="wrap clear">
             <div class="search">
+                <br><br>
                 <form action="sRoomSearch.bo">
 				<table>
 					<tr>
@@ -40,16 +37,49 @@
 					</tr>
 				</table>
 			</form>
+            <br><br>
             </div>
             <div class="content">
                 <div id="sRoom-list">
-                    리스트
+                    <table border="1">
+                        <tbody>
+                            <tr>
+                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
+                                <td style="width: 500px;">스터디카페</td>
+                            </tr>
+                            <tr>
+                                <td>주소</td>
+                            </tr>
+                            <tr>
+                                <td>전화번호</td>
+                            </tr>
+                            <tr>
+                                <td><button>지도보기</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="1">
+                        <tbody>
+                            <tr>
+                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
+                                <td style="width: 500px;">스터디카페</td>
+                            </tr>
+                            <tr>
+                                <td>주소</td>
+                            </tr>
+                            <tr>
+                                <td>전화번호</td>
+                            </tr>
+                            <tr>
+                                <td><button>지도보기</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div id="sRoom-map">
                     지도
                 </div>
             </div>
         </div>
-    </div>
 </body>
 </html>

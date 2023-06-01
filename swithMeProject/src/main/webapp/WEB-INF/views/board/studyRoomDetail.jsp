@@ -34,22 +34,22 @@
         <div class="inner">
             <br>
             <a class="btn btn-secondary" style="float:left;" href="">목록으로</a>
-            <a class="btn btn-secondary" style="float:right;" href="">수정하기</a> &nbsp;
-            <a class="btn btn-secondary" style="float:right;" href="">삭제하기</a> &nbsp;
+            <a class="btn btn-secondary" style="float:right;" href="">수정하기</a> 
+            <a class="btn btn-secondary" style="float:right;" href="">삭제하기</a> 
             
             <br>
             <table id="contentArea" algin="center" class="table">
                 <tr>
-                    <th width="100" colspan="2">스터디룸명</th>
+                    <th width="100" >스터디룸명</th>
                 </tr>
                 <tr>
-                    <td colspan="2">주소</td>
+                    <td >주소</td>
                 </tr>
                 <tr>
-                    <td colspan="2">이미지</td>
+                    <td >이미지</td>
                 </tr>
                 <tr>
-                    <td colspan="2">상세설명</td>
+                    <td >상세설명</td>
                 </tr>
             </table>
             <div id="middle-bar">
