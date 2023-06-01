@@ -109,8 +109,9 @@
                     <th align="left">이름</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="memberName"  style="width:225px" required></td>
-                </tr><tr><td><br></td></tr>
+                    <td><input id="writeName" type="text" name="memberName"  style="width:225px" required></td>
+                </tr>
+                 <tr><td><br></td></tr>
                 <tr>
                     <th align="left">닉네임</th>
                 </tr>
@@ -168,7 +169,7 @@
     	
         idInput.keyup(function() {
         	
-        	console.log(idInput.val());
+        	//console.log(idInput.val());
 			//공백 
 			if(idInput.val() === '') {
 				idInput.css('border-color','rgb(245, 119, 119)');
@@ -226,7 +227,7 @@
     	
     	pwdInput.keyup(function() {
     	
-    		console.log(pwdInput.val());
+    		//console.log(pwdInput.val());
     		
     		if(pwdInput.val() === ''){
     			pwdInput.css('border-color','rgb(245, 119, 119)');
@@ -261,7 +262,7 @@
     
     pwdChkInput.keyup(function() {
     	
-    	console.log(pwdChkInput.val());
+    	//console.log(pwdChkInput.val());
     	
     	if(pwdInput.val() === pwdChkInput.val()){
     		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
@@ -280,6 +281,35 @@
     	
     
     //이름
+    $(function() {
+    	
+    	let chkName = /^[가-힣]{2,7}$/;
+    	
+    	const nameInput = $('#writeName');
+    	
+    	nameInput.keyup(function() {
+    		
+    		console.log(nameInput.val());
+    		
+    		
+    		if(!chkName.test(nameInput.val())){ //정규표현식에 맞지 않으면
+    			nameInput.css('border-color','gray');	
+    			$('#enrollBtn').attr("disabled", true);
+    			$('#enrollBtn').css('background-color','gray');
+    			
+    		}else{ //OK
+    			nameInput.css('border-color','rgb(3, 195, 115)');	
+    			$('#enrollBtn').removeAttr("disabled", true);
+    			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+    		}
+    	});
+    	
+    	
+    	
+    	
+    	
+    	
+    });
     
     	
     	
