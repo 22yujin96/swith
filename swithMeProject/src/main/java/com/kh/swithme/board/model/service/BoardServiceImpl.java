@@ -49,12 +49,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int sRoomListCount() {
-		return 0;
+		return boardDao.sRoomListCount(sqlSession);
 	}
 
 	@Override
-	public ArrayList<StudyRoom> selectsRoomList(PageInfo pi) {
-		return null;
+	public ArrayList<StudyRoom> selectSRoomList(PageInfo pi) {
+		return boardDao.selectSRoomList(sqlSession, pi);
 	}
 	
 }

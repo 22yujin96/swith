@@ -62,7 +62,11 @@ public class BoardController {
 	
 	// -----------희재
 	@RequestMapping("studyRoomMainView.bo")
-	public String studyRoomMainView() {
+	public String studyRoomMainView(@RequestParam(value="cPage", defaultValue="1") 
+									int currentPage, Model model) {
+		PageInfo pi = Pagination.getPageInfo(boardService.sRoomListCount(), currentPage, 10, 10);
+		model.addAttribute("pi", pi);
+		model.addAttribute("sRoomList", boardService.selectSRoomList(pi));
 		return "board/studyRoomMain";
 	}
 	
