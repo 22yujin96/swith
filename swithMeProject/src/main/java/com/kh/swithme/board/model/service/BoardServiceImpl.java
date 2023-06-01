@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.swithme.board.model.dao.BoardDao;
+import com.kh.swithme.board.model.vo.Attach;
 import com.kh.swithme.board.model.vo.Board;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
@@ -55,6 +56,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<StudyRoom> selectSRoomList(PageInfo pi) {
 		return boardDao.selectSRoomList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Attach> selectSRoomAttachList(int studyRoomNo) {
+		return null;
 	}
 	
 }
