@@ -1,11 +1,19 @@
 package com.kh.swithme.member.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.swithme.member.model.service.MemberService;
+
 @Controller
 public class MemberControllerL {
+	
+	
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//회원가입 작성 폼으로 이동
 	@RequestMapping("memberEnrollForm.me")
@@ -56,9 +64,11 @@ public class MemberControllerL {
 	// 아이디 중복 체크
 	@ResponseBody
 	@RequestMapping("idCheck.me")
-	public String idCheck() {
+	public String idCheck(String checkId) {
 		
-		int count = memberService.idc
+		return memberService.idCheck(checkId) > 0 ? "N" : "Y";
+		
+	
 		
 	}
 	

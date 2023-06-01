@@ -54,6 +54,11 @@
  
     
 }
+ #joinMember input:focus{
+  	  border-color:gray;
+  	  outline: none;
+  	  
+}
 
 #idMessage{
 	color:gray;
@@ -169,7 +174,7 @@
    
     $(function() {
 
-    	 let chkId = /^[a-zA-Z0-9\d-_^]{4,,19}$/;
+    	 let chkId = /^[a-zA-Z0-9\d-_^]{4,19}$/;
     	 
     	const idInput = $('#writeId');
     	
@@ -177,28 +182,41 @@
         	
         	console.log(idInput.val());
 
-			if(idInput.val() === null) {
+			if(idInput.val() === '') {
 				idInput.css('border-color','red');
-				$('#checkId').html('아이디는 필수 입력사항입니다.');
+				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
 				
 			}else if(!chkId.test(idInput.val())) {
 				idInput.css('border-color','red');
-				$('#checkId').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 			
 			}else {
 				
 				
-				
+				//아이디 중복체크
 				$.ajax({
 					
 					url : 'idCheck.me',
-					data : {checkId : input.val()},
-					success : result => {
+					data : {checkId : idInput.val()},
+					success : function(result) {
 						
-						console.log('중복 ㄴ');
+						console.log(result);
+						
+						if(result === "N"){
+							
+							$('#checkId').css('color','red').html('중복된 아이디가 존재합니다.');
+							$('#joinMember button').attr("disabled");
+							
+						}else{
+							
+							idInput.css('border-color','rgb(3, 195, 115)');
+							$('#checkId').css('color','rgb(3, 195, 115)').html('사용가능한 아이디입니다.');
+							$('#joinMember button').removeAttr("disabled", true);
+						
+						}
 						
 					},
-					error : () => {
+					error : function(){
 						console.log('아이디 중복');
 					}
 					

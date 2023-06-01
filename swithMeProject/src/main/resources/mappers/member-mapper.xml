@@ -8,6 +8,22 @@
 	
 	<!-- 지현 -->
 	
+	<!-- 아이디 체크용 쿼리  -->
+	<select id="idCheck" resultType="_int"><!-- v파라미터다시 -->
+		
+		SELECT
+			COUNT(*)
+		FROM
+			MEMBER
+		WHERE	
+			MEMBER_ID = #{checkId}
+				
+						
+		
+	
+	
+	</select>
+	
 	
 	<!-- 유진 -->
 
