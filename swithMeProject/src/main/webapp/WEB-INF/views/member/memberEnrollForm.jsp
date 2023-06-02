@@ -69,6 +69,10 @@
 	
 }
 
+#enrollBtn{
+	background-color : gray;
+	}
+
 
 
 
@@ -135,37 +139,24 @@
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled >가입하기</button></td>
+                    <td><button type="button" style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled>가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
-                <tr>
-                    <!-- ***모두입력하면 버튼 활성화시키기  -->
-                </tr>
+                
             </table>
 		</div>
+		
     </form>
    </div>
    
    <br><br><br><br><br><br>
  					<jsp:include page="../common/footer.jsp"/>
  					
- 					
+ 
     <script>
-    //input클릭하면 조건메시지 뜨도록
- 	
- 		$(function() {
- 			$('#writePwd').click(function() {
- 				$('#pwdMessage').show();
- 			});
- 		});
- 		$(function() {
- 			$('#writeEmail').click(function() {
- 				$('#emailMessage').show();
- 			});
- 		});
-    	
-    </script>
-    <script>
-    	
+    
+    
+   
+   
     // 정규표현식에 맞으면 초록색 테두리
     // 정규표현식에 맞지 않으면 빨간색 테두리
    //아이디 중복체크
@@ -180,20 +171,15 @@
         	//console.log(idInput.val());
 			//공백 
 			if(idInput.val() === '') {
-				
-				
 				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
-				$('#enrollBtn').attr("disabled", true);
-				$('#enrollBtn').css('background-color','gray');
+				
 			
 			//정규표현식에 맞지 않을때
 			}else if(!chkId.test(idInput.val())) {
 				idInput.css('border-color','gray');
 				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-				$('#enrollBtn').attr("disabled", true);
-				$('#enrollBtn').css('background-color','gray');
-			}else {
 				
+			}else {
 				
 				//아이디 중복체크
 				$.ajax({
@@ -202,30 +188,23 @@
 					data : {checkId : idInput.val()},
 					success : function(result) {
 						
-						console.log(result);
-						
 						if(result === "N"){
 							$('#checkId').css('color','gray').html('중복된 아이디가 존재합니다.');
-							$('#enrollBtn').attr("disabled", true);
-							$('#enrollBtn').css('background-color','gray');
 							
 						}else{
 							idInput.css('border-color','rgb(3, 195, 115)');
 							$('#checkId').css('color','rgb(3, 195, 115)').html('사용가능한 아이디입니다.');
-							$('#enrollBtn').removeAttr("disabled", true);
-							$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
 						}
 					},
 					error : function(){
 						console.log('아이디 중복');
 					}
 				});
-	     	   }
+	     	  }
 	      });
 	  });
 		  
-    
-    
+   
     
     //비밀번호
     $(function() {
@@ -236,46 +215,26 @@
     	
     	pwdInput.keyup(function() {
     	
-    		//console.log(pwdInput.val());
-    		
     		if(pwdInput.val() === ''){
     			pwdInput.css('border-color','gray');
     			$('#checkPwd').css('color','gray').html('비밀번호는 필수 입력사항입니다.');
-				$('#enrollBtn').attr("disabled", true);
-				$('#enrollBtn').css('background-color','gray');
+				
     		
     		}else if(!chkPwd.test(pwdInput.val())) {
     			
 	    		pwdInput.css('border-color','gray');
 				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-				$('#enrollBtn').attr("disabled", true);
-				$('#enrollBtn').css('background-color','gray');
 				
 		    	} else {
 		    		
 		    		pwdInput.css('border-color','rgb(3, 195, 115)');	
-		    		$('#enrollBtn').removeAttr("disabled", true);
-					$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+		    		
 		    	}
-    	<%--	
-    if(pwdInput.val() === pwdChkInput.val()){
-        		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
-        		$('#enrollBtn').removeAttr("disabled", true);
-    			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
-        		
-        	}else{
-        		pwdChkInput.css('border-color','gray');	
-        		$('#enrollBtn').attr("disabled", true);
-    			$('#enrollBtn').css('background-color','gray');
-    			
-    			return false;
-        	}
-        });
-        
-        --%>
-		      });
-});
     	
+		      });
+			});
+    	
+    
     
     
     //비밀번호 재확인
@@ -285,18 +244,13 @@
     const pwdInput = $('#writePwd');
     
     pwdChkInput.keyup(function() {
-    	
-    	//console.log(pwdChkInput.val());
-    	
+
     	if(pwdInput.val() === pwdChkInput.val()){
     		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
-    		$('#enrollBtn').removeAttr("disabled", true);
-			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
-    		
+    	
     	}else{
     		pwdChkInput.css('border-color','gray');	
-    		$('#enrollBtn').attr("disabled", true);
-			$('#enrollBtn').css('background-color','gray');
+    		
 			
 			return false;
     	}
@@ -321,13 +275,11 @@
     		if(!chkName.test(nameInput.val())){ //정규표현식에 맞지 않으면
     			$('#checkName').css('color','gray').html('이름은 필수 입력사항입니다.');
     			nameInput.css('border-color','gray');	
-    			$('#enrollBtn').attr("disabled", true);
-    			$('#enrollBtn').css('background-color','gray');
+    			
     			
     		}else{ //OK
     			nameInput.css('border-color','rgb(3, 195, 115)');	
-    			$('#enrollBtn').removeAttr("disabled", true);
-    			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+    			
     		}
     	});
     });
@@ -365,45 +317,24 @@
     						if(result == 'N'){ //존재할때
     							$('#checkNick').css('color','red').html('이미 존재하는 닉네임 입니다.');
     							nickInput.css('border-color','gray');
-    							$('#enrollBtn').attr("disabled", true);
-    							$('#enrollBtn').css('background-color','gray');
+    							
     						
     						}else{ //성공
     							$('#checkNick').css('color','rgb(3, 195, 115').html('사용가능한 닉네임입니다.');
     							nickInput.css('border-color','rgb(3, 195, 115)');	
-    							$('#enrollBtn').removeAttr("disabled", true);
-    							$('#enrollBtn').css('background-color','rgb(3, 195, 115');
+    						
     						};
     					},
     					error: () => {
     						console.log('실패');
     					}
     				});
-    				
     			});
-    		}
-    	});
-    	
-    });
-    		
-   <%--
-    //이메일
-    $(function() {
-    	let chkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        
-        const emailInput = $('writeEmail');
-        
-        if(!chkEmail.test(emailInput.val())){
-        	
-        	
-        	
-        }
-    	
-    		
-    });
-    			
-    --%>
-    
+    		  }
+    	  });
+      });
+     		
+ 
     
     
     
@@ -411,16 +342,22 @@
     //이메일 중복확인 안누르고 가입하기 눌렀을때 예외처리
     $(function() {
     	
-    	let count = 0;
+    	 count = 0;
+    	
+    
     	
     	$('#nickBtn').on('click',function() {
     		count ++;	
-    		console.log(count);
+    		//console.log(count);
     	});
+    
     	
-   	
+   	<%--
    	 $(function() {
    	    	$('#enrollBtn').click(function() {
+   	    		if(allInputs === ''){
+   	    			alert('필수입력사항을 입력해주세요.');
+   	    		}
    	    		if(count == 0){
    	    			alert('닉네임 중복확인이 필요합니다.');
    	    			$('#nickBtn').focus();
@@ -432,15 +369,127 @@
    	    		
    	    	});
    	    })	
+    	--%>		
   });
-    			
-   
-
     
-    
-  
-  		
     	
+    $(function() {
+    	
+    	
+    	
+    	var allInputs = $('form input');//배열로옴
+    	
+    	var test = document.getElementsByTagName('input').innerText;
+		console.log(test2);
+    	// console.log(allInputs);
+    	
+
+		var test = '';
+    	$(allInputs).each(function(index, item){
+    		if(item.val() == ''){
+				test += 1;
+			}
+			
+		});
+    	
+		if(test == 6){
+			$('#enrollBtn').removeAttr('disabled');
+		}
+    		/*
+    		 for(var i in allInputs){
+    			
+    		 	if(allInputs[i].val() !== ""){
+    				
+    		 		$('#enrollBtn').removeAttr('disabled');
+    				
+    			
+    	
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    		 };
+    	
+    		 };
+    */
+    });
+    
+    
+    function () {
+    	
+		var allInputs = $('form input');//배열로옴
+    	
+    
+			
+	
+    		
+	
+    		
+    		 for(var i in allInputs){
+    			
+    		 	if(allInputs.eq(i).val() !== ''){
+    		 		
+    		 	
+    				
+    		 		
+    				$('#enrollBtn').css('background-color', 'rgb(3, 195, 115)');
+    				$('#enrollBtn').removeAttr('disabled');
+    			
+    		 };
+    			
+    		
+    	
+    }
+    }
+    	/*
+ 	   var allInputs = $('form input');//배열로옴
+ 	   
+    	console.log( $('form input').val());
+ 	   
+ 	   
+ 	   
+ 	  
+ 	 
+    	var test = document.getElementsByTagName('input').val();
+		console.log(test);
+    	// console.log(allInputs);
+    	
+
+		var test = '';
+    	$(allInputs).each(function(index, item){
+    		if(item.val() == ''){
+				test += 1;
+				
+			}
+			
+		});
+    	
+		if(test == 6){
+			$('#enrollBtn').removeAttr('disabled');
+    	
+    	
+    } 
+    
+ }
+
+	/*  let test = document.getElementsByTagName('input').value;
+	 
+ 	console.log(test);
+	 var vari = ''
+	 $(test).each(function(index, item){
+	 
+	    if(item != ''){
+	       vari += 1
+	    }
+	 });
+	 
+	 if(vari == 6){
+		 $('#enrollBtn').removeAttr('disabled');
+	 }
+	} */
 
     </script>
    

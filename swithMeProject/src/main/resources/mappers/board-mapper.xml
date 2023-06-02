@@ -147,23 +147,23 @@
 			  MAINBOARD
 		WHERE
 			  <if test="boardType == 1">
-			  BOARD_TYPE = 'free'
+			  BOARD_TYPE = 'info'
 			  </if>
 			   <if test="boardType == 2">
-			  BOARD_TYPE = 'QnA'
+			  BOARD_TYPE = 'info'
 			  </if>
 		  AND
 		  	  BOARD_STATUS = 'Y'
 	</select>
 	
-	<!-- 리스트 불러오기 -->
+	<!-- 게시글 리스트 불러오기 -->
 	<select id="boardListSelect" parameterType="_int" resultMap="boardResultSet">
 		SELECT
               BOARD_NO
              ,NICKNAME AS "MEMBER_ID"
              ,CATEGORY
              ,BOARD_TITLE
-             ,BOARD_CONTENT
+             ,SUMMARY
              ,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD HH24:MI') AS "CREATE_DATE"
              ,BOARD_COUNT
 		  FROM
@@ -177,7 +177,7 @@
 		   	  BOARD_TYPE = 'free'
 			  </if>
 			  <if test="boardType == 2">
-		   	  BOARD_TYPE = 'QnA'
+		   	  BOARD_TYPE = 'info'
 			  </if>
 		 ORDER
 		    BY
@@ -194,6 +194,201 @@
 		 	  BOARD_TYPE = 'free'
 		 
 	</select>
+	
+	<!-- 게시판 상세 조회  -->
+	<select id="boardDetail" parameterType="_int" resultMap="boardResultSet">
+		SELECT
+		 	  BOARD_NO
+	         ,BOARD_TITLE
+	         ,BOARD_CONTENT
+	         ,NICKNAME AS "MEMBER_ID"
+	         ,CATEGORY
+	         ,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD HH24:MI') AS "CREATE_DATE"
+	 	 FROM
+	          MAINBOARD
+		 JOIN
+	          MEMBER USING(MEMBER_ID)
+	    WHERE
+	    	  BOARD_NO = #{ boardNo }
+	</select>
+	
+	<!-- ******** 멤버아이디 로그인 유저로 교체 필요 함!!! *********  -->
+	<!-- 게시판 좋아요, 북마크 여부 -->
+	<select id="likeStatus" resultType="_int">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  BOARD_LB
+		 WHERE
+		      MEMBER_ID ='hyerin'
+		   AND
+		      STATUS_LB='L'
+		   AND
+		      BOARD_NO = #{ boardNo }
+	</select>
+	
+	<!-- 좋아요 수 확인  -->
+	<select id="likeCount" parameterType="_int" resultType="_int">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  BOARD_LB
+		 WHERE
+		 	  BOARD_NO = #{ boardNo }
+		   AND
+		   	  STATUS_LB = 'L'
+	</select>
+	
+	<!-- 좋아요 하기  -->
+	<insert id="likeBoard" parameterType="_int">
+		INSERT
+		  INTO
+		  	  BOARD_LB
+		VALUES
+			  (
+			  #{ boardNo }
+			 ,'hyerin' <!-- 나중에 로그인 유저 -->
+			 ,'L'
+			  )
+	</insert>
+	
+	<!-- 좋아요 삭제하기 -->
+	<delete id="removeLike" parameterType="_int">
+		DELETE
+		      BOARD_LB
+		 WHERE
+		 	  MEMBER_ID = 'hyerin'
+		   AND
+		   	  BOARD_NO = #{ boardNo }
+		   AND
+		      STATUS_LB = 'L'
+	</delete>
+	
+	<!-- 북마크 상태 확인  -->
+	<select id="bookStatus" resultType="_int">
+		SELECT COUNT(*) 
+		  FROM BOARD_LB 
+		 WHERE MEMBER_ID ='hyerin'
+		   AND BOARD_NO = #{ boardNo }
+		   AND STATUS_LB = 'B'
+	</select>
+	
+	<!-- 북마크 하기   -->
+	<insert id="bookBoard" parameterType="_int">
+		INSERT
+		  INTO
+		  	  BOARD_LB
+		VALUES
+			  (
+			  #{ boardNo }
+			 ,'hyerin' <!-- 나중에 로그인 유저 -->
+			 ,'B'
+			  )
+	</insert>
+	
+	<!-- 북마크 삭제하기 -->
+	<delete id="removeBook" parameterType="_int">
+		DELETE
+			  BOARD_LB
+		 WHERE
+		 	  BOARD_NO = #{ boardNo }
+		   AND
+		   	  MEMBER_ID = 'hyerin'
+		   AND
+			  STATUS_LB = 'B'
+	</delete>
+	
+	<!-- 북마크 카운트  -->
+	<select id="bookCount" parameterType="_int" resultType="_int">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  BOARD_LB
+		 WHERE
+		 	  BOARD_NO = #{ boardNo }
+		   AND
+		   	  STATUS_LB = 'B'
+	</select>
+	
+	<!-- 댓글 수 카운트  -->
+	<select id="replyCount" parameterType="_int" resultType="_int">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  BOARD_REPLY
+		 WHERE
+		 	  BOARD_NO = #{ boardNo }
+	</select>
+	
+	<!-- 댓글 가져오기 -->
+	<select id="replyList" parameterType="_int" resultMap="replyResultMap">
+		SELECT
+              BOARD_REPLY_NO
+             ,BOARD_NO
+             ,NICKNAME AS "MEMBER_ID"
+             ,BOARD_REPLY_CONTENT
+             ,BOARD_REPLY_FILE
+             ,TO_CHAR(BOARD_REPLY_CREATE_DATE, 'YYYY-MM-DD HH24:MI') AS "BOARD_REPLY_CREATE_DATE"
+ 		  FROM
+              BOARD_REPLY
+    	  JOIN
+              MEMBER USING(MEMBER_ID)
+		 WHERE
+              BOARD_STATUS = 'Y'
+           AND
+           	  BOARD_NO = #{ boardNo }
+	</select>
+	
+	<!-- 대댓글 리스트 가져오기 -->
+	<select id="reReplyList" parameterType="_int" resultMap="reReplyResultMap">
+		SELECT
+			  BOARD_RE_REPLY_NO
+			 ,BOARD_REPLY_NO
+			 ,MEMBER_ID
+			 ,BOARD_REPLY2_CONTENT
+			 ,BOARD_REPLY2_CREATE_DATE
+			 ,BOARD_REPLY2_FILE
+		  FROM
+		 	  BOARD_RE_REPLY
+		 WHERE
+		 	  STATUS = 'Y'
+		   AND
+		   	  BOARD_REPLY_NO = #{ replyNo }
+	</select>
+	
+	<!-- 댓글 작성하기 -->
+	<insert id="insertReply">
+		INSERT
+		  INTO 
+			  BOARD_REPLY
+		VALUES
+			  (
+			  SEQ_BOARD_REPLY.NEXTVAL
+			 ,#{ boardNo }
+			 ,'hyerin' <!-- 나중에 수정 -->
+			 ,#{ boardReplyContent } 
+			 ,NULL
+			 ,DEFAULT
+			 ,DEFAULT
+			 )
+	</insert>
+	
+	<!-- 대댓글 작성하기  -->
+	<insert id="reReplyBoard" parameterType="rereply">
+		INSERT
+		  INTO
+		  	  BOARD_RE_REPLY
+		VALUES
+			  (
+			  SEQ_BOARD_RE_REPLY.NEXTVAL
+			 ,#{ replyNo }
+			 ,'hyerin'
+			 ,#{ reReplyContent }
+			 ,SYSDATE
+			 ,NULL <!-- 파일 있으면 나중에 처리해야함 지금은 파일을 뒷전으로... -->
+			 ,DEFAULT
+			 )
+	</insert>
 	
 	
 	
