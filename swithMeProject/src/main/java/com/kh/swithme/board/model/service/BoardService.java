@@ -34,11 +34,17 @@ public interface BoardService {
 	// 스터디름 상세 정보 보기 
 	StudyRoom selectStudyRoom(int studyRoomNo);
 	
-	// 댓글(후기) 불러오기
+	// 댓글(이용후기) 불러오기
 	ArrayList<SRoomReview> selectStudyRoomReviewList(int studyRoomNo);
 	
-	// 댓글(후기) 작성하기
+	// 댓글(이용후기) 작성하기
 	int insertStudyRoomReview(SRoomReview sr);
+	
+	// 댓글(이용후기) 수정하기
+	int updateStudyRoomReview(SRoomReview sr);
+	
+	// 댓글(이용후기) 삭제하기
+	int deleteStudyRoomReview(SRoomReview sr);
 	
 	
 	

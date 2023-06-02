@@ -78,5 +78,15 @@ public class BoardServiceImpl implements BoardService {
 	public int insertStudyRoomReview(SRoomReview sr) {
 		return boardDao.insertStudyRoomReview(sqlSession, sr);
 	}
+
+	@Override
+	public int updateStudyRoomReview(SRoomReview sr) {
+		return 0;
+	}
+
+	@Override
+	public int deleteStudyRoomReview(SRoomReview sr) {
+		return 0;
+	}
 	
 }

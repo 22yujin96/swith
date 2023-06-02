@@ -100,7 +100,7 @@
                         </td>
                     </tr>
                 </table>
-                <table id="reviewArea" align="center">
+                <table id="reviewArea" align="center" border="1">
                     <thead>
                     	<tr>
                     		<th colspan="4" class="reviewStar">
@@ -143,6 +143,7 @@
             selectReviewList();
         });
 
+        // 이용후기 등록
     	function selectReviewList(){
     		$.ajax({
     			url : 'selectStudyRoomReviewList.bo',
@@ -150,9 +151,7 @@
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
     			success : function(result){
-    				//console.log(result);
     				var value='';
-    				
     				for(let i in result){
     					value += '<tr>' 
 							+ '<th>' + result[i].memberId+ '</th>'
@@ -172,15 +171,14 @@
     				}
     				$('#reviewArea tbody').html(value);
     				$('#rcount').text(result.length);
-    				
     			},
     			error : function(){
     				console.log('실패');
     			}
     		});
-    		
     	}
     
+        // 이용후기 등록
     	function insertReview(){
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
@@ -191,7 +189,6 @@
     				StudyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
     			success : function(result){
-    				console.log(result);
                     if(result === 1){
                         selectReviewList();
                         $('#content').val('');
@@ -203,16 +200,13 @@
     		});
     	}
 
+        // 이용후기 별점 선택
         $('.reviewStar label').on('click', function(){
-
             var value=$('input:radio[name=reviewStar]').filter(':checked').val();
-            //console.log(value);
-            
             $('.reviewStar label').removeClass("hover");
             for(var i=0; i<value; i++){
                 $('.reviewStar label').eq(i).addClass("hover");
             }
-
         })
     
     </script>
