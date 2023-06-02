@@ -166,7 +166,8 @@
                         value += '</td>'
                                 + '<td>' + result[i].reviewDate + '</td>'
                                 + '<td>'
-                                + '<button onclick="updateReview();">수정</button>&nbsp;'
+                                + '<button class="updateBtn">수정</button>&nbsp;'
+                                + '<input type="hidden" value="' +  result[i].reviewNo + '">'
                                 + '<button onclick="deleteReview();">삭제</button>'
                                 + '</td>'
                                 + '</tr>' 
@@ -191,7 +192,7 @@
     				memberId : 'user01',
     				reviewContent : $('#content').val(),
     				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
-    				StudyRoomNo : ${sRoomDetail.studyRoomNo}
+    				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
     			success : function(result){
                     if(result === 1){
@@ -206,11 +207,17 @@
     	}
 
         // 이용후기 수정
-        function updateReview(){
-            console.log($(this));
+        $('#reviewArea').on('click','.updateBtn',function(){
+            console.log($('.reviewNo').text());
+            console.log($(this).next().val());
 
 
 
+        })
+
+        // 이용후기 삭제
+        function deleteReview(){
+            console.log();
         }
 
 
