@@ -120,18 +120,19 @@
                     <th align="left">닉네임</th>
                 </tr>
                 <tr>
-                    <td><input id="writeNick" type="text" name="nickName"  style="width:160px" required><button style="height: 27px;" class="btn123">중복확인</button></td>
+                    <td><input id="writeNick" type="text" name="nickName"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" id="nickBtn">중복확인</button></td>
                 </tr>
-                
-                <tr><td><br></td></tr>
+                <tr>
+                  <td style="font-size: 10px; " id="checkNick"> </td>
+                </tr><tr><td><br></td></tr>
                 <tr>
                     <th align="left">이메일</th>
                 </tr>
                 <tr>
-                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px"><button style="height: 27px;" class="btn123" >메일확인</button></td>
+                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn" >가입하기</button></td>
+                    <td><button style="width:233px; height: 35px; color: white;" required class="btn123" id="enrollBtn">가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 <tr>
                     <!-- ***모두입력하면 버튼 활성화시키기  -->
@@ -178,14 +179,14 @@
 			if(idInput.val() === '') {
 				
 				
-				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
+				$('#checkId').css('color','red').html('아이디는 필수 입력사항입니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
 			
 			//정규표현식에 맞지 않을때
 			}else if(!chkId.test(idInput.val())) {
 				idInput.css('border-color','gray');
-				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				$('#checkId').css('color','red').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
 			}else {
@@ -201,7 +202,7 @@
 						console.log(result);
 						
 						if(result === "N"){
-							$('#checkId').css('color','gray').html('중복된 아이디가 존재합니다.');
+							$('#checkId').css('color','red').html('중복된 아이디가 존재합니다.');
 							$('#enrollBtn').attr("disabled", true);
 							$('#enrollBtn').css('background-color','gray');
 							
@@ -216,9 +217,9 @@
 						console.log('아이디 중복');
 					}
 				});
-			   }
-		          });
-		       });
+	     	   }
+	      });
+	  });
 		  
     
     
@@ -236,14 +237,14 @@
     		
     		if(pwdInput.val() === ''){
     			pwdInput.css('border-color','gray');
-    			$('#checkPwd').css('color','gray').html('비밀번호는 필수 입력사항입니다.');
+    			$('#checkPwd').css('color','red').html('비밀번호는 필수 입력사항입니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
     		
     		}else if(!chkPwd.test(pwdInput.val())) {
     			
 	    		pwdInput.css('border-color','gray');
-				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				$('#checkPwd').css('color','red').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
     		
@@ -252,6 +253,7 @@
 		    		pwdInput.css('border-color','rgb(3, 195, 115)');	
 		    		$('#enrollBtn').removeAttr("disabled", true);
 					$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+					$('#checkPwd').css('color','rgb(240, 240, 240)');
 		    	}
 		      });
 		    });
@@ -324,16 +326,53 @@
     		
     		console.log(nickInput.val());
     		
-    		닉네임 버튼 누르면 에이젝스로 디비갔다가 확인
-    		+ 가입하기 버튼(활성화 / 비활성화)
+    		if(!chkNick.test(nickInput.val())){ //사용자가 입력한 값이 정규표현식이랑 같지 않으면
+    			$('#nickBtn').attr('disabled', true);
+    			$('#checkNick').css('color','gray').html('2~16자 이하 영어 또는 숫자 또는 한글로 입력해주세요.');
+    			
+    		}else{
+    			
+    			$('#nickBtn').removeAttr('disabled', true);
+    			
+    			$('#nickBtn').click(function() {
+    				
+    				$.ajax({
+    					
+    					url : 'nickCheck.me',
+    					data : {checkNick : nickInput.val()},
+    					success : function(result){
+    						
+    						console.log(result);
+    						
+    						if(result == 'N'){ //존재할때
+    							$('#checkNick').css('color','red').html('이미 존재하는 닉네임 입니다.');
+    							nickInput.css('border-color','gray');
+    							$('#enrollBtn').attr("disabled", true);
+    							$('#enrollBtn').css('background-color','gray');
+    						
+    						}else{ //성공
+    							$('#checkNick').css('color','rgb(3, 195, 115').html('사용가능한 닉네임입니다.');
+    							nickInput.css('border-color','rgb(3, 195, 115)');	
+    							$('#enrollBtn').removeAttr("disabled", true);
+    							$('#enrollBtn').css('background-color','rgb(3, 195, 115');
+    						};
+    					},
+    					error: () => {
+    						console.log('실패');
+    					}
+    					
+    				});
+    				
+    			});
+    		}
     	});
-    
-    	
-    	
     });
     
     
-   
+   $(function() {
+	  
+	   
+   });
     
     	
     	
