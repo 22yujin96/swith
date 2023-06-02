@@ -89,7 +89,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="insertstudyRoomReview.bo", produces="application/json; charset=UTF-8")
 	public int ajaxInsertStudyRoomReview(SRoomReview sr) {
-		System.out.println(sr);
 		return boardService.insertStudyRoomReview(sr);
 	}
 	
