@@ -96,8 +96,22 @@
                         </td>
                     </tr>
                 </table>
-                <table id="reviewArea" class="table" align="center">
+                <table id="reviewArea" align="center">
                     <thead>
+                    	<tr>
+                    		<th colspan="3">
+                    			<input type="radio" name="reviewStar" value="5" id="rate1">
+                    			<label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate1">
+                    			<label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate1">
+                    			<label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate1">
+                    			<label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate1">
+                    			<label for="rate1">★</label>
+                    		 </th>
+                    	</tr>
                         <tr>
                             <th colspan="2">
                                 <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
@@ -117,23 +131,22 @@
     </div>
     <br><br>
     <jsp:include page="../common/footer.jsp" />
-    <script>
     
-    	function addReview(){
+    <script>
+    	function selectReviewList(){
     		
     		$.ajax({
-    			url : ,
-    			data : ,
-    			success : function(data){
-    				
-    			} ,
+    			url : 'selectsRoomReviewList.bo',
+    			data : {
+    				studyRoomNo : ${sRoomDetail.studyRoomNo}
+    			},
+    			success : function(result){
+    				console.log(result);
+    			},
     			error : function(){
     				console.log('실패');
     			}
-    			
     		})
-    		
-    		
     		
     	}
     

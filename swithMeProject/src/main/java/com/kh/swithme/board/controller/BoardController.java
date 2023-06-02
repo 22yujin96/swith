@@ -78,5 +78,12 @@ public class BoardController {
 		return "board/studyRoomDetail";
 	}
 	
+	@RequestMapping("selectstudyRoomReviewList.bo")
+	public String ajaxSelectStudyRoomReviewList(int studyRoomNo, Model model) {
+		boardService.selectStudyRoomReviewList(studyRoomNo);
+		
+	}
+	
+
 	
 }

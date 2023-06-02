@@ -35,10 +35,10 @@ public interface BoardService {
 	StudyRoom selectStudyRoom(int studyRoomNo);
 	
 	// 댓글(후기) 불러오기
-	ArrayList<SRoomReview> selectSRoomReviewList(int studyRoomNo);
+	ArrayList<SRoomReview> selectStudyRoomReviewList(int studyRoomNo);
 	
 	// 댓글(후기) 작성하기
-	int insertSRoomReview(SRoomReview sr);
+	int insertStudyRoomReview(SRoomReview sr);
 	
 	
 	
