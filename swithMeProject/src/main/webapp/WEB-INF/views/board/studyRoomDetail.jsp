@@ -33,9 +33,9 @@
         <div class="inner">
             <br>
             <a class="btn btn-secondary" style="float:left;" href="">목록으로</a>
+            <!-- 관리자만 볼 수 있게 -->
             <a class="btn btn-secondary" style="float:right;" href="">수정하기</a> 
             <a class="btn btn-secondary" style="float:right;" href="">삭제하기</a> 
-            
             <br>
             <table id="contentArea" algin="center" class="table">
                 <tr>
@@ -96,7 +96,7 @@
                         </td>
                     </tr>
                 </table>
-                <table id="replyArea" class="table" align="center">
+                <table id="reviewArea" class="table" align="center">
                     <thead>
                         <tr>
                             <th colspan="2">
@@ -109,21 +109,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>user02</th>
-                            <td>ㅋㅋㅋㅋㅋㅋㅋ</td>
-                            <td>2023-05-05</td>
-                        </tr>
-                        <tr>
-                            <th>user01</th>
-                            <td>재밌</td>
-                            <td>2023-05-05</td>
-                        </tr>
-                        <tr>
-                            <th>admin</th>
-                            <td>댓글</td>
-                            <td>2023-05-05</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
         </div>
@@ -131,5 +117,32 @@
     </div>
     <br><br>
     <jsp:include page="../common/footer.jsp" />
+    <script>
+    
+    	function addReview(){
+    		
+    		$.ajax({
+    			url : ,
+    			data : ,
+    			success : function(data){
+    				
+    			} ,
+    			error : function(){
+    				console.log('실패');
+    			}
+    			
+    		})
+    		
+    		
+    		
+    	}
+    
+    
+    </script>
+    
+    
+    
+    
+    
 </body>
 </html>
