@@ -7,7 +7,7 @@ import lombok.Data;
 public class SRoomReview {
 	private int reviewNo;
 	private int studyRoomNo;
-	private String memberId;
+	private String nickName;
 	private String reviewContent;
 	private int reviewStar;
 	private Date reviewDate;

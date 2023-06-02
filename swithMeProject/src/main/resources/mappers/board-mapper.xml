@@ -103,7 +103,7 @@
 		SELECT
 		    REVIEW_NO reviewNo
 		    ,SR_NO studyroomNo
-		    ,NICKNAME memberId
+		    ,NICKNAME nickName
 		    ,REVIEW_CONTENT reviewContent
 		    ,REVIEW_STAR reviewStar
 		    ,REVIEW_DATE reviewDate

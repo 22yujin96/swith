@@ -76,7 +76,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertStudyRoomReview(SRoomReview sr) {
-		return 0;
+		return boardDao.insertStudyRoomReview(sqlSession, sr);
 	}
 	
 }
