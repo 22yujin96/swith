@@ -25,8 +25,10 @@
         table * {margin:5px;}
         table {width:100%;}
         #middle-bar{text-align:center;}
-        #reviewStar input[type=radio]{display:none;}
-         #reviewStar label:hover{color:red;}
+        .reviewStar input[type=radio]{display:none;}
+        .reviewStar label:hover{color:red;}
+        .reviewStar label.hover{color:red;}
+
     </style>
 </head>
 <body>
@@ -101,7 +103,7 @@
                 <table id="reviewArea" class="table" align="center">
                     <thead>
                     	<tr>
-                    		<th colspan="3" id="reviewStar">
+                    		<th colspan="3" class="reviewStar">
                     			<input type="radio" name="reviewStar" value="1" id="rate1">
                     			<label for="rate1">★</label>
                                 <input type="radio" name="reviewStar" value="2" id="rate2">
@@ -136,7 +138,6 @@
     
     <script>
         $(function(){
-            
             selectReviewList();
         });
 
@@ -189,6 +190,13 @@
     			}
     		});
     	}
+
+        $('.reviewStar label').on('click', function(e){
+            var click=$(this);
+            click.addClass('hover');
+            console.log(click);
+
+        })
     
     </script>
     
