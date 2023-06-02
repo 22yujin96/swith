@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.swithme.board.model.dao.BoardDao;
 import com.kh.swithme.board.model.vo.Attach;
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
@@ -66,6 +67,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public StudyRoom selectStudyRoom(int studyRoomNo) {
 		return boardDao.selectStudyRoom(sqlSession, studyRoomNo);
+	}
+
+	@Override
+	public ArrayList<SRoomReview> selectSRoomReviewList(int studyRoomNo) {
+		return null;
+	}
+
+	@Override
+	public int insertSRoomReview(SRoomReview sr) {
+		return 0;
 	}
 	
 }

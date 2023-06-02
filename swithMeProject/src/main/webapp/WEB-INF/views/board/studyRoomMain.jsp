@@ -8,8 +8,8 @@
 <title>스터디룸</title>
 <style>
     .content>div{height:100%;float:left;}
-    #sRoom-list{width:70%;}
-    #sRoom-map{width:30%;}
+    #sRoomList{width:65%;}
+    #sRoomMap{width:35%;}
     /*검색*/
     table {display: inline-block;}
     .search {text-align: center;}
@@ -51,7 +51,7 @@
 			                    <input type="hidden" value="${sRoom.studyRoomNo }">
 			                        <tbody>
 			                            <tr>
-			                                <th rowspan="4" style="width:300px;height:300px;">이미지</th>
+			                                <th rowspan="4" style="width:250px;height:250px;">이미지</th>
 			                                <td style="width: 500px;">${sRoom.studyRoomName}</td>
 			                            </tr>
 			                            <tr>
@@ -73,7 +73,7 @@
                 		});
                 	});
                 </script>
-                <div id="sRoom-map">
+                <div id="sRoomMap">
 	                <!-- 지도를 표시할 div 입니다 -->
 					<div id="map" style="width:100%;height:450px;"></div>
 					

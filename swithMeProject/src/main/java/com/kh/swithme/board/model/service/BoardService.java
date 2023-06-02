@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.swithme.board.model.vo.Attach;
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
@@ -34,8 +35,12 @@ public interface BoardService {
 	StudyRoom selectStudyRoom(int studyRoomNo);
 	
 	// 댓글(후기) 불러오기
+	ArrayList<SRoomReview> selectSRoomReviewList(int studyRoomNo);
 	
 	// 댓글(후기) 작성하기
+	int insertSRoomReview(SRoomReview sr);
+	
+	
 	
 	
 	
