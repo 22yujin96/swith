@@ -41,19 +41,19 @@
             <li><a href="freeBoardListView.bo?boardType=1">커뮤니티</a></li>
             <li><a href="freeBoardListView.bo?boardType=2">질문정보</a></li>
             <li><a href="studyBandListView.bo">스터디밴드</a></li>
-            <li><a href="#">스터디룸</a></li>
+            <li><a href="studyRoomMainView.bo">스터디룸</a></li>
             <li><a href="#">아이템 상점</a></li>
         </ul>
         
         <ul id="userMenu">
             <li>
-                <a href="#">
+                <a href="alarm.me">
                     <img src="resources/images/common/notice.png">
                     <div id="noRead"></div>
                 </a>
             </li>
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
+            <li><a href="loginForm.me">로그인</a></li>
+            <li><a href="memberEnrollForm.me">회원가입</a></li>
             
         </ul>
     </div>

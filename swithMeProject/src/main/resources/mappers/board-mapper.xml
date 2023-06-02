@@ -37,8 +37,103 @@
 		<result column="STATUS" property="status" />
 	</resultMap>
 	
-	<!-- 희재 -->
+	<!-- 스터디룸 -->
+	<resultMap id="sRoomResultSet" type="studyRoom">
+		<result column="SR_NO" property="studyRoomNo" />
+		<result column="SR_NAME" property="studyRoomName"/>
+		<result column="SR_LOCATION" property="studyRoomLocation" />
+		<result column="SR_ADDRESS" property="studyRoomAddress" />
+		<result column="SR_LAT" property="studyRoomLat" />
+		<result column="SR_LNG" property="studyRoomLng" />
+		<result column="SR_PHONE" property="studyRoomPhone" />
+		<result column="SR_INTRODUCE" property="studyRoomIntroduce" />
+		<result column="SR_CREATEDATE" property="studyRoomCreatedate" />
+		<result column="SR_WEBSITE" property="studyRoomWebsite" />
+		
 	
+	</resultMap>
+	
+	<!-- 희재 -->
+	<!-- 스터디룸 게시글 수 -->
+	<select id="sRoomListCount" resultType="_int">
+		SELECT 
+			COUNT(*)
+		FROM
+			BOARD_STUDYROOM
+	</select>
+	
+	<!-- 스터디룸 메인 리스트 -->
+	<select id="selectSRoomList" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LNG
+			,SR_PHONE
+		FROM
+			BOARD_STUDYROOM
+		ORDER
+		BY
+			SR_CREATEDATE DESC
+	</select>
+	
+	<!-- 스터디룸 상세 보기 -->
+	<select id="selectStudyRoom" parameterType="_int" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LNG
+			,SR_PHONE
+			,SR_INTRODUCE
+			,SR_WEBSITE
+		FROM
+			BOARD_STUDYROOM
+		WHERE
+			SR_NO=#{studyRoomNo}
+	
+	</select>
+	
+	<!-- 스터디룸 리뷰 보기 -->
+	<select id="selectStudyRoomReviewList" resultType="SRoomReview">
+		SELECT
+		    REVIEW_NO reviewNo
+		    ,SR_NO studyroomNo
+		    ,MEMBER_ID memberId
+		    ,REVIEW_CONTENT reviewContent
+		    ,REVIEW_STAR reviewStar
+		    ,REVIEW_DATE reviewDate
+		FROM 
+		    BOARD_SROOM_REVIEW
+		WHERE
+		    SR_NO = #{studyRoomNo}
+	</select>
+	
+	<!-- 스터디룸 리뷰 등록 -->
+	<insert id="insertStudyRoomReview" parameterType="SRoomReview">
+		INSERT
+		INTO
+			BOARD_SROOM_REVIEW
+			(
+			REVIEW_NO, 
+			SR_NO, 
+			MEMBER_ID, 
+			REVIEW_CONTENT, 
+			REVIEW_STAR
+			)
+		VALUES 
+			(
+			SEQ_REIVEW_NO.NEXTVAL, 
+			#{studyRoomNo}, 
+			#{memberId}, 
+			#{reviewContent}, 
+			#{reviewStar}
+			)
+	</insert>
 	
 	<!-- 혜린 -->
 	

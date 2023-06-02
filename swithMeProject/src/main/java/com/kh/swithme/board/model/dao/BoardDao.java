@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.SRoomReview;
+import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
 @Repository
@@ -27,4 +29,28 @@ public class BoardDao {
 	}
 	
 	
+	
+	
+	// 희재 스터디룸 ------------------------------------------------------------------------
+	public int sRoomListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.sRoomListCount");
+	}
+	
+	public ArrayList<StudyRoom> selectSRoomList(SqlSessionTemplate sqlSession, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSRoomList", rowBounds);
+	}
+	
+	public StudyRoom selectStudyRoom(SqlSessionTemplate sqlSession, int studyRoomNo) {
+		return sqlSession.selectOne("boardMapper.selectStudyRoom", studyRoomNo);
+	}
+	
+	public ArrayList<SRoomReview> selectStudyRoomReviewList(SqlSessionTemplate sqlSession, int studyRoomNo){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectStudyRoomReviewList", studyRoomNo);
+	}
+	
+	public int insertStudyRoomReview(SqlSessionTemplate sqlSession, SRoomReview sr) {
+		return sqlSession.insert("boardMapper.insertStudyRoomReview", sr);
+	}
 }
