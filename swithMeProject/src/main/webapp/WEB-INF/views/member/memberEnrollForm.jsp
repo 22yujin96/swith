@@ -139,13 +139,12 @@
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled>가입하기</button></td>
+                    <td><button type="button" style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled>가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
-                <tr>
-                    <!-- ***모두입력하면 버튼 활성화시키기  -->
-                </tr>
+                
             </table>
 		</div>
+		
     </form>
    </div>
    
@@ -377,20 +376,31 @@
     $(function() {
     	
     	
+    	
     	var allInputs = $('form input');//배열로옴
     	
-    	console.log(allInputs);
+    	var test = document.getElementsByTagName('input').innerText;
+		console.log(test2);
+    	// console.log(allInputs);
     	
-    	each.function(index, item){
-    		
-    	}
+
+		var test = '';
+    	$(allInputs).each(function(index, item){
+    		if(item.val() == ''){
+				test += 1;
+			}
+			
+		});
     	
-    		
-    		for(var i in allInputs){
+		if(test == 6){
+			$('#enrollBtn').removeAttr('disabled');
+		}
+    		/*
+    		 for(var i in allInputs){
     			
-    			if(allInputs[i].val() !== ""){
+    		 	if(allInputs[i].val() !== ""){
     				
-    				$('#enrollBtn').removeAttr('disabled');
+    		 		$('#enrollBtn').removeAttr('disabled');
     				
     			
     	
@@ -401,15 +411,85 @@
     			
     			
     			
-    		};
+    		 };
     	
-    		};
-    
+    		 };
+    */
     });
     
     
- 
+    function () {
     	
+		var allInputs = $('form input');//배열로옴
+    	
+    
+			
+	
+    		
+	
+    		
+    		 for(var i in allInputs){
+    			
+    		 	if(allInputs.eq(i).val() !== ''){
+    		 		
+    		 	
+    				
+    		 		
+    				$('#enrollBtn').css('background-color', 'rgb(3, 195, 115)');
+    				$('#enrollBtn').removeAttr('disabled');
+    			
+    		 };
+    			
+    		
+    	
+    }
+    }
+    	/*
+ 	   var allInputs = $('form input');//배열로옴
+ 	   
+    	console.log( $('form input').val());
+ 	   
+ 	   
+ 	   
+ 	  
+ 	 
+    	var test = document.getElementsByTagName('input').val();
+		console.log(test);
+    	// console.log(allInputs);
+    	
+
+		var test = '';
+    	$(allInputs).each(function(index, item){
+    		if(item.val() == ''){
+				test += 1;
+				
+			}
+			
+		});
+    	
+		if(test == 6){
+			$('#enrollBtn').removeAttr('disabled');
+    	
+    	
+    } 
+    
+ }
+
+	/*  let test = document.getElementsByTagName('input').value;
+	 
+ 	console.log(test);
+	 var vari = ''
+	 $(test).each(function(index, item){
+	 
+	    if(item != ''){
+	       vari += 1
+	    }
+	 });
+	 
+	 if(vari == 6){
+		 $('#enrollBtn').removeAttr('disabled');
+	 }
+	} */
 
     </script>
    
