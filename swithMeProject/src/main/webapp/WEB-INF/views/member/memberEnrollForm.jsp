@@ -135,7 +135,7 @@
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" >가입하기</button></td>
+                    <td><button style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled >가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 <tr>
                     <!-- ***모두입력하면 버튼 활성화시키기  -->
@@ -250,16 +250,31 @@
 				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				$('#enrollBtn').attr("disabled", true);
 				$('#enrollBtn').css('background-color','gray');
-    		
+				
 		    	} else {
 		    		
 		    		pwdInput.css('border-color','rgb(3, 195, 115)');	
 		    		$('#enrollBtn').removeAttr("disabled", true);
 					$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
 		    	}
+    	<%--	
+    if(pwdInput.val() === pwdChkInput.val()){
+        		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
+        		$('#enrollBtn').removeAttr("disabled", true);
+    			$('#enrollBtn').css('background-color','rgb(3, 195, 115)');
+        		
+        	}else{
+        		pwdChkInput.css('border-color','gray');	
+        		$('#enrollBtn').attr("disabled", true);
+    			$('#enrollBtn').css('background-color','gray');
+    			
+    			return false;
+        	}
+        });
+        
+        --%>
 		      });
-		    });
-    	
+});
     	
     
     
@@ -282,6 +297,8 @@
     		pwdChkInput.css('border-color','gray');	
     		$('#enrollBtn').attr("disabled", true);
 			$('#enrollBtn').css('background-color','gray');
+			
+			return false;
     	}
     });
    });
@@ -331,7 +348,7 @@
     		if(!chkNick.test(nickInput.val())){ //사용자가 입력한 값이 정규표현식이랑 같지 않으면
     			$('#nickBtn').attr('disabled', true);
     			$('#checkNick').css('color','gray').html('2~16자 이하 영어 또는 숫자 또는 한글로 입력해주세요.');
-    			nickInput.css('background-color','lightgray');
+    			nickInput.css('background-color','rgb(226, 222, 222)');
     		}else{
     			
     			$('#nickBtn').removeAttr('disabled', true);
@@ -391,7 +408,7 @@
     
     
     
-    
+    //이메일 중복확인 안누르고 가입하기 눌렀을때 예외처리
     $(function() {
     	
     	let count = 0;
@@ -403,27 +420,25 @@
     	
    	
    	 $(function() {
-   	    	
    	    	$('#enrollBtn').click(function() {
-   	    		
    	    		if(count == 0){
    	    			alert('닉네임 중복확인이 필요합니다.');
    	    			$('#nickBtn').focus();
    	    			
-   	    			
-   	    			
    	    			return false;
-   	    			
    	    		}else{
    	    			$('#enrollBtn').removeAttr('disabled',true);
    	    		}
    	    		
    	    	});
    	    })	
-   
-    	
   });
     			
+   
+
+    
+    
+  
   		
     	
 
