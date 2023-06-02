@@ -154,13 +154,18 @@
     				for(let i in result){
     					value += '<tr>' 
 							+ '<th>' + result[i].memberId+ '</th>'
-							+ '<td>' + result[i].reviewStar + '</td>'
-							+ '</tr>' 
-							+ '<tr>' 
-							+ '<td>' + result[i].reviewContent + '</td>'
-							+ '</tr>'
-							+ '<td>' + result[i].reviewDate + '</td>'
-							+ '</tr>';
+							+ '<td><b>' + result[i].reviewStar + '</b>/5';
+                        for(let j=1; j <= result[i].reviewStar; j++){
+                            value += '<label style="color:red;">★</label>';
+                        }
+                        for(let j=1; j <= 5-result[i].reviewStar; j++){
+                            value += '<label style="color:lightgrey;">★</label>';
+                        }        
+                        value += '</td>'+ '</tr>' 
+                                + '<td>' + result[i].reviewContent + '</td>'
+                                + '</tr>'
+                                + '<td>' + result[i].reviewDate + '</td>'
+                                + '</tr>';
     				}
     				$('#reviewArea tbody').html(value);
     				$('#rcount').text(result.length);
@@ -191,10 +196,15 @@
     		});
     	}
 
-        $('.reviewStar label').on('click', function(e){
-            var click=$(this);
-            click.addClass('hover');
-            console.log(click);
+        $('.reviewStar label').on('click', function(){
+
+            var value=$('input:radio[name=reviewStar]').filter(':checked').val();
+            console.log(value);
+            
+            $('.reviewStar label').removeClass("hover");
+            for(var i=0; i<value; i++){
+                $('.reviewStar label').eq(i).addClass("hover");
+            }
 
         })
     
