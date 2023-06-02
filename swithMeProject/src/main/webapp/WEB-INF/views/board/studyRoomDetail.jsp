@@ -100,7 +100,7 @@
                         </td>
                     </tr>
                 </table>
-                <table id="reviewArea" align="center" border="1">
+                <table id="reviewArea" align="center">
                     <thead>
                     	<tr>
                     		<th colspan="4" class="reviewStar">
@@ -123,7 +123,7 @@
                             </th>
                             <th colspan="2" style="vertical-align:middle"><button class="btn btn-secondary" onclick="insertReview();">등록하기</button></th>
                         </tr>
-                        <tr><th>&nbsp;&nbsp</th></tr>
+                        <tr><th>&nbsp;&nbsp;</th></tr>
                         <tr>
                             <th colspan="4" style="font-size: larger;">이용후기(<span id="rcount"></span>)</th>
                         </tr>
@@ -143,7 +143,7 @@
             selectReviewList();
         });
 
-        // 이용후기 등록
+        // 이용후기 조회
     	function selectReviewList(){
     		$.ajax({
     			url : 'selectStudyRoomReviewList.bo',
@@ -151,6 +151,7 @@
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
     			success : function(result){
+                    console.log(result);
     				var value='';
     				for(let i in result){
     					value += '<tr>' 
@@ -164,6 +165,10 @@
                         }        
                         value += '</td>'
                                 + '<td>' + result[i].reviewDate + '</td>'
+                                + '<td>'
+                                + '<button onclick="updateReview();">수정</button>&nbsp;'
+                                + '<button onclick="deleteReview();">삭제</button>'
+                                + '</td>'
                                 + '</tr>' 
                                 + '<tr>'
                                 + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
@@ -199,6 +204,15 @@
     			}
     		});
     	}
+
+        // 이용후기 수정
+        function updateReview(){
+            console.log($(this));
+
+
+
+        }
+
 
         // 이용후기 별점 선택
         $('.reviewStar label').on('click', function(){
