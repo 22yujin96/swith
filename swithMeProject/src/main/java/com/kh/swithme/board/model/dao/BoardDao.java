@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.ReReply;
+import com.kh.swithme.board.model.vo.Reply;
 import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.swithme.board.model.dao.BoardDao;
 import com.kh.swithme.board.model.vo.Attach;
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.ReReply;
+import com.kh.swithme.board.model.vo.Reply;
 import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
