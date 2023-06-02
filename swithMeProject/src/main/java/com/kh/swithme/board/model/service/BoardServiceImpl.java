@@ -34,15 +34,73 @@ public class BoardServiceImpl implements BoardService {
 	public int boardListCount(int boardType) {
 		return boardDao.boardListCount(sqlSession, boardType);
 	}
-
 	@Override
 	public ArrayList<Board> selectBoardList(int boardType, PageInfo pi) {
 		return boardDao.boardListSelect(sqlSession, pi, boardType);
 	}
-	
+	@Override
+	public int boardCountUp(int boardNo) {
+		return boardDao.boardCountUp(sqlSession, boardNo);
+	}
 	@Override
 	public int freeCount() {
 		return boardDao.freeCount(sqlSession);
+	}
+	@Override
+	public Board boardDetail(int boardNo) {
+		return boardDao.boardDetail(sqlSession, boardNo);
+	}
+	@Override
+	public int likeStatus(int boardNo) {
+		return boardDao.likeStatus(sqlSession, boardNo);
+	}
+	@Override
+	public int likeCount(int boardNo) {
+		return boardDao.likeCount(sqlSession, boardNo);
+	}
+	@Override
+	public int likeBoard(int boardNo) {
+		return boardDao.likeBoard(sqlSession, boardNo);
+	}
+	@Override
+	public int removeLike(int boardNo) {
+		return boardDao.removeLike(sqlSession, boardNo);
+	}
+	@Override
+	public int bookStatus(int boardNo) {
+		return boardDao.bookStatus(sqlSession, boardNo);
+	}
+	@Override
+	public int bookBoard(int boardNo) {
+		return boardDao.bookBoard(sqlSession, boardNo);
+	}
+	@Override
+	public int removeBook(int boardNo) {
+		return boardDao.removeBook(sqlSession, boardNo);
+	}
+	@Override
+	public int bookCount(int boardNo) {
+		return boardDao.bookCount(sqlSession, boardNo);
+	}
+	@Override
+	public int replyCount(int boardNo) {
+		return boardDao.replyCount(sqlSession, boardNo);
+	}
+	@Override
+	public ArrayList<Reply> replyList(int boardNo) {
+		return boardDao.replyList(sqlSession, boardNo);
+	}
+	@Override
+	public ArrayList<ReReply> reReplyList(int replyNo) {
+		return boardDao.reReplyList(sqlSession, replyNo);
+	}
+	@Override
+	public int insertReply(Reply r) {
+		return boardDao.insertReply(sqlSession, r);
+	}
+	@Override
+	public int reReplyBoard(ReReply rere) {
+		return boardDao.reReplyBoard(sqlSession, rere);
 	}
 
 	
