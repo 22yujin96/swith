@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.swithme.board.model.vo.Board;
+import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.board.model.vo.StudyRoom;
 import com.kh.swithme.common.model.vo.PageInfo;
 
@@ -45,5 +46,11 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectStudyRoom", studyRoomNo);
 	}
 	
+	public ArrayList<SRoomReview> selectStudyRoomReviewList(SqlSessionTemplate sqlSession, int studyRoomNo){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectStudyRoomReviewList", studyRoomNo);
+	}
 	
+	public int insertStudyRoomReview(SqlSessionTemplate sqlSession, SRoomReview sr) {
+		return sqlSession.insert("boardMapper.insertStudyRoomReview", sr);
+	}
 }

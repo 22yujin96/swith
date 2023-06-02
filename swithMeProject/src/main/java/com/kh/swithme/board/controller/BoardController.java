@@ -6,9 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.swithme.board.model.service.BoardServiceImpl;
+import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.common.model.vo.PageInfo;
 import com.kh.swithme.common.template.Pagination;
 
@@ -78,5 +79,20 @@ public class BoardController {
 		return "board/studyRoomDetail";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="selectStudyRoomReviewList.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectStudyRoomReviewList(int studyRoomNo) {
+		System.out.println(boardService.selectStudyRoomReviewList(studyRoomNo));
+		return new Gson().toJson(boardService.selectStudyRoomReviewList(studyRoomNo));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="insertstudyRoomReview.bo", produces="application/json; charset=UTF-8")
+	public int ajaxInsertStudyRoomReview(SRoomReview sr) {
+		System.out.println(sr);
+		return boardService.insertStudyRoomReview(sr);
+	}
+	
+
 	
 }

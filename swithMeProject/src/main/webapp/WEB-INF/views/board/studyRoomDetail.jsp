@@ -25,6 +25,10 @@
         table * {margin:5px;}
         table {width:100%;}
         #middle-bar{text-align:center;}
+        .reviewStar input[type=radio]{display:none;}
+        .reviewStar label:hover{color:red;}
+        .reviewStar label.hover{color:red;}
+
     </style>
 </head>
 <body>
@@ -98,14 +102,28 @@
                 </table>
                 <table id="reviewArea" class="table" align="center">
                     <thead>
+                    	<tr>
+                    		<th colspan="3" class="reviewStar">
+                    			<input type="radio" name="reviewStar" value="1" id="rate1">
+                    			<label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate2">
+                    			<label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3">
+                    			<label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate4">
+                    			<label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="5" id="rate5">
+                    			<label for="rate5">★</label>
+                    		 </th>
+                    	</tr>
                         <tr>
                             <th colspan="2">
                                 <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
                             </th>
-                            <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+                            <th style="vertical-align:middle"><button class="btn btn-secondary" onclick="insertReview();">등록하기</button></th>
                         </tr>
                         <tr>
-                            <td colspan="3">댓글(<span id="rcount">3</span>)</td>
+                            <td colspan="3">리뷰(<span id="rcount"></span>)</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,26 +135,68 @@
     </div>
     <br><br>
     <jsp:include page="../common/footer.jsp" />
-    <script>
     
-    	function addReview(){
-    		
+    <script>
+        $(function(){
+            selectReviewList();
+        });
+
+    	function selectReviewList(){
     		$.ajax({
-    			url : ,
-    			data : ,
-    			success : function(data){
+    			url : 'selectStudyRoomReviewList.bo',
+    			data : {
+    				studyRoomNo : ${sRoomDetail.studyRoomNo}
+    			},
+    			success : function(result){
+    				console.log(result);
+    				var value='';
     				
-    			} ,
+    				for(let i in result){
+    					value += '<tr>' 
+							+ '<th>' + result[i].memberId+ '</th>'
+							+ '<td>' + result[i].reviewStar + '</td>'
+							+ '</tr>' 
+							+ '<tr>' 
+							+ '<td>' + result[i].reviewContent + '</td>'
+							+ '</tr>'
+							+ '<td>' + result[i].reviewDate + '</td>'
+							+ '</tr>';
+    				}
+    				$('#reviewArea tbody').html(value);
+    				$('#rcount').text(result.length);
+    				
+    			},
     			error : function(){
     				console.log('실패');
     			}
-    			
-    		})
-    		
-    		
+    		});
     		
     	}
     
+    	function insertReview(){
+    		$.ajax({
+    			url : 'insertstudyRoomReview.bo',
+    			data : {
+    				memberId : 'user01',
+    				reviewContent : $('#content').val(),
+    				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
+    				StudyRoomNo : ${sRoomDetail.studyRoomNo}
+    			},
+    			success : function(){
+    				console.log('성공');
+    			},
+    			error : function(){
+    				console.log('실패');
+    			}
+    		});
+    	}
+
+        $('.reviewStar label').on('click', function(e){
+            var click=$(this);
+            click.addClass('hover');
+            console.log(click);
+
+        })
     
     </script>
     

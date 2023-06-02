@@ -70,13 +70,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<SRoomReview> selectSRoomReviewList(int studyRoomNo) {
-		return null;
+	public ArrayList<SRoomReview> selectStudyRoomReviewList(int studyRoomNo) {
+		return boardDao.selectStudyRoomReviewList(sqlSession, studyRoomNo);
 	}
 
 	@Override
-	public int insertSRoomReview(SRoomReview sr) {
-		return 0;
+	public int insertStudyRoomReview(SRoomReview sr) {
+		return boardDao.insertStudyRoomReview(sqlSession, sr);
 	}
 	
 }
