@@ -133,10 +133,15 @@
     <jsp:include page="../common/footer.jsp" />
     
     <script>
+
+        $(function(){
+            selectReviewList();
+        });
+
     	function selectReviewList(){
     		
     		$.ajax({
-    			url : 'selectsRoomReviewList.bo',
+    			url : 'selectstudyRoomReviewList.bo',
     			data : {
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},

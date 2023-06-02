@@ -79,6 +79,7 @@
 			SR_CREATEDATE DESC
 	</select>
 	
+	<!-- 스터디룸 상세 보기 -->
 	<select id="selectStudyRoom" parameterType="_int" resultMap="sRoomResultSet">
 		SELECT 
 			SR_NO
@@ -97,6 +98,21 @@
 	
 	</select>
 	
+	<!-- 스터디룸 리뷰 보기 -->
+	<select id="selectStudyRoomReviewList" resultType="SRoomReview">
+		SELECT
+		    REVIEW_NO reviewNo
+		    ,SR_NO studyroomNo
+		    ,NICKNAME memberId
+		    ,REVIEW_CONTENT reviewContent
+		    ,REVIEW_STAR reviewStar
+		    ,REVIEW_DATE reviewDate
+		FROM 
+		    BOARD_SROOM_REVIEW
+		JOIN MEMBER USING (MEMBER_ID)
+		WHERE
+		    SR_NO = #{studyRoomNo}
+	</select>
 	
 	<!-- 혜린 -->
 	
