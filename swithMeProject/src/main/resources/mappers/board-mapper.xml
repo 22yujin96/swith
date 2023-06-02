@@ -103,16 +103,37 @@
 		SELECT
 		    REVIEW_NO reviewNo
 		    ,SR_NO studyroomNo
-		    ,NICKNAME nickName
+		    ,MEMBER_ID memberId
 		    ,REVIEW_CONTENT reviewContent
 		    ,REVIEW_STAR reviewStar
 		    ,REVIEW_DATE reviewDate
 		FROM 
 		    BOARD_SROOM_REVIEW
-		JOIN MEMBER USING (MEMBER_ID)
 		WHERE
 		    SR_NO = #{studyRoomNo}
 	</select>
+	
+	<!-- 스터디룸 리뷰 등록 -->
+	<insert id="insertStudyRoomReview" parameterType="SRoomReview">
+		INSERT
+		INTO
+			BOARD_SROOM_REVIEW
+			(
+			REVIEW_NO, 
+			SR_NO, 
+			MEMBER_ID, 
+			REVIEW_CONTENT, 
+			REVIEW_STAR
+			)
+		VALUES 
+			(
+			SEQ_REIVEW_NO.NEXTVAL, 
+			#{studyRoomNo}, 
+			#{memberId}, 
+			#{reviewContent}, 
+			#{reviewStar}
+			)
+	</insert>
 	
 	<!-- 혜린 -->
 	

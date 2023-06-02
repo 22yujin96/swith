@@ -150,7 +150,7 @@
     				
     				for(let i in result){
     					value += '<tr>' 
-							+ '<th>' + result[i].nickName+ '</th>'
+							+ '<th>' + result[i].memberId+ '</th>'
 							+ '<td>' + result[i].reviewStar + '</td>'
 							+ '</tr>' 
 							+ '<tr>' 
@@ -175,7 +175,7 @@
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
     			data : {
-    				nickName : '유저1',
+    				memberId : 'user01',
     				reviewContent : $('#content').val(),
     				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
     				StudyRoomNo : ${sRoomDetail.studyRoomNo}

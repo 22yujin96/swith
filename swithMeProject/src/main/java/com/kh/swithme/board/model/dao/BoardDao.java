@@ -50,4 +50,7 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectStudyRoomReviewList", studyRoomNo);
 	}
 	
+	public int insertStudyRoomReview(SqlSessionTemplate sqlSession, SRoomReview sr) {
+		return sqlSession.insert("boardMapper.insertStudyRoomReview", sr);
+	}
 }
