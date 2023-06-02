@@ -67,10 +67,15 @@ public class MemberControllerL {
 	public String idCheck(String checkId) {
 		
 		return memberService.idCheck(checkId) > 0 ? "N" : "Y";
-		
-	
-		
+
 	}
+	
+	@ResponseBody
+	@RequestMapping("nickCheck.me")
+	public String nickCheck(String checkNick) {
+		return memberService.nickCheck(checkNick) > 0 ? "N" : "Y";
+	}
+	
 	
 	
 	
