@@ -25,6 +25,8 @@
         table * {margin:5px;}
         table {width:100%;}
         #middle-bar{text-align:center;}
+        #reviewStar input[type=radio]{display:none;}
+         #reviewStar label:hover{color:red;}
     </style>
 </head>
 <body>
@@ -99,17 +101,17 @@
                 <table id="reviewArea" class="table" align="center">
                     <thead>
                     	<tr>
-                    		<th colspan="3">
+                    		<th colspan="3" id="reviewStar">
                     			<input type="radio" name="reviewStar" value="1" id="rate1">
                     			<label for="rate1">★</label>
                                 <input type="radio" name="reviewStar" value="2" id="rate2">
-                    			<label for="rate1">★</label>
+                    			<label for="rate2">★</label>
                                 <input type="radio" name="reviewStar" value="3" id="rate3">
-                    			<label for="rate1">★</label>
+                    			<label for="rate3">★</label>
                                 <input type="radio" name="reviewStar" value="4" id="rate4">
-                    			<label for="rate1">★</label>
+                    			<label for="rate4">★</label>
                                 <input type="radio" name="reviewStar" value="5" id="rate5">
-                    			<label for="rate1">★</label>
+                    			<label for="rate5">★</label>
                     		 </th>
                     	</tr>
                         <tr>
@@ -133,8 +135,8 @@
     <jsp:include page="../common/footer.jsp" />
     
     <script>
-
         $(function(){
+            
             selectReviewList();
         });
 
@@ -171,7 +173,6 @@
     	}
     
     	function insertReview(){
-    		console.log($('input:radio[name=reviewStar]').filter(':checked').val());
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
     			data : {
