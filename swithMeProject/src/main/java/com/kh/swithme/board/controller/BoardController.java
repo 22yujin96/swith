@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.swithme.board.model.service.BoardServiceImpl;
+import com.kh.swithme.board.model.vo.Board;
 import com.kh.swithme.board.model.vo.SRoomReview;
 import com.kh.swithme.common.model.vo.PageInfo;
 import com.kh.swithme.common.template.Pagination;
@@ -46,14 +47,46 @@ public class BoardController {
 			PageInfo pi = Pagination.getPageInfo(boardService.boardListCount(boardType), currentPage, 20, 10);
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", boardService.selectBoardList(boardType, pi));
-			// System.out.println(boardService.selectBoardList(boardType, pi));
 			return "board/freeBoardListView";
 		}else {
 			PageInfo pi = Pagination.getPageInfo(boardService.boardListCount(boardType), currentPage, 20, 10);
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", boardService.selectBoardList(boardType, pi));
+			System.out.println(boardService.selectBoardList(boardType, pi));
 			return "board/infoBoardListView";
 		}
+	}
+	/**
+	 * 게시글 상세 보기 
+	 * @param boardNo 조회할 게시글 번호
+	 * @return 게시판 상세 페이지
+	 */
+	@RequestMapping("freeBoardDetail.bo")
+	public String boardDetail(int boardNo, Model model) {
+		
+		if(boardService.boardCountUp(boardNo) > 0) {
+			// 로그인 유저가 좋아요 한상태인지 아닌
+			Board status = new Board();
+			status.setLikeStatus(boardService.likeStatus(boardNo));
+			status.setBookStatus(boardService.bookStatus(boardNo));
+			
+			model.addAttribute("status", status);
+			model.addAttribute("b",boardService.boardDetail(boardNo));
+			return "board/freeBoardDetail";
+		}else {
+			return "errorPage";
+		}
+	}
+	
+	/**
+	 * 댓글 리스트 가져오기
+	 * @param boardNo 댓글이 달린 게시글 번호
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="replyList.bo", produces="application/json; charset=UTF-8")
+	public String replyList(int boardNo) {
+		return new Gson().toJson(boardService.replyList(boardNo));
 	}
 	
 	
