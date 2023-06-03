@@ -205,58 +205,61 @@
 	  });
 		  
    
-    
     //비밀번호
     $(function() {
     	
-    	let chkPwd = /^[a-zA-Z\d!@#$%^]{8,16}/;
     	
-    	const pwdInput = $('#writePwd');
-    	
-    	pwdInput.keyup(function() {
-    	
-    		if(pwdInput.val() === ''){
-    			pwdInput.css('border-color','gray');
-    			$('#checkPwd').css('color','gray').html('비밀번호는 필수 입력사항입니다.');
-				
-    		
-    		}else if(!chkPwd.test(pwdInput.val())) {
-    			
-	    		pwdInput.css('border-color','gray');
-				$('#checkPwd').css('color','gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-				
-		    	} else {
-		    		
-		    		pwdInput.css('border-color','rgb(3, 195, 115)');	
-		    		
-		    	}
-    	
-		      });
-			});
-    	
-    
-    
-    
-    //비밀번호 재확인
-    $(function() {
-    	
-    const pwdChkInput = $('#writePwdCheck');
-    const pwdInput = $('#writePwd');
-    
-    pwdChkInput.keyup(function() {
+    	  let chkPwd = /^[a-zA-Z\d!@#$%^]{8,16}/;
 
-    	if(pwdInput.val() === pwdChkInput.val()){
-    		pwdChkInput.css('border-color','rgb(3, 195, 115)');	
-    	
-    	}else{
-    		pwdChkInput.css('border-color','gray');	
-    		
-			
-			return false;
-    	}
-    });
-   });
-    
+    	  const pwdInput = $('#writePwd');
+    	  const pwdChkInput = $('#writePwdCheck');
+    	  const enrollBtn = $('#enrollBtn');
+
+    	  pwdInput.keyup(function() {
+    		  
+    	    if (pwdInput.val() === '') {
+    	      pwdInput.css('border-color', 'gray');
+    	      $('#checkPwd').css('color', 'gray').html('비밀번호는 필수 입력사항입니다.');
+    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+    	      
+    	    } else if (!chkPwd.test(pwdInput.val())) {
+    	      pwdInput.css('border-color', 'gray');
+    	      $('#checkPwd').css('color', 'gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+    	      
+    	    } else {
+    	      pwdInput.css('border-color', 'rgb(3, 195, 115)');
+    	      
+    	      if (pwdInput.val() !== pwdChkInput.val()) {
+    	        pwdChkInput.css('border-color', 'gray');
+    	        enrollBtn.attr('disabled', true).css('background-color', 'gray');
+    	        
+    	      } else {
+    	        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
+    	        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+    	        
+    	      }
+    	    }
+    	  });
+
+    	  pwdChkInput.keyup(function() {
+    		  
+    	    if (pwdInput.val() !== pwdChkInput.val()) {
+    	    	
+    	      pwdChkInput.css('border-color', 'gray');
+    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+    	      
+    	    } else {
+    	      pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
+    	      
+    	      if (chkPwd.test(pwdInput.val())) {
+    	        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+    	        
+    	      }
+    	    }
+    	  });
+    	});
+
     	
     	
     
@@ -286,7 +289,7 @@
     
     
     
-    //닉네임
+    //닉네임중복
     $(function() {
     	
     	let chkNick = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;  //2자 이상 16자 이하, 영어 또는 숫자 또는 한글로 구성, 	*한글 초성 및 모음은 허가하지 않는다.
