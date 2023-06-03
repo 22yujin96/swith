@@ -61,6 +61,7 @@ public class MemberControllerL {
 	
 	
 	
+	
 	// 아이디 중복 체크
 	@ResponseBody
 	@RequestMapping("idCheck.me")
@@ -76,6 +77,7 @@ public class MemberControllerL {
 		return memberService.nickCheck(checkNick) > 0 ? "N" : "Y";
 	}
 	
+
 	
 	
 	

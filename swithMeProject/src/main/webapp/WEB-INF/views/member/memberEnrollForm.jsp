@@ -24,7 +24,7 @@
     background-color: rgb(240, 240, 240);
     border-radius: 20px;
     width: 490px;
-    height:650px;
+    height:670px;
 }
 
 .btn123{
@@ -141,9 +141,12 @@
                     <th align="left">이메일</th>
                 </tr>
                 <tr>
-                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
+                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:225px;" required></td>
                 </tr>
-                <tr><td><br></td></tr>
+                <tr>
+                <tr>
+                  <td style="font-size: 10px; " id="checkMail"> </td>
+                </tr><td><br></td></tr>
                     <td><button  style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" >가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 
@@ -327,8 +330,6 @@
 				enrollBtn.attr('disabled', true).css('background-color', 'gray');
     			
     		}else{
-    			checkNick.css('color','gray').html('');
-    			nickInput.css('background-color','white');
     			
     				$.ajax({
 	    					url : 'nickCheck.me',
@@ -354,37 +355,47 @@
      		
     	
     	
- 		//이메일
-    	$(function() {
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    	});
-    	
-    	
-    	
-    
-    
-    
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+	
+    	//이메일
+       	$(function() {
+       		
+       		 var chkMail =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+       						
+       		 const emailInput = $('#writeEmail');
+       		 const checkMail = $('#checkMail');
+       		
+       		
+       		 	emailInput.keyup(function() {
+       		 		
+       		 
+       			
+       			 if(!chkMail.test(emailInput.val())){
+       				emailInput.css('border-color','red');
+       				checkMail.html('올바른 형식으로 작성해주세요.').css('color','red');
+       				
+       			 }else{
+
+						$.ajax({
+							
+							url : 'emailCheck.me',
+							data : {checkEmail : emailInput.val()},
+							success : function(result) {
+								
+								//존재할 때 아닐때 
+								이거해야함
+								
+							},error : () => {console.log('실패');}
+						});
+       			 }
+       			 
+       			 
+       		 });
+       		
+	});
+        		
+        		
+        		
+        		
     	
     	
     	
