@@ -109,10 +109,15 @@
                 <tr>
                     <th align="left">비밀번호 재확인</th>
                 </tr>
+                
                 <tr>
                     <td><input id="writePwdCheck" type="password" nmae="memberPwdChk"  style="width:225px" required ></td><br>
                     
+                </tr>
+                <tr>
+                  <td style="font-size: 10px; " id="RecheckPwd"> </td>
                 </tr><tr><td><br></td></tr>
+                
                 <tr>
                     <th align="left">이름</th>
                 </tr>
@@ -139,7 +144,7 @@
                     <td><input  id="writeEmail" type="email" name="userEmail"  style="width:160px" required><button type="button" style="height: 27px;" class="btn123" >메일확인</button></td>
                 </tr>
                 <tr><td><br></td></tr>
-                    <td><button type="button" style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" disabled>가입하기</button></td>
+                    <td><button  style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" >가입하기</button></td>
                 </tr>  <tr><td><br></td></tr>
                 
             </table>
@@ -157,8 +162,7 @@
     
    
    
-    // 정규표현식에 맞으면 초록색 테두리
-    // 정규표현식에 맞지 않으면 빨간색 테두리
+    
    //아이디 중복체크
     $(function() {
 
@@ -168,16 +172,16 @@
     	
         idInput.keyup(function() {
         	
-        	//console.log(idInput.val());
+        	
 			//공백 
 			if(idInput.val() === '') {
-				$('#checkId').css('color','gray').html('아이디는 필수 입력사항입니다.');
+				$('#checkId').css('color','red').html('아이디는 필수 입력사항입니다.');
 				
 			
 			//정규표현식에 맞지 않을때
 			}else if(!chkId.test(idInput.val())) {
-				idInput.css('border-color','gray');
-				$('#checkId').css('color','gray').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				idInput.css('border-color','red');
+				$('#checkId').css('color','red').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 				
 			}else {
 				
@@ -189,7 +193,8 @@
 					success : function(result) {
 						
 						if(result === "N"){
-							$('#checkId').css('color','gray').html('중복된 아이디가 존재합니다.');
+							$('#checkId').css('color','red').html('중복된 아이디가 존재합니다.');
+							idInput.css('border-color','red');
 							
 						}else{
 							idInput.css('border-color','rgb(3, 195, 115)');
@@ -205,63 +210,87 @@
 	  });
 		  
    
+   
+   
     //비밀번호
     $(function() {
-    	
-    	
-    	  let chkPwd = /^[a-zA-Z\d!@#$%^]{8,16}/;
+		  let chkPwd = /^[a-zA-Z\d!@#$%^]{8,16}/;
+		
+		  const pwdInput = $('#writePwd');
+		  const pwdChkInput = $('#writePwdCheck');
+		  const enrollBtn = $('#enrollBtn');
+		
+		  pwdInput.keyup(function() {
+		    if (pwdInput.val() === '') {	//1
+		      pwdInput.css('border-color', 'red');
+		      $('#checkPwd').css('color', 'red').html('비밀번호는 필수 입력사항입니다.');
+		      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+		      
+		      
+		    } else if (!chkPwd.test(pwdInput.val())) {//2 조건을 만족안했을떄
+			      if (pwdInput.val() !== pwdChkInput.val()) {// 비밀번호 재확인(일치하지 않을때)
+				        pwdChkInput.css('border-color', 'red');
+				        $('#RecheckPwd').css('color', 'red').html('비밀번호가 일치하지 않습니다.');
+				        enrollBtn.attr('disabled', true).css('background-color', 'gray');
+				        
+				        
+				      } else { // 일치할때
+				        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
+				        $('#RecheckPwd').css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
+				        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+				       
+				        
+				      }
+		    	
+		    	
+		      pwdInput.css('border-color', 'red');
+		      $('#checkPwd').css('color', 'red').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+		      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+		      
+		      
+		    } else { // 비밀번호 조건맞춰입력 3
+		      pwdInput.css('border-color', 'rgb(3, 195, 115)');
+		      $('#checkPwd').css('color', 'rgb(3, 195, 115)').html('올바른 비밀번호입니다.');
+		      
+			      
+			      if (pwdInput.val() !== pwdChkInput.val()) {// 비밀번호 재확인(일치하지 않을때)
+			        pwdChkInput.css('border-color', 'red');
+			        $('#RecheckPwd').css('color', 'red').html('비밀번호가 일치하지 않습니다.');
+			        enrollBtn.attr('disabled', true).css('background-color', 'gray');
+			        
+			        
+			      } else { // 일치할때
+			        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
+			        $('#RecheckPwd').css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
+			        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+			       
+			        
+			      }
+			    }
+			  });
+		
+		  
+		  
+		  pwdChkInput.keyup(function() { //비밀번호 재확인 keyup
+		    if (pwdInput.val() !== pwdChkInput.val()) {
+		      pwdChkInput.css('border-color', 'red');
+		      $('#RecheckPwd').css('color', 'red').html('비밀번호가 일치하지 않습니다.');
+		      enrollBtn.attr('disabled', true).css('background-color', 'gray');
+		      
+		      
+		    } else {
+		      pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
+		      $('#RecheckPwd').css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
+		      
+		      	if (chkPwd.test(pwdInput.val())) {
+		      		 $('#RecheckPwd').css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
+		        	enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+		      }
+		    }
+		  });
+		});
 
-    	  const pwdInput = $('#writePwd');
-    	  const pwdChkInput = $('#writePwdCheck');
-    	  const enrollBtn = $('#enrollBtn');
-
-    	  pwdInput.keyup(function() {
-    		  
-    	    if (pwdInput.val() === '') {
-    	      pwdInput.css('border-color', 'gray');
-    	      $('#checkPwd').css('color', 'gray').html('비밀번호는 필수 입력사항입니다.');
-    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
-    	      
-    	    } else if (!chkPwd.test(pwdInput.val())) {
-    	      pwdInput.css('border-color', 'gray');
-    	      $('#checkPwd').css('color', 'gray').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
-    	      
-    	    } else {
-    	      pwdInput.css('border-color', 'rgb(3, 195, 115)');
-    	      
-    	      if (pwdInput.val() !== pwdChkInput.val()) {
-    	        pwdChkInput.css('border-color', 'gray');
-    	        enrollBtn.attr('disabled', true).css('background-color', 'gray');
-    	        
-    	      } else {
-    	        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
-    	        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
-    	        
-    	      }
-    	    }
-    	  });
-
-    	  pwdChkInput.keyup(function() {
-    		  
-    	    if (pwdInput.val() !== pwdChkInput.val()) {
-    	    	
-    	      pwdChkInput.css('border-color', 'gray');
-    	      enrollBtn.attr('disabled', true).css('background-color', 'gray');
-    	      
-    	    } else {
-    	      pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
-    	      
-    	      if (chkPwd.test(pwdInput.val())) {
-    	        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
-    	        
-    	      }
-    	    }
-    	  });
-    	});
-
-    	
-    	
+  
     
     //이름
     $(function() {
@@ -276,7 +305,7 @@
     		
     		
     		if(!chkName.test(nameInput.val())){ //정규표현식에 맞지 않으면
-    			$('#checkName').css('color','gray').html('이름은 필수 입력사항입니다.');
+    			$('#checkName').css('color','red').html('이름은 필수 입력사항입니다.');
     			nameInput.css('border-color','gray');	
     			
     			
@@ -298,11 +327,10 @@
     	
     	nickInput.keyup(function() {
     		
-    		console.log(nickInput.val());
     		
     		if(!chkNick.test(nickInput.val())){ //사용자가 입력한 값이 정규표현식이랑 같지 않으면
     			$('#nickBtn').attr('disabled', true);
-    			$('#checkNick').css('color','gray').html('2~16자 이하 영어 또는 숫자 또는 한글로 입력해주세요.');
+    			$('#checkNick').css('color','red').html('2~16자 이하 영어 또는 숫자 또는 한글로 입력해주세요.');
     			nickInput.css('background-color','rgb(226, 222, 222)');
     		}else{
     			
@@ -319,12 +347,13 @@
 
     						if(result == 'N'){ //존재할때
     							$('#checkNick').css('color','red').html('이미 존재하는 닉네임 입니다.');
-    							nickInput.css('border-color','gray');
+    							$('#enrollBtn').attr('disabled', true).css('background-color', 'gray');
     							
     						
     						}else{ //성공
-    							$('#checkNick').css('color','rgb(3, 195, 115').html('사용가능한 닉네임입니다.');
+    							$('#checkNick').css('color','rgb(3, 195, 115').html('센스있는 닉네임이네요 !');
     							nickInput.css('border-color','rgb(3, 195, 115)');	
+    							$('#enrollBtn').removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
     						
     						};
     					},
@@ -421,7 +450,7 @@
     });
     
     
-    function () {
+    $(function () {
     	
 		var allInputs = $('form input');//배열로옴
     	
@@ -446,7 +475,7 @@
     		
     	
     }
-    }
+    });
     	/*
  	   var allInputs = $('form input');//배열로옴
  	   
