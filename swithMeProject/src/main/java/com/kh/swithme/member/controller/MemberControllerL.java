@@ -88,31 +88,30 @@ public class MemberControllerL {
 	}
 	
 	//회원가입하기 + 500p
-	
-	@RequestMapping("join.mem")
+	@ResponseBody
+	@RequestMapping(value="join.mem", produces="text/html; charset=UTF-8")
 	public String joinMember(Member m) {
-		
 		
 		//암호화
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd()); //암호화
 		//System.out.println("암호문 : " + encPwd);
 		m.setMemberPwd(encPwd);
 		
+		
 		String message = "";
+		
 			if(memberService.joinMember(m) > 0) { //회원가입 성공
-					memberService.joinPoint(m);
 					
-					message = "<script>alert('회원가입을 축하합니다 ! 500p가 지급되었습니다 !');</script>";
+				memberService.joinPoint(m);
 					
-							return "redirect:/";
+					message = "<script>alert('환영합니다 ! 500p가 지급되었습니다 !');location.href='loginForm.me';</script>";
+					
 							
 				}else {
-					return "member/memberEnrollForm";
-		
-					}
-	
-	
-	}
+					message = "<script>alert('회원가입을 다시 시도해주세요.');location.href='memberEnrollForm.me';</script>";
+			}
+			return message;
+		}
 	
 	
 	

@@ -70,8 +70,6 @@
 }
 
 
-
-
 </style>
 <body>
 
@@ -105,15 +103,12 @@
                 <tr>
                     <th align="left">비밀번호 재확인</th>
                 </tr>
-                
                 <tr>
                     <td><input id="writePwdCheck" type="password" nmae="memberPwdChk"  style="width:225px" required ></td><br>
-                    
                 </tr>
                 <tr>
                   <td style="font-size: 10px; " id="RecheckPwd"> </td>
                 </tr><tr><td><br></td></tr>
-                
                 <tr>
                     <th align="left">이름</th>
                 </tr>
@@ -146,13 +141,11 @@
                     <td><button  style="width:233px; height: 35px; color: white;"  class="btn123" id="enrollBtn" >가입하기</button></td>
                 </tr> <tr><td><br></td></tr>
                 <tr>
-                    <!-- ***모두입력하면 버튼 활성화시키기  -->
                 </tr>
             </table>
       </div>
     </form>
    </div>
-   
    <br><br><br><br><br><br>
  					<jsp:include page="../common/footer.jsp"/>
  					
@@ -199,7 +192,6 @@
 		      });
 		  });
    
-
    
     //비밀번호
     $(function() {
@@ -245,7 +237,6 @@
 			        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
 			        RecheckPwd.css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
 			        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
-			        
 			      }
 			    }
 			  });
@@ -268,7 +259,7 @@
 		   });
 		});
     
-	  
+    
     
     //이름
     $(function() {
@@ -302,7 +293,6 @@
     	const nickInput = $('#writeNick');
     	const nickBtn = $('#nickBtn');
     	const checkNick = $('#checkNick');
-    	
     	
     	nickInput.keyup(function() {
     		
