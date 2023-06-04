@@ -259,6 +259,21 @@ public class BoardController {
 		return boardService.insertStudyRoomReview(sr);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="selectStudyRoomReview.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectStudyRoomReview(int reviewNo) {
+		System.out.println(reviewNo);
+		return new Gson().toJson(boardService.selectStudyRoomReview(reviewNo));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="deleteReview.bo")
+	public int ajaxDeleteReview(int reviewNo) {
+		System.out.println(boardService.deleteStudyRoomReview(reviewNo));
+		return boardService.deleteStudyRoomReview(reviewNo);
+	}
+	
+	
 
 	
 }

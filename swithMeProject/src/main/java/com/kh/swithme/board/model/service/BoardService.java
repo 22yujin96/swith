@@ -90,11 +90,14 @@ public interface BoardService {
 	// 댓글(이용후기) 작성하기
 	int insertStudyRoomReview(SRoomReview sr);
 	
+	// 댓글(이용후기) 불러오기
+	SRoomReview selectStudyRoomReview(int reviewNo);
+	
 	// 댓글(이용후기) 수정하기
 	int updateStudyRoomReview(SRoomReview sr);
 	
 	// 댓글(이용후기) 삭제하기
-	int deleteStudyRoomReview(SRoomReview sr);
+	int deleteStudyRoomReview(int reviewNo);
 	
 	
 	

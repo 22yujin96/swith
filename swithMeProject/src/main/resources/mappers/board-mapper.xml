@@ -135,6 +135,43 @@
 			)
 	</insert>
 	
+	<!-- 스터디룸 리뷰 불러오기 -->
+	<select id="selectStudyRoomReview" resultType="SRoomReview">
+		SELECT
+			REVIEW_NO reviewNo
+			, MEMBER_ID memberId
+			, REVIEW_CONTENT reviewContent
+			, REVIEW_STAR reviewStar
+		FROM
+			BOARD_SROOM_REVIEW
+		WHERE
+			REVIEW_NO = #{reviewNo}	
+	</select>
+	
+	
+	
+	<!-- 스터디룸 리뷰 수정 -->
+	<update id="updateStudyRoomReview" parameterType="SRoomReview">
+		UPDATE
+			BOARD_SROOOM_REVIEW
+		SET
+			REVIEW_CONTENT=#{reviewContent}
+			,REVIEW_STAR=#{reviewStar}
+			,REVIEW_DATE=SYSDATE
+        WHERE
+            REVIEW_NO = #{reviewNo}
+	</update>
+	
+	<!-- 스터디룸 리뷰 삭제 -->
+	<delete id="deleteStudyRoomReview">
+		DELETE 
+		FROM 	
+			BOARD_SROOM_REVIEW
+		WHERE
+			REVIEW_NO=#{reviewNo}
+	
+	</delete>
+	
 	<!-- 혜린 -->
 	
 

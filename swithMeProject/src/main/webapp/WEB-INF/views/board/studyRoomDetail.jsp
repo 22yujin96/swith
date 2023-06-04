@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>스터디룸 상세</title>
-<style>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- swiper.js 라이브러리추가 -->
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
     <style> 
         .content {
             background-color:rgb(247, 245, 245);
@@ -29,6 +33,7 @@
         .reviewStar label:hover{color:red;}
         .reviewStar label.hover{color:red;}
 
+        
     </style>
 </head>
 <body>
@@ -49,7 +54,28 @@
                     <td >${sRoomDetail.studyRoomAddress}</td>
                 </tr>
                 <tr>
-                    <td >이미지</td>
+                    <td >
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <div class="swiper-slide"><img src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg"></div>
+                                <div class="swiper-slide"><img src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg"></div>
+                                <div class="swiper-slide"><img src=></div>
+                               
+                            </div>
+                        
+                            <!-- If we need pagination -->
+                            <div class="swiper-pagination"></div>
+                        
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        
+                            <!-- If we need scrollbar -->
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td >${sRoomDetail.studyRoomIntroduce}</td>
@@ -168,7 +194,7 @@
                                 + '<td>'
                                 + '<button class="updateBtn">수정</button>&nbsp;'
                                 + '<input type="hidden" value="' +  result[i].reviewNo + '">'
-                                + '<button onclick="deleteReview();">삭제</button>'
+                                + '<button class="deleteBtn">삭제</button>'
                                 + '</td>'
                                 + '</tr>' 
                                 + '<tr>'
@@ -189,7 +215,7 @@
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
     			data : {
-    				memberId : 'user01',
+    				memberId : 'user02',
     				reviewContent : $('#content').val(),
     				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
@@ -207,18 +233,66 @@
     	}
 
         // 이용후기 수정
+        // 리뷰 불러오기
         $('#reviewArea').on('click','.updateBtn',function(){
-            console.log($('.reviewNo').text());
             console.log($(this).next().val());
-
-
-
+        	$.ajax({
+        		url : 'selectStudyRoomReview.bo',
+        		data : {
+    				reviewNo : $(this).next().val()
+        		},
+        		success : function(review){
+        			console.log(review);
+                    var value='';
+    				for(let i in result){
+    					value += '<tr>' 
+							+ '<th>' + result[i].memberId+ '</th>'
+							+ '<td><b>' + result[i].reviewStar + '</b>/5';
+                        for(let j=1; j <= result[i].reviewStar; j++){
+                            value += '<label style="color:red;">★</label>';
+                        }
+                        for(let j=1; j <= 5-result[i].reviewStar; j++){
+                            value += '<label style="color:lightgrey;">★</label>';
+                        }        
+                        value += '</td>'
+                                + '<td>' + result[i].reviewDate + '</td>'
+                                + '<td>'
+                                + '<button class="updateBtn">수정</button>&nbsp;'
+                                + '<input type="hidden" value="' +  result[i].reviewNo + '">'
+                                + '<button class="deleteBtn">삭제</button>'
+                                + '</td>'
+                                + '</tr>' 
+                                + '<tr>'
+                                + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
+                                + '</tr>';
+    				}
+        		},
+        		error : function(){
+        			console.log('실패');
+        		}
+        	})
         })
 
+        // 리뷰 수정하기
+
         // 이용후기 삭제
-        function deleteReview(){
-            console.log();
-        }
+         $('#reviewArea').on('click','.deleteBtn',function(){
+            $.ajax({
+                url : 'deleteReview.bo',
+                data : {
+                    reviewNo : $(this).prev().val()
+                },
+                success : function(result){
+                    console.log(result);
+                    location.reload();
+                    
+                },
+                error : function(){
+                    consoel.log('실패');
+                }
+            })
+
+        })
 
 
         // 이용후기 별점 선택
@@ -229,6 +303,23 @@
                 $('.reviewStar label').eq(i).addClass("hover");
             }
         })
+
+         // 슬라이더 동작 정의
+      const swiper = new Swiper('.swiper', {
+          autoplay : {
+              delay : 3000 // 3초마다 이미지 변경
+          },
+          loop : true, //반복 재생 여부
+          slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
+          pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+              el: '.swiper-pagination',
+              clickable: true
+          },
+          navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+          }
+      }); 
     
     </script>
     
