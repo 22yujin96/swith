@@ -92,30 +92,27 @@ public class MemberControllerL {
 	@RequestMapping("join.mem")
 	public String joinMember(Member m) {
 		
+		
 		//암호화
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd()); //암호화
 		//System.out.println("암호문 : " + encPwd);
 		m.setMemberPwd(encPwd);
 		
+		String message = "";
 			if(memberService.joinMember(m) > 0) { //회원가입 성공
 					memberService.joinPoint(m);
 					
-					return "redirect:/";
+					message = "<script>alert('회원가입을 축하합니다 ! 500p가 지급되었습니다 !');</script>";
+					
+							return "redirect:/";
 							
-				
 				}else {
 					return "member/memberEnrollForm";
 		
-	
-			
-		
-		
-	}
-	
-	
-	
-	
+					}
 	
 	
 	}
+	
+	
 }
