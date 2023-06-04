@@ -184,7 +184,7 @@
 			  MAINBOARD
 		WHERE
 			  <if test="boardType == 1">
-			  BOARD_TYPE = 'info'
+			  BOARD_TYPE = 'free'
 			  </if>
 			   <if test="boardType == 2">
 			  BOARD_TYPE = 'info'
@@ -220,7 +220,15 @@
 		    BY
 	          CREATE_DATE DESC
 	</select>
-	
+	<update id="boardCountUp">
+		UPDATE 
+                MAINBOARD
+        SET
+               BOARD_COUNT = BOARD_COUNT + 1
+ 		WHERE
+               BOARD_NO = #{ boardNo }
+
+	</update>
 	<!-- 자유게시판 게시글 수 조회  -->
 	<select id="freeCount" resultType="_int">
 		SELECT

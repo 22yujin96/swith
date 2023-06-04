@@ -6,11 +6,29 @@
 	<!-- 희재 -->
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 지현 -->
 	
 		<!-- 아이디 체크용 쿼리  -->
 		<select id="idCheck" resultType="_int"><!-- v파라미터다시 -->
-			
 			SELECT
 				COUNT(*)
 			FROM
@@ -21,7 +39,6 @@
 		
 		<!-- 닉네임 체크용 쿼리 -->
 		<select id="nickCheck" resultType="_int" parameterType="string">
-		
 			SELECT
 				COUNT(*)
 			FROM
@@ -29,6 +46,76 @@
 			WHERE
 				NICKNAME = #{checkNick}
 		</select>
+		
+		<!-- 이메일 중복 체크용 쿼리 -->
+		<select id="emailCheck" resultType="_int" parameterType="string">
+			SELECT 
+				COUNT(*)
+			FROM
+				MEMBER
+			WHERE
+				MEMBER_EMAIL = #{checkEmail}		
+		</select>
+		<insert id="joinMember"  parameterType="member">
+			INSERT
+				INTO
+					MEMBER
+					(
+					MEMBER_ID
+					,MEMBER_PWD
+					,MEMBER_NAME
+					,MEMBER_EMAIL
+					,NICKNAME
+					
+					)
+				VALUES
+				(
+					#{memberId}
+					,#{memberPwd}
+					,#{memberName}
+					,#{memberEmail}
+					,#{nickName}
+				)
+		</insert>
+		
+		<!-- 회원가입 시 포인트 추가 -->
+		<insert id="joinPoint" parameterType="member">
+			INSERT
+				INTO
+					POINT
+						(
+						MEMBER_ID
+						,POINT_SCORE
+						,POINT_DETAIL
+						,POINT_STATUS
+						,POINT_TIME
+						)
+					VALUES
+						(
+						#{memberId}
+						,500
+						,'회원가입'
+						, 'Y'
+						, SYSDATE
+						)	
+					
+		
+		</insert>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	<!-- 유진 -->
 
