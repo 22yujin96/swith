@@ -1,11 +1,13 @@
 package com.kh.swithme.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.swithme.member.model.service.MemberService;
+import com.kh.swithme.member.model.vo.Member;
 
 @Controller
 public class MemberControllerL {
@@ -14,6 +16,9 @@ public class MemberControllerL {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	//회원가입 작성 폼으로 이동
 	@RequestMapping("memberEnrollForm.me")
@@ -26,7 +31,6 @@ public class MemberControllerL {
 	public String loginMemberForm() {
 		return "member/loginForm";
 	}
-
 	
 	//아이디 찾기 폼으로 이동
 	@RequestMapping("searchIdForm.me")
@@ -66,23 +70,52 @@ public class MemberControllerL {
 	@ResponseBody
 	@RequestMapping("idCheck.me")
 	public String idCheck(String checkId) {
-		
 		return memberService.idCheck(checkId) > 0 ? "N" : "Y";
 
 	}
-	
+	//닉네임 중복체크
 	@ResponseBody
 	@RequestMapping("nickCheck.me")
 	public String nickCheck(String checkNick) {
 		return memberService.nickCheck(checkNick) > 0 ? "N" : "Y";
 	}
 	
-
+	//이메일 중복체크
+	@ResponseBody
+	@RequestMapping("emailCheck.me")
+	public String emailCheck(String checkEmail) {
+		return memberService.emailCheck(checkEmail) > 0 ? "N" : "Y";
+	}
+	
+	//회원가입하기 + 500p
+	
+	@RequestMapping("join.mem")
+	public String joinMember(Member m) {
+		
+		//암호화
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd()); //암호화
+		//System.out.println("암호문 : " + encPwd);
+		m.setMemberPwd(encPwd);
+		
+			if(memberService.joinMember(m) > 0) { //회원가입 성공
+					memberService.joinPoint(m);
+					
+					return "redirect:/";
+							
+				
+				}else {
+					return "member/memberEnrollForm";
+		
+	
+			
+		
+		
+	}
 	
 	
 	
 	
 	
 	
-	
+	}
 }

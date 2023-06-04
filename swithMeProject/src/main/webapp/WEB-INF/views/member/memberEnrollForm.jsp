@@ -141,7 +141,7 @@
                     <th align="left">이메일</th>
                 </tr>
                 <tr>
-                    <td><input  id="writeEmail" type="email" name="userEmail"  style="width:225px;" required></td>
+                    <td><input  id="writeEmail" type="email" name="memberEmail"  style="width:225px;" required></td>
                 </tr>
                 <tr>
                 <tr>
@@ -159,13 +159,10 @@
    <br><br><br><br><br><br>
  					<jsp:include page="../common/footer.jsp"/>
  					
- 
     <script>
-    
     
     const enrollBtn = $('#enrollBtn');
    
-    
    //아이디 중복체크
     $(function() {
 
@@ -185,7 +182,6 @@
 				checkId.css('color','red').html('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 			
 			}else {
-				
 				//아이디 중복체크
 				$.ajax({
 					
@@ -196,19 +192,15 @@
 						if(result === "N"){
 							checkId.css('color','red').html('중복된 아이디가 존재합니다.');
 							idInput.css('border-color','red');
-							
 						}else{
 							idInput.css('border-color','rgb(3, 195, 115)');
 							checkId.css('color','rgb(3, 195, 115)').html('사용가능한 아이디입니다.');
 						}
-						}, error : function(){
-							 console.log('아이디 중복');
-					}
-				});
-	     	  }
-	      });
-	  });
-		  
+						}, error : function(){console.log('아이디 중복');}
+					});
+		     	  }
+		      });
+		  });
    
    
    
@@ -221,7 +213,6 @@
 		  const cehckPwd = $('#checkPwd');
 		  const RecheckPwd = $('#RecheckPwd');
 		 
-		
 		  pwdInput.keyup(function() {
 		    if (pwdInput.val() === '') {	//조건 1
 		      pwdInput.css('border-color', 'red');
@@ -240,22 +231,18 @@
 				        RecheckPwd.css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
 				        enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
 				      }
-		    	
 		      pwdInput.css('border-color', 'red');
 		      cehckPwd.css('color', 'red').html('8~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 		      enrollBtn.attr('disabled', true).css('background-color', 'gray');
 		      
-		      
 		    } else { // 비밀번호 조건맞춰입력 3
 		      pwdInput.css('border-color', 'rgb(3, 195, 115)');
 		      cehckPwd.css('color', 'rgb(3, 195, 115)').html('올바른 비밀번호입니다.');
-		      
 			      
 			      if (pwdInput.val() !== pwdChkInput.val()) {// 비밀번호 재확인(일치하지 않을때)
 			        pwdChkInput.css('border-color', 'red');
 			        RecheckPwd.css('color', 'red').html('비밀번호가 일치하지 않습니다.');
 			        enrollBtn.attr('disabled', true).css('background-color', 'gray');
-			        
 			        
 			      } else { // 일치할때
 			        pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
@@ -272,19 +259,16 @@
 		      RecheckPwd.css('color', 'red').html('비밀번호가 일치하지 않습니다.');
 		      enrollBtn.attr('disabled', true).css('background-color', 'gray');
 		      
-		      
 		    } else {
 		      pwdChkInput.css('border-color', 'rgb(3, 195, 115)');
 		      RecheckPwd.css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
-		      
+
 		      	if (chkPwd.test(pwdInput.val())) {
 		      		RecheckPwd.css('color', 'rgb(3, 195, 115)').html('비밀번호가 일치합니다.');
 		        	enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+		        }
 		      }
-		    }
-		  });
-    
-	  
+		   });
 		});
     
 	  
@@ -302,7 +286,6 @@
     			checkName.css('color','red').html('이름은 필수 입력사항입니다.');
     			enrollBtn.attr('disabled', true).css('background-color', 'gray');
     			nameInput.css('border-color','red');
-    			
     		}else{ //OK
     			nameInput.css('border-color','rgb(3, 195, 115)');	
     			checkName.css('color','rgb(3, 195, 115)').html('멋진 이름이네요 !');
@@ -322,6 +305,7 @@
     	const nickBtn = $('#nickBtn');
     	const checkNick = $('#checkNick');
     	
+    	
     	nickInput.keyup(function() {
     		
     		if(!chkNick.test(nickInput.val())){ //사용자가 입력한 값이 정규표현식이랑 같지 않으면
@@ -340,7 +324,6 @@
 	    							checkNick.css('color','red').html('이미 존재하는 닉네임 입니다.');
 	    							nickInput.css('border-color','red');
 	    							enrollBtn.attr('disabled', true).css('background-color', 'gray');
-	    							
 	    						}else{ //성공
 	    							checkNick.css('color','rgb(3, 195, 115').html('센스있는 닉네임이네요 !');
 	    							nickInput.css('border-color','rgb(3, 195, 115)');	
@@ -352,27 +335,21 @@
     	 		 });
     		});
     			
-     		
-    	
     	
 	
     	//이메일
        	$(function() {
        		
        		 var chkMail =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-       						
        		 const emailInput = $('#writeEmail');
        		 const checkMail = $('#checkMail');
        		
-       		
        		 	emailInput.keyup(function() {
-       		 		
-       		 
        			
        			 if(!chkMail.test(emailInput.val())){
        				emailInput.css('border-color','red');
        				checkMail.html('올바른 형식으로 작성해주세요.').css('color','red');
-       				
+       				enrollBtn.attr('disabled', true).css('background-color', 'gray');
        			 }else{
 
 						$.ajax({
@@ -381,186 +358,20 @@
 							data : {checkEmail : emailInput.val()},
 							success : function(result) {
 								
-								//존재할 때 아닐때 
-								이거해야함
-								
+								if(result == 'N'){ // 이메일 존재할 때
+									checkMail.html('이미 존재하는 이메일 입니다.').css('color','red');
+									emailInput.css('border-color','red');
+								}else{
+									checkMail.html('사용 가능한 이메일입니다.').css('color','rgb(3, 195, 115)');
+									enrollBtn.removeAttr('disabled').css('background-color', 'rgb(3, 195, 115)');
+									emailInput.css('border-color','rgb(3, 195, 115)');
+								}
 							},error : () => {console.log('실패');}
 						});
-       			 }
-       			 
-       			 
-       		 });
-       		
-	});
+       				 }
+       		 	});
+			});
         		
-        		
-        		
-        		
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    //이메일 중복확인 안누르고 가입하기 눌렀을때 예외처리
-    $(function() {
-    	
-    	 count = 0;
-    	
-    
-    	
-    	$('#nickBtn').on('click',function() {
-    		count ++;	
-    		//console.log(count);
-    	});
-    
-    	
-   	<%--
-   	 $(function() {
-   	    	$('#enrollBtn').click(function() {
-   	    		if(allInputs === ''){
-   	    			alert('필수입력사항을 입력해주세요.');
-   	    		}
-   	    		if(count == 0){
-   	    			alert('닉네임 중복확인이 필요합니다.');
-   	    			$('#nickBtn').focus();
-   	    			
-   	    			return false;
-   	    		}else{
-   	    			$('#enrollBtn').removeAttr('disabled',true);
-   	    		}
-   	    		
-   	    	});
-   	    })	
-    	--%>		
-  });
-    
-    	
-    $(function() {
-    	
-    	
-    	
-    	var allInputs = $('form input');//배열로옴
-    	
-    	var test = document.getElementsByTagName('input').innerText;
-		console.log(test2);
-    	// console.log(allInputs);
-    	
-
-		var test = '';
-    	$(allInputs).each(function(index, item){
-    		if(item.val() == ''){
-				test += 1;
-			}
-			
-		});
-    	
-		if(test == 6){
-			$('#enrollBtn').removeAttr('disabled');
-		}
-    		/*
-    		 for(var i in allInputs){
-    			
-    		 	if(allInputs[i].val() !== ""){
-    				
-    		 		$('#enrollBtn').removeAttr('disabled');
-    				
-    			
-    	
-    			
-    			
-    			
-    			
-    			
-    			
-    			
-    		 };
-    	
-    		 };
-    */
-    });
-    
-    
-    $(function () {
-    	
-		var allInputs = $('form input');//배열로옴
-    	
-    
-			
-	
-    		
-	
-    		
-    		 for(var i in allInputs){
-    			
-    		 	if(allInputs.eq(i).val() !== ''){
-    		 		
-    		 	
-    				
-    		 		
-    				$('#enrollBtn').css('background-color', 'rgb(3, 195, 115)');
-    				$('#enrollBtn').removeAttr('disabled');
-    			
-    		 };
-    			
-    		
-    	
-    }
-    });
-    	/*
- 	   var allInputs = $('form input');//배열로옴
- 	   
-    	console.log( $('form input').val());
- 	   
- 	   
- 	   
- 	  
- 	 
-    	var test = document.getElementsByTagName('input').val();
-		console.log(test);
-    	// console.log(allInputs);
-    	
-
-		var test = '';
-    	$(allInputs).each(function(index, item){
-    		if(item.val() == ''){
-				test += 1;
-				
-			}
-			
-		});
-    	
-		if(test == 6){
-			$('#enrollBtn').removeAttr('disabled');
-    	
-    	
-    } 
-    
- }
-
-	/*  let test = document.getElementsByTagName('input').value;
-	 
- 	console.log(test);
-	 var vari = ''
-	 $(test).each(function(index, item){
-	 
-	    if(item != ''){
-	       vari += 1
-	    }
-	 });
-	 
-	 if(vari == 6){
-		 $('#enrollBtn').removeAttr('disabled');
-	 }
-	} */
-
     </script>
    
 
