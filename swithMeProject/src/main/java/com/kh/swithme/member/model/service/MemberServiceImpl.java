@@ -80,16 +80,18 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.loginMember(sqlSession, m);
 	}
 	
-	
-	
-	
+	//로그인 시 pointSelect	
+	@Override
+	public int loginPointChk(Member m) {
+		return memberDao.loginPointChk(sqlSession,m);
+	}
 	
 	/**
 	 *로그인 시 포인트 지급
 	 */
 	@Override
-	public int loginPoint(Member m) {
-		return memberDao.loginPoint(sqlSession, m);
+	public int loginPointInsert(Member m) {
+		return memberDao.loginPointInsert(sqlSession, m);
 	}
 	
 	
@@ -143,8 +145,6 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<QNA> selectQnaList(PageInfo pi, String memberId) {
 		return memberDao.selectQnaList(sqlSession, pi, memberId);
 	}
-	
-	
 	
 	
 

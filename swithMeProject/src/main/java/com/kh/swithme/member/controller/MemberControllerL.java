@@ -12,18 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.swithme.member.model.service.MemberService;
 import com.kh.swithme.member.model.vo.Member;
 
-/**
- * @author user1
- *
- */
-/**
- * @author user1
- *
- */
-/**
- * @author user1
- *
- */
+
+ 
 /**
  * @author user1
  *
@@ -165,16 +155,30 @@ public class MemberControllerL {
 		//복화
 		if(loginMember != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
 				
-				memberService.loginPoint(m);
-			
+				if(memberService.loginPointChk(m) == 0) {
+					memberService.loginPointInsert(m);
+				}
+				//알럿 띄우고싶음.
 				session.setAttribute("loginMember", loginMember);
+				                                        //session.setAttribute("alertMsg", "환영합니다 ! 30p가 지급되었습니다.");
 				model.setViewName("redirect:/");
-				
-			
 		}else {
+													
 				model.setViewName("member/loginForm");
 		}
-		
 			return model;
 	}
+	
+	
+	/**로그아웃
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping("logout.me")
+	public String logoutMember(Member m, HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+		
+	}
+	
  }

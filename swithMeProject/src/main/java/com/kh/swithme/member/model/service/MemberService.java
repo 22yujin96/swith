@@ -30,10 +30,11 @@ public interface MemberService {
 	//로그인
 	Member loginMember(Member m);
 
-
+	//로그인시 출석 포인트 select
+	int loginPointChk(Member m);
 
 	//로그인 포인트 insert
-	int loginPoint(Member m);
+	int loginPointInsert(Member m);
 	
 	
 	

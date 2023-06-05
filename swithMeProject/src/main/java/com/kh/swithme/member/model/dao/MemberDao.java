@@ -42,9 +42,16 @@ public class MemberDao {
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember",m);
 	}
+	
+	
+	//로그인 시 출석 포인트 체크
+	public int loginPointChk(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginPointChk",m);
+	}
+	
 	//로그인 시 포인트
-	public int loginPoint(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.insert("memberMapper.loginPoint");
+	public int loginPointInsert(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.loginPointInsert", m);
 	}
 	
 	
@@ -81,7 +88,6 @@ public class MemberDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("memberMapper.selectQnaList", memberId, rowBounds);
 	}
-	
 	
 	
 	

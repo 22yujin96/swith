@@ -146,33 +146,53 @@
 					MEMBER_STATUS = 'Y'	
 			
 		</select>
-		<!-- 로그인 시 포인트 -->
-		<insert id="loginPoint">
-			INSERT 
+		<!-- 로그인 시 출석 POINT 조회 -->
+		<select id="loginPointChk" parameterType="member" resultType="_int">
+		SELECT
+				COUNT(*)
+			FROM
+				POINT
+			WHERE
+				MEMBER_ID = #{memberId}
+            AND 
+            	POINT_DETAIL = '출석'
+            AND 
+            	TO_CHAR(POINT_TIME,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+		
+		
+		</select>
+		<!-- 로그인시 포인트 insert -->
+		<insert id="loginPointInsert" parameterType="member">
+			INSERT
 				INTO
 					POINT
-						(
-						MEMBER_ID
-						,POINT_SCORE
-						,POINT_DETAIL
-						,POINT_STATUS
-						,POINT_TIME
-						)
-					VALUES
-						(
-						#{memberId}
-						,30
-						,출석
-						,Y
-						,SYSDATE)
-					WHERE
-						POINT_DETAIL != '출석'
-							
-						
-					
+					(MEMBER_ID
+					,POINT_SCORE
+					,POINT_DETAIL
+					,POINT_STATUS
+					,POINT_TIME)
+				VALUES
+					(
+					#{memberId}
+					,30
+					,'출석'
+					,'Y'
+					,SYSDATE
+					)	
 			
 		
 		</insert>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
