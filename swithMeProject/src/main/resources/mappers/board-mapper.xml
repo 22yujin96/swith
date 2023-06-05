@@ -49,8 +49,6 @@
 		<result column="SR_INTRODUCE" property="studyRoomIntroduce" />
 		<result column="SR_CREATEDATE" property="studyRoomCreatedate" />
 		<result column="SR_WEBSITE" property="studyRoomWebsite" />
-		
-	
 	</resultMap>
 	
 	<!-- 희재 -->
@@ -63,17 +61,22 @@
 	</select>
 	
 	<!-- 스터디룸 메인 리스트 -->
-	<select id="selectSRoomList" resultMap="sRoomResultSet">
+	<select id="selectSRoomList" resultType="StudyRoom">
 		SELECT 
-			SR_NO
-			,SR_NAME
-			,SR_LOCATION
-			,SR_ADDRESS
-			,SR_LAT
-			,SR_LNG
-			,SR_PHONE
+			SR_NO studyRoomNo
+			,SR_NAME studyRoomName
+			,SR_LOCATION studyRoomLocation
+			,SR_ADDRESS studyRoomAddress
+			,SR_PHONE studyRoomPhone
+			,CHANGE_NAME titleImg
 		FROM
 			BOARD_STUDYROOM
+		JOIN 
+			ATTACH ON (SR_NO = REF_NO)
+		WHERE 
+			SR_NO = 3
+		AND 
+			FILE_LEVEL=1
 		ORDER
 		BY
 			SR_CREATEDATE DESC
@@ -134,6 +137,56 @@
 			#{reviewStar}
 			)
 	</insert>
+	
+	<!-- 스터디룸 리뷰 불러오기 -->
+	<select id="selectStudyRoomReview" resultType="SRoomReview">
+		SELECT
+			REVIEW_NO reviewNo
+			, MEMBER_ID memberId
+			, REVIEW_CONTENT reviewContent
+			, REVIEW_STAR reviewStar
+		FROM
+			BOARD_SROOM_REVIEW
+		WHERE
+			REVIEW_NO = #{reviewNo}	
+	</select>
+	
+	
+	
+	<!-- 스터디룸 리뷰 수정 -->
+	<update id="updateStudyRoomReview" parameterType="SRoomReview">
+		UPDATE
+			BOARD_SROOOM_REVIEW
+		SET
+			REVIEW_CONTENT=#{reviewContent}
+			,REVIEW_STAR=#{reviewStar}
+			,REVIEW_DATE=SYSDATE
+        WHERE
+            REVIEW_NO = #{reviewNo}
+	</update>
+	
+	<!-- 스터디룸 리뷰 삭제 -->
+	<delete id="deleteStudyRoomReview">
+		DELETE 
+		FROM 	
+			BOARD_SROOM_REVIEW
+		WHERE
+			REVIEW_NO=#{reviewNo}
+	
+	</delete>
+	
+	<!-- 스터디룸 전체 주소 조회 -->
+	<select id="selectAddress" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LNG
+		FROM
+			BOARD_STUDYROOM
+		</select>
 	
 	<!-- 혜린 -->
 	

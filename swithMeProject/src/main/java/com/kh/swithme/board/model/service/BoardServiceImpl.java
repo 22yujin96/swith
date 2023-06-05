@@ -138,5 +138,25 @@ public class BoardServiceImpl implements BoardService {
 	public int insertStudyRoomReview(SRoomReview sr) {
 		return boardDao.insertStudyRoomReview(sqlSession, sr);
 	}
+
+	@Override
+	public SRoomReview selectStudyRoomReview(int reviewNo) {
+		return boardDao.selectStudyRoomReview(sqlSession, reviewNo);
+	}
+
+	@Override
+	public int updateStudyRoomReview(SRoomReview sr) {
+		return boardDao.updateStudyRoomReview(sqlSession, sr);
+	}
+
+	@Override
+	public int deleteStudyRoomReview(int reviewNo) {
+		return boardDao.deleteStudyRoomReview(sqlSession, reviewNo);
+	}
+	@Override
+	public ArrayList<StudyRoom> selectAddress() {
+		return boardDao.selectAddress(sqlSession);
+	}
+
 	
 }

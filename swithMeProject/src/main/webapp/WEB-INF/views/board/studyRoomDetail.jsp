@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>스터디룸 상세</title>
-<style>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
     <style> 
         .content {
             background-color:rgb(247, 245, 245);
@@ -29,6 +31,7 @@
         .reviewStar label:hover{color:red;}
         .reviewStar label.hover{color:red;}
 
+        
     </style>
 </head>
 <body>
@@ -49,7 +52,9 @@
                     <td >${sRoomDetail.studyRoomAddress}</td>
                 </tr>
                 <tr>
-                    <td >이미지</td>
+                    <td >
+                      이미지
+                    </td>
                 </tr>
                 <tr>
                     <td >${sRoomDetail.studyRoomIntroduce}</td>
@@ -100,10 +105,10 @@
                         </td>
                     </tr>
                 </table>
-                <table id="reviewArea" class="table" align="center">
+                <table id="reviewArea" align="center">
                     <thead>
                     	<tr>
-                    		<th colspan="3" class="reviewStar">
+                    		<th colspan="4" class="reviewStar">
                     			<input type="radio" name="reviewStar" value="1" id="rate1">
                     			<label for="rate1">★</label>
                                 <input type="radio" name="reviewStar" value="2" id="rate2">
@@ -116,14 +121,16 @@
                     			<label for="rate5">★</label>
                     		 </th>
                     	</tr>
+                        
                         <tr>
                             <th colspan="2">
                                 <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
                             </th>
-                            <th style="vertical-align:middle"><button class="btn btn-secondary" onclick="insertReview();">등록하기</button></th>
+                            <th colspan="2" style="vertical-align:middle"><button class="btn btn-secondary" onclick="insertReview();">등록하기</button></th>
                         </tr>
+                        <tr><th>&nbsp;&nbsp;</th></tr>
                         <tr>
-                            <td colspan="3">리뷰(<span id="rcount"></span>)</td>
+                            <th colspan="4" style="font-size: larger;">이용후기(<span id="rcount"></span>)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,6 +148,7 @@
             selectReviewList();
         });
 
+        // 이용후기 조회
     	function selectReviewList(){
     		$.ajax({
     			url : 'selectStudyRoomReviewList.bo',
@@ -148,31 +156,41 @@
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
     			success : function(result){
-    				console.log(result);
+                    console.log(result);
     				var value='';
-    				
     				for(let i in result){
     					value += '<tr>' 
 							+ '<th>' + result[i].memberId+ '</th>'
-							+ '<td>' + result[i].reviewStar + '</td>'
-							+ '</tr>' 
-							+ '<tr>' 
-							+ '<td>' + result[i].reviewContent + '</td>'
-							+ '</tr>'
-							+ '<td>' + result[i].reviewDate + '</td>'
-							+ '</tr>';
+							+ '<td><b>' + result[i].reviewStar + '</b>/5';
+                        for(let j=1; j <= result[i].reviewStar; j++){
+                            value += '<label style="color:red;">★</label>';
+                        }
+                        for(let j=1; j <= 5-result[i].reviewStar; j++){
+                            value += '<label style="color:lightgrey;">★</label>';
+                        }        
+                        value += '</td>'
+                            + '<td>' + result[i].reviewDate + '</td>'
+                            + '<td>'
+                            + '<button class="updateBtn">수정</button>&nbsp;'
+                            + '<input type="hidden" value="' +  result[i].reviewNo + '">'
+                            + '<button class="deleteBtn">삭제</button>'
+                            + '</td>'
+                            + '</tr>' 
+                            + '<tr>'
+                            + '<td colspan="5" style="height:100px; vertical-align:top;" class="reviewContent">' + result[i].reviewContent + '</td>'
+                            + '</tr>';
+                        
     				}
     				$('#reviewArea tbody').html(value);
     				$('#rcount').text(result.length);
-    				
     			},
     			error : function(){
     				console.log('실패');
     			}
     		});
-    		
     	}
     
+        // 이용후기 등록
     	function insertReview(){
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
@@ -180,10 +198,13 @@
     				memberId : 'user01',
     				reviewContent : $('#content').val(),
     				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
-    				StudyRoomNo : ${sRoomDetail.studyRoomNo}
+    				studyRoomNo : ${sRoomDetail.studyRoomNo}
     			},
-    			success : function(){
-    				console.log('성공');
+    			success : function(result){
+                    if(result === 1){
+                        selectReviewList();
+                        $('#content').val('');
+                    }
     			},
     			error : function(){
     				console.log('실패');
@@ -191,12 +212,63 @@
     		});
     	}
 
-        $('.reviewStar label').on('click', function(e){
-            var click=$(this);
-            click.addClass('hover');
-            console.log(click);
+        // 이용후기 수정
+        // 리뷰 불러오기
+        $('#reviewArea').on('click','.updateBtn',function(){
+            console.log($(this).next().val());
+        	$.ajax({
+        		url : 'selectStudyRoomReview.bo',
+        		data : {
+    				reviewNo : $(this).next().val()
+        		},
+        		success : function(review){
+        			
+                    var value='';
+    					value += '<td colspan="5">'
+		                        + '<textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>'
+		                    	+ '</td>';
+
+    				$('#reviewArea tbody .reviewContent').html(value);
+    			
+    					
+        		},
+        		error : function(){
+        			console.log('실패');
+        		}
+        	})
+        })
+
+        // 리뷰 수정하기
+
+        // 이용후기 삭제
+         $('#reviewArea').on('click','.deleteBtn',function(){
+            $.ajax({
+                url : 'deleteReview.bo',
+                data : {
+                    reviewNo : $(this).prev().val()
+                },
+                success : function(result){
+                    console.log(result);
+                    location.reload();
+                    
+                },
+                error : function(){
+                    consoel.log('실패');
+                }
+            })
 
         })
+
+
+        // 이용후기 별점 선택
+        $('.reviewStar label').on('click', function(){
+            var value=$('input:radio[name=reviewStar]').filter(':checked').val();
+            $('.reviewStar label').removeClass("hover");
+            for(var i=0; i<value; i++){
+                $('.reviewStar label').eq(i).addClass("hover");
+            }
+        })
+
     
     </script>
     

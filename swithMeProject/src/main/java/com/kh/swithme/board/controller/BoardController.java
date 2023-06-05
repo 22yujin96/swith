@@ -236,6 +236,7 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(boardService.sRoomListCount(), currentPage, 10, 10);
 		model.addAttribute("pi", pi);
 		model.addAttribute("sRoomList", boardService.selectSRoomList(pi));
+		System.out.println(boardService.selectSRoomList(pi));
 		return "board/studyRoomMain";
 	}
 	
@@ -256,9 +257,29 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="insertstudyRoomReview.bo", produces="application/json; charset=UTF-8")
 	public int ajaxInsertStudyRoomReview(SRoomReview sr) {
-		System.out.println(sr);
 		return boardService.insertStudyRoomReview(sr);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectStudyRoomReview.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectStudyRoomReview(int reviewNo) {
+		System.out.println(reviewNo);
+		return new Gson().toJson(boardService.selectStudyRoomReview(reviewNo));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="deleteReview.bo")
+	public int ajaxDeleteReview(int reviewNo) {
+		System.out.println(boardService.deleteStudyRoomReview(reviewNo));
+		return boardService.deleteStudyRoomReview(reviewNo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="map.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectAddress() {
+		return new Gson().toJson(boardService.selectAddress());
+	}
+	
 	
 
 	

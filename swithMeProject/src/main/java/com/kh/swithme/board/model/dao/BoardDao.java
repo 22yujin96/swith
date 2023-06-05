@@ -100,4 +100,20 @@ public class BoardDao {
 	public int insertStudyRoomReview(SqlSessionTemplate sqlSession, SRoomReview sr) {
 		return sqlSession.insert("boardMapper.insertStudyRoomReview", sr);
 	}
+	
+	public SRoomReview selectStudyRoomReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectOne("boardMapper.selectStudyRoomReview", reviewNo);
+	}
+	
+	public int updateStudyRoomReview(SqlSessionTemplate sqlSession, SRoomReview sr) {
+		return sqlSession.update("boardMappier.updateStudyRoomReview", sr);
+	}
+	
+	public int deleteStudyRoomReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.delete("boardMapper.deleteStudyRoomReview",reviewNo);
+	}
+	
+	public ArrayList<StudyRoom> selectAddress(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectAddress");
+	}
 }
