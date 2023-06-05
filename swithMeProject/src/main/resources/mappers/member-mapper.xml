@@ -210,7 +210,7 @@
 	
 	<!-- 유진 -->
 	<!-- 임시로그인 -->
-	<select id="selectMemberY" resultType="member">
+	<!-- <select id="selectMemberY" resultType="member">
 		SELECT
 				MEMBER_ID memberId,
 				MEMBER_PWD memberPwd,
@@ -223,7 +223,7 @@
 		  		MEMBER
 		 WHERE
 		 		MEMBER_ID = 'user03'
-	</select>
+	</select> -->
 	
 	<!-- 토탈포인트 -->
 	<select id="selectTotalPoint" parameterType="string" resultType="_int">

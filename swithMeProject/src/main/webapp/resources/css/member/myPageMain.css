@@ -151,6 +151,15 @@ a:hover{
 	border-radius : 5px;
 	cursor : pointer;
 }
+#AminiList>span{
+	display : block;
+	line-height : 35px;
+	padding-left : 10px;
+	text-align : center;
+	font-size : 15px;
+	color : rgb(160, 160, 160);
+	padding-top : 60px;
+}
 #grass>h5{
 	color: rgb(94, 94, 94);
 	font-size : 17px;

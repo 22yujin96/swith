@@ -75,7 +75,7 @@
 		            <li><a href="memberEnrollForm.me">회원가입</a></li>
 	            </c:when>
 	            <c:otherwise>
-	            	<li><label>${loginMember.memberName }님 환영합니다.</label></li>
+	            	<li><label>${ loginMember.memberName }님 환영합니다.</label></li>
 	            	<li><a href="logout.me">로그아웃</a></li>
 	            </c:otherwise>
             </c:choose>

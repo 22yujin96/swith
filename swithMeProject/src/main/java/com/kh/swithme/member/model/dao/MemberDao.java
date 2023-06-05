@@ -58,9 +58,9 @@ public class MemberDao {
 	//유진 -----------------------------------------------------------------------------------
 	
 	// 임시로그인
-	public Member selectMemberY(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("memberMapper.selectMemberY");
-	}
+//	public Member selectMemberY(SqlSessionTemplate sqlSession) {
+//		return sqlSession.selectOne("memberMapper.selectMemberY");
+//	}
 	
 	// 총 포인트 가져오기
 	public int selectTotalPoint(SqlSessionTemplate sqlSession, String memberId) {

@@ -100,10 +100,10 @@ public class MemberServiceImpl implements MemberService{
 	//유진 -----------------------------------------------------------------------------------
 	
 	// 임시 로그인
-	public Member selectMemberY() {
-		System.out.println("ㅇ나런이ㅏㅓ리ㅏㄴ어ㅣㄹ");
-		return memberDao.selectMemberY(sqlSession);
-	}
+//	public Member selectMemberY() {
+//		System.out.println("ㅇ나런이ㅏㅓ리ㅏㄴ어ㅣㄹ");
+//		return memberDao.selectMemberY(sqlSession);
+//	}
 	
 	// 총 포인트 가져오기
 	@Override

@@ -23,19 +23,17 @@ public class MemberControllerY {
 	private MemberServiceImpl memberService;
 	
 	// 마이페이지 메인으로 이동
-//		@RequestMapping("mypage.me")
-//		public String myPageMain() {
-//			return "member/myPageMain";
-//		}
-		
-	// 임시로그인 (user03 고정) 
 	@RequestMapping("mypage.me")
-	public String myPageMain(Model model) {
-		Member loginUser = memberService.selectMemberY();
-		System.out.println(loginUser);
-		model.addAttribute("loginUser", loginUser);
+	public String myPageMain() {
 		return "member/myPageMain";
 	}
+
+	
+//	임시로그인 (user03 고정) 
+//	@RequestMapping("mypage.me")
+//	public String myPageMain(Model model) {
+//		return "member/myPageMain";
+//	}
 	
 	
 	@RequestMapping("item.me")
@@ -63,12 +61,7 @@ public class MemberControllerY {
 								HttpSession session,
 								Model model) {
 		
-//		Member loginUser = new Member();
-//		loginUser.setMemberId(id);
-
-		
-		//String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
-		String memberId = "user03";
+		String memberId = ((Member)session.getAttribute("loginMember")).getMemberId();
 		
 		PageInfo pi = Pagination.getPageInfo(memberService.selecQnaListCount(memberId), currentPage, 5, 5);
 		

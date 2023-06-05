@@ -23,8 +23,8 @@
 		
 			<div id="mb1">
 				<div id="mainChar">캐릭터</div>
-				<p id="mNick">${ loginUser.nickName }</p>
-				<p id="mMail">${ loginUser.memberEmail }</p>
+				<p id="mNick">${ loginMember.nickName }</p>
+				<p id="mMail">${ loginMember.memberEmail }</p>
 				<button>수정하기</button>
 			</div><!-- 
 		 --><div class="balance" id="mb2">
@@ -61,7 +61,7 @@
 		function totalPoint(){
 			$.ajax({
 				url : 'miniPoint',
-				data : { memberId : '${loginUser.memberId}' },
+				data : { memberId : '${loginMember.memberId}' },
 				success : (tp) => {
 					$('#totalP').html(tp + 'P');
 				},
@@ -73,7 +73,7 @@
 		function miniPointList(){
 			$.ajax({
 				url : 'miniPointList',
-				data : { memberId : '${loginUser.memberId}' },
+				data : { memberId : '${loginMember.memberId}' },
 				success : (list) => {
 					
 					let value= '';
@@ -100,42 +100,54 @@
 		function miniAlarmList(){
 			$.ajax({
 				url : 'miniAlarmList',
-				data : { memberId : '${loginUser.memberId}' },
+				data : { memberId : '${loginMember.memberId}' },
 				success : (list) => {
 					//console.log('연결성공');
 					//console.log(list);
 					
-					comment = {
-							'댓글' : '댓글이 달렸습니다.',
-							'대댓글' : '대댓글이 달렸습니다.',
-							'채택' : '답변이 채택되었습니다.',
-							'유저태그' : '게시글에 태그되었습니다.',
-							'방장양도' : '방장으로 임명되었습니다.'
+					if(list.length == 0){
+						console.log('sdjkhffsd');
+						
+						let result = '<span class="emptyList">등록된 알림이 없습니다.</span>';
+						
+						$('#AminiList').html(result);
+						
+						
 					}
-					
-					let value = '';
-					
-					for(let i in list){
+					else{
 						
-						let sort = ''; // 게시판 or 스터디밴드 구분용 빈문자열 선언 
-						if(list[i].alarmSort == 's'){sort = '[게시판]'}
-						else {sort = '[밴드]'};
-						
-						let category = '';
-						for(var key in comment){
-							if(list[i].alarmCategory == key){
-								category = comment[key];
-								break;
-							}
+						comment = {
+								'댓글' : '댓글이 달렸습니다.',
+								'대댓글' : '대댓글이 달렸습니다.',
+								'채택' : '답변이 채택되었습니다.',
+								'유저태그' : '게시글에 태그되었습니다.',
+								'방장양도' : '방장으로 임명되었습니다.'
 						}
 						
-						value += '<p>'
-							   + sort + ' ' + category
-							   + '</p>'	
+						let value = '';
 						
-					};
-					
-					$('#AminiList').html(value);
+						for(let i in list){
+							
+							let sort = ''; // 게시판 or 스터디밴드 구분용 빈문자열 선언 
+							if(list[i].alarmSort == 's'){sort = '[게시판]'}
+							else {sort = '[밴드]'};
+							
+							let category = '';
+							for(var key in comment){
+								if(list[i].alarmCategory == key){
+									category = comment[key];
+									break;
+								}
+							}
+							
+							value += '<p>'
+								   + sort + ' ' + category
+								   + '</p>'	
+							
+						};
+						
+						$('#AminiList').html(value);
+					}
 					
 				},
 				error : () => { console.log('연결실패'); }
