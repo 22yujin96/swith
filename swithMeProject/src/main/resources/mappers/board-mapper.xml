@@ -172,6 +172,19 @@
 	
 	</delete>
 	
+	<!-- 스터디룸 전체 주소 조회 -->
+	<select id="selectAddress" resultMap="sRoomResultSet">
+		SELECT 
+			SR_NO
+			,SR_NAME
+			,SR_LOCATION
+			,SR_ADDRESS
+			,SR_LAT
+			,SR_LNG
+		FROM
+			BOARD_STUDYROOM
+		</select>
+	
 	<!-- 혜린 -->
 	
 

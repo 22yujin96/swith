@@ -153,5 +153,10 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteStudyRoomReview(int reviewNo) {
 		return boardDao.deleteStudyRoomReview(sqlSession, reviewNo);
 	}
+	@Override
+	public ArrayList<StudyRoom> selectAddress() {
+		return boardDao.selectAddress(sqlSession);
+	}
+
 	
 }

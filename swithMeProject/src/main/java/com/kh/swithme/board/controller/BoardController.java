@@ -273,6 +273,11 @@ public class BoardController {
 		return boardService.deleteStudyRoomReview(reviewNo);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="map.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectAddress() {
+		return new Gson().toJson(boardService.selectAddress());
+	}
 	
 
 	

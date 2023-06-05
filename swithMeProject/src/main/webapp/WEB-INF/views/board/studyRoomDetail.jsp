@@ -8,9 +8,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- swiper.js 라이브러리추가 -->
-   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
 
     <style> 
         .content {
@@ -55,26 +53,7 @@
                 </tr>
                 <tr>
                     <td >
-                        <div class="swiper">
-                            <!-- Additional required wrapper -->
-                            <div class="swiper-wrapper">
-                                <!-- Slides -->
-                                <div class="swiper-slide"><img src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg"></div>
-                                <div class="swiper-slide"><img src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg"></div>
-                                <div class="swiper-slide"><img src=></div>
-                               
-                            </div>
-                        
-                            <!-- If we need pagination -->
-                            <div class="swiper-pagination"></div>
-                        
-                            <!-- If we need navigation buttons -->
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        
-                            <!-- If we need scrollbar -->
-                            <div class="swiper-scrollbar"></div>
-                        </div>
+                      이미지
                     </td>
                 </tr>
                 <tr>

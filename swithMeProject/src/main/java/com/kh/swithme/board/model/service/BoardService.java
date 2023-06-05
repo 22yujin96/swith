@@ -77,7 +77,7 @@ public interface BoardService {
 	
 	// 스터디룸 리스트 불러오기
 	ArrayList<StudyRoom> selectSRoomList(PageInfo pi);
-	
+		
 	// 스터디룸 대표이미지 불러오기
 	ArrayList<Attach> selectSRoomAttachList(int studyRoomNo);
 	
@@ -99,7 +99,8 @@ public interface BoardService {
 	// 댓글(이용후기) 삭제하기
 	int deleteStudyRoomReview(int reviewNo);
 	
-	
+	// 지도 불러오기
+	ArrayList<StudyRoom> selectAddress();
 	
 	
 	

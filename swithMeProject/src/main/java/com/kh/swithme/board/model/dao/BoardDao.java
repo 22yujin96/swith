@@ -112,4 +112,8 @@ public class BoardDao {
 	public int deleteStudyRoomReview(SqlSessionTemplate sqlSession, int reviewNo) {
 		return sqlSession.delete("boardMapper.deleteStudyRoomReview",reviewNo);
 	}
+	
+	public ArrayList<StudyRoom> selectAddress(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectAddress");
+	}
 }
