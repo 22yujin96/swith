@@ -94,7 +94,7 @@
                 
                 <tr>
                     <th>이메일</th>
-                    <td colspan="2"><input type="eamil" name="userEmail" required placeholder=" 비밀번호를 입력해주세요."></td>
+                    <td colspan="2"><input type="eamil" name="memberEmail" required placeholder=" 비밀번호를 입력해주세요."></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
@@ -105,7 +105,7 @@
                 </tr><td><br></td></tr>
                     
                 <tr>
-                    <td colspan="3"><button onclick="location.href='###'">찾기</button></td>
+                    <td colspan="3"><button>찾기</button></td>
                 </tr><td><br></td></tr>
                 
             </table>

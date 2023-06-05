@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.swithme.member.model.service.MemberService;
 import com.kh.swithme.member.model.vo.Member;
 
 
  
+/**
+ * @author user1
+ *
+ */
 /**
  * @author user1
  *
@@ -181,5 +186,26 @@ public class MemberControllerL {
 		return "redirect:/";
 		
 	}
+	
+	
+	/**아이디 찾기
+	 * @param m
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("searchId.me")
+	public ModelAndView memberSerchId(Member m, ModelAndView model, HttpSession session) {
+		
+		 Member memberId = memberService.memberSerchId(m);
+		 
+		 session.setAttribute("memberId", memberId.getMemberId());
+		 
+		 model.setViewName("member/searchIdResult");
+		 
+		 return model;
+		 
+		
+	}
+	
 	
  }

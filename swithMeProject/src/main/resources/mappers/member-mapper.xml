@@ -85,6 +85,8 @@
 			WHERE
 				MEMBER_EMAIL = #{checkEmail}		
 		</select>
+		
+		<!-- 회원가입INSERT -->
 		<insert id="joinMember"  parameterType="member">
 			INSERT
 				INTO
@@ -148,19 +150,19 @@
 		</select>
 		<!-- 로그인 시 출석 POINT 조회 -->
 		<select id="loginPointChk" parameterType="member" resultType="_int">
-		SELECT
-				COUNT(*)
-			FROM
-				POINT
-			WHERE
-				MEMBER_ID = #{memberId}
-            AND 
-            	POINT_DETAIL = '출석'
-            AND 
-            	TO_CHAR(POINT_TIME,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
-		
+			SELECT
+					COUNT(*)
+				FROM
+					POINT
+				WHERE
+					MEMBER_ID = #{memberId}
+	            AND 
+	            	POINT_DETAIL = '출석'
+	            AND 
+	            	TO_CHAR(POINT_TIME,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
 		
 		</select>
+		
 		<!-- 로그인시 포인트 insert -->
 		<insert id="loginPointInsert" parameterType="member">
 			INSERT
@@ -179,9 +181,22 @@
 					,'Y'
 					,SYSDATE
 					)	
-			
-		
 		</insert>
+		
+		<!-- 아이디 찾기 -->
+		<select id="memberSerchId" parameterType="member" resultType="member">
+			SELECT
+					MEMBER_ID 		memberId
+				FROM
+					MEMBER
+				WHERE
+					MEMBER_NAME = #{memberName}
+				AND
+					MEMBER_EMAIL = #{memberEmail}	
+				AND 
+				 	MEMBER_STATUS = 'Y'		
+				
+		</select>
 		
 		
 		
