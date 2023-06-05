@@ -169,16 +169,17 @@
                             value += '<label style="color:lightgrey;">★</label>';
                         }        
                         value += '</td>'
-                                + '<td>' + result[i].reviewDate + '</td>'
-                                + '<td>'
-                                + '<button class="updateBtn">수정</button>&nbsp;'
-                                + '<input type="hidden" value="' +  result[i].reviewNo + '">'
-                                + '<button class="deleteBtn">삭제</button>'
-                                + '</td>'
-                                + '</tr>' 
-                                + '<tr>'
-                                + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
-                                + '</tr>';
+                            + '<td>' + result[i].reviewDate + '</td>'
+                            + '<td>'
+                            + '<button class="updateBtn">수정</button>&nbsp;'
+                            + '<input type="hidden" value="' +  result[i].reviewNo + '">'
+                            + '<button class="deleteBtn">삭제</button>'
+                            + '</td>'
+                            + '</tr>' 
+                            + '<tr>'
+                            + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
+                            + '</tr>';
+                        
     				}
     				$('#reviewArea tbody').html(value);
     				$('#rcount').text(result.length);
@@ -194,7 +195,7 @@
     		$.ajax({
     			url : 'insertstudyRoomReview.bo',
     			data : {
-    				memberId : 'user02',
+    				memberId : 'user01',
     				reviewContent : $('#content').val(),
     				reviewStar : $('input:radio[name=reviewStar]').filter(':checked').val(),
     				studyRoomNo : ${sRoomDetail.studyRoomNo}
@@ -222,29 +223,8 @@
         		},
         		success : function(review){
         			console.log(review);
-                    var value='';
-    				for(let i in result){
-    					value += '<tr>' 
-							+ '<th>' + result[i].memberId+ '</th>'
-							+ '<td><b>' + result[i].reviewStar + '</b>/5';
-                        for(let j=1; j <= result[i].reviewStar; j++){
-                            value += '<label style="color:red;">★</label>';
-                        }
-                        for(let j=1; j <= 5-result[i].reviewStar; j++){
-                            value += '<label style="color:lightgrey;">★</label>';
-                        }        
-                        value += '</td>'
-                                + '<td>' + result[i].reviewDate + '</td>'
-                                + '<td>'
-                                + '<button class="updateBtn">수정</button>&nbsp;'
-                                + '<input type="hidden" value="' +  result[i].reviewNo + '">'
-                                + '<button class="deleteBtn">삭제</button>'
-                                + '</td>'
-                                + '</tr>' 
-                                + '<tr>'
-                                + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
-                                + '</tr>';
-    				}
+
+    					
         		},
         		error : function(){
         			console.log('실패');
@@ -283,22 +263,6 @@
             }
         })
 
-         // 슬라이더 동작 정의
-      const swiper = new Swiper('.swiper', {
-          autoplay : {
-              delay : 3000 // 3초마다 이미지 변경
-          },
-          loop : true, //반복 재생 여부
-          slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
-          pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
-              el: '.swiper-pagination',
-              clickable: true
-          },
-          navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
-              prevEl: '.swiper-button-prev',
-              nextEl: '.swiper-button-next'
-          }
-      }); 
     
     </script>
     
