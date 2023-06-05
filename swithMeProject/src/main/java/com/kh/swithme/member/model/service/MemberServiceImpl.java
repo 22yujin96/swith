@@ -13,6 +13,18 @@ import com.kh.swithme.member.model.vo.Member;
 import com.kh.swithme.member.model.vo.Point;
 import com.kh.swithme.member.model.vo.QNA;
 
+/**
+ * @author user1
+ *
+ */
+/**
+ * @author user1
+ *
+ */
+/**
+ * @author user1
+ *
+ */
 @Service
 public class MemberServiceImpl implements MemberService{
 	
@@ -22,36 +34,67 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	//아이디 중복체크
+	
+	/**
+	 *아이디 중복체크
+	 */
 	@Override
 	public int idCheck(String checkId) {
 		return memberDao.idCheck(sqlSession, checkId);
 	}
-	
-	//닉네임 중복체크
+	/**
+	 *닉네임 중복체크
+	 */
 	@Override
 	public int nickCheck(String checkNick) {
 		return memberDao.nickCheck(sqlSession, checkNick);
 	}
-
-	//이메일 중복체크
+	/**
+	 *이메일 중복체크
+	 */
 	@Override
 	public int emailCheck(String checkEmail) {
 		return memberDao.emailCheck(sqlSession,checkEmail);
 	}
-	
-	//회원가입
+	/**
+	 *회원가입
+	 */
 	@Override
 	public int joinMember(Member m) {
 		return memberDao.joinMember(sqlSession, m);
-	
 	}
-
-	//회원가입시 포인트 insert
+	
+	/**
+	 *회원가입시 포인트 insert
+	 */
 	@Override
 	public int joinPoint(Member m) {
 		return memberDao.joinPoint(sqlSession, m);
 	}
+	
+	/**
+	 *로그인 select
+	 */
+	@Override
+	public Member loginMember(Member m) {
+		return memberDao.loginMember(sqlSession, m);
+	}
+	
+	//로그인 시 pointSelect	
+	@Override
+	public int loginPointChk(Member m) {
+		return memberDao.loginPointChk(sqlSession,m);
+	}
+	
+	/**
+	 *로그인 시 포인트 지급
+	 */
+	@Override
+	public int loginPointInsert(Member m) {
+		return memberDao.loginPointInsert(sqlSession, m);
+	}
+	
+	
 	
 	
 	//유진 -----------------------------------------------------------------------------------
@@ -102,8 +145,6 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<QNA> selectQnaList(PageInfo pi, String memberId) {
 		return memberDao.selectQnaList(sqlSession, pi, memberId);
 	}
-	
-	
 	
 	
 

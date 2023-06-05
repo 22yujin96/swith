@@ -65,6 +65,7 @@
     
     <jsp:include page="../common/header.jsp"/><br><br><br>
     
+   
     
 
     <h1 id="loginTitle" align="center">로그인</h1><br><br>
@@ -82,7 +83,8 @@
                 
                 <tr>
                     <th>비밀번호</th>
-                    <td colspan="2"><input type="password" required placeholder=" 비밀번호를 입력해주세요."></td>
+                    <td colspan="2"><input type="password" name="memberPwd" required placeholder=" 비밀번호를 입력해주세요."></td>
+                    
                 </tr><td><br></td></tr>
                 
                 <tr>

@@ -26,6 +26,19 @@ public interface MemberService {
 	//회원가입시 포인트 insert
 	int joinPoint(Member m);
 	
+
+	//로그인
+	Member loginMember(Member m);
+
+	//로그인시 출석 포인트 select
+	int loginPointChk(Member m);
+
+	//로그인 포인트 insert
+	int loginPointInsert(Member m);
+	
+	
+	
+
 	//유진 -----------------------------------------------------------------------------------
 
 	// 토탈포인트(사용가능한 포인트)
@@ -49,5 +62,7 @@ public interface MemberService {
 	// 사용자가 작성한 문의글 리스트 조회
 	ArrayList<QNA> selectQnaList(PageInfo pi, String memberId);
 
+
+	
 	
 }

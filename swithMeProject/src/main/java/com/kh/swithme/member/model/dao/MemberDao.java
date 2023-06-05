@@ -30,11 +30,28 @@ public class MemberDao {
 	public int emailCheck(SqlSessionTemplate sqlSession, String checkEmail) {
 		return sqlSession.selectOne("memberMapper.emailCheck",checkEmail);
 	}
+	// 회원가입
 	public int joinMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.joinMember", m);
 	}
+	//회원가입 시 포인트
 	public int joinPoint(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.joinPoint", m);
+	}
+	//로그인
+	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginMember",m);
+	}
+	
+	
+	//로그인 시 출석 포인트 체크
+	public int loginPointChk(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginPointChk",m);
+	}
+	
+	//로그인 시 포인트
+	public int loginPointInsert(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.loginPointInsert", m);
 	}
 	
 	
@@ -71,7 +88,6 @@ public class MemberDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("memberMapper.selectQnaList", memberId, rowBounds);
 	}
-	
 	
 	
 	
