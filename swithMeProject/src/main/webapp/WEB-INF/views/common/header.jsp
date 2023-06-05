@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 	
 	<!-- jQuery 라이브러리 -->
@@ -33,6 +34,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%-- 
+ <c:if test = "${not empty alertMsg }">
+ 	<script>
+    	alert('${alertMsg }');
+ 	
+ 	</script>
+    </c:if>
+ <c:remove var = "alertMsg" scope="session"/> 
+--%>
+
+	
+	
+
 
 <header>
     <div class="wrap clear">
@@ -52,8 +66,18 @@
                     <div id="noRead"></div>
                 </a>
             </li>
-            <li><a href="loginForm.me">로그인</a></li>
-            <li><a href="memberEnrollForm.me">회원가입</a></li>
+            
+            <!-- 로그인 전 / 후 -->
+            <c:choose>
+            	<c:when test="${empty loginMember }">
+		            <li><a href="loginForm.me">로그인</a></li>
+		            <li><a href="memberEnrollForm.me">회원가입</a></li>
+	            </c:when>
+	            <c:otherwise>
+	            	<li><label>${loginMember.memberName }님 환영합니다.</label></li>
+	            	<li><a href="logout.me">로그아웃</a></li>
+	            </c:otherwise>
+            </c:choose>
             
         </ul>
     </div>

@@ -19,6 +19,13 @@ public interface MemberService {
 	
 	//회원가입시 포인트 insert
 	int joinPoint(Member m);
+	
+	//로그인
+	Member loginMember(Member m);
 
+	//로그인 포인트 insert
+	int loginPoint(Member m);
+	
+	
 	
 }
