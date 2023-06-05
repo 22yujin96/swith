@@ -51,7 +51,9 @@
 			                    <input type="hidden" value="${sRoom.studyRoomNo }">
 			                        <tbody>
 			                            <tr>
-			                                <th rowspan="4" style="width:250px;height:250px;">이미지</th>
+			                                <th rowspan="4" style="width:250px;height:250px;">
+											<img src="" >
+											</th>
 			                                <td style="width: 500px;">${sRoom.studyRoomName}</td>
 			                            </tr>
 			                            <tr>

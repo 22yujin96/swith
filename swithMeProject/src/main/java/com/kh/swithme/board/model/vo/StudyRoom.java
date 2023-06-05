@@ -15,4 +15,5 @@ public class StudyRoom {
 	private String studyRoomIntroduce;
 	private Date studyRoomCreatedate;
 	private String studyRoomWebsite;
+	private String titleImg;
 }

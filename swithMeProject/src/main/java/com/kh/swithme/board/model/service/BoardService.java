@@ -78,7 +78,7 @@ public interface BoardService {
 	// 스터디룸 리스트 불러오기
 	ArrayList<StudyRoom> selectSRoomList(PageInfo pi);
 		
-	// 스터디룸 대표이미지 불러오기
+	// 스터디룸 이미지 불러오기
 	ArrayList<Attach> selectSRoomAttachList(int studyRoomNo);
 	
 	// 스터디름 상세 정보 보기 

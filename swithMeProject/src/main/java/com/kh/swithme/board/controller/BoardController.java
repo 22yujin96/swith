@@ -236,6 +236,7 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(boardService.sRoomListCount(), currentPage, 10, 10);
 		model.addAttribute("pi", pi);
 		model.addAttribute("sRoomList", boardService.selectSRoomList(pi));
+		System.out.println(boardService.selectSRoomList(pi));
 		return "board/studyRoomMain";
 	}
 	
@@ -278,6 +279,7 @@ public class BoardController {
 	public String ajaxSelectAddress() {
 		return new Gson().toJson(boardService.selectAddress());
 	}
+	
 	
 
 	
