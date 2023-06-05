@@ -3,6 +3,35 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
+
+	<resultMap id="pointResultSet" type="point">
+		<result column="MEMBER_ID"		property="memberId" />
+		<result column="POINT_SCORE"	property="pointScore" />
+		<result column="POINT_DETAIL"	property="pointDetail" />
+		<result column="POINT_STATUS"	property="pointStatus" />
+		<result column="POINT_TIME"		property="pointTime" />
+	</resultMap>
+	
+	<resultMap id="alarmResultSet" type="alarm">
+		<result column="LALRM_NO"			property="alarmNo" />
+		<result column="ALARM_MEMBER_ID"	property="alarmMemberId" />
+		<result column="ALARM_BOARD_NO"		property="alarmBoardNo" />
+		<result column="ALARM_CATEGORY"		property="alarmCategory" />
+		<result column="ALARM_DATE"			property="alarmDate" />
+		<result column="ALARM_STATUS"		property="alarmStatus" />
+		<result column="ALARM_SORT"			property="alarmSort" />
+	</resultMap>
+	
+	<resultMap id="QnaResultSet" type="qna">
+		<result column="QNA_NO"			property="qnaNo" />
+		<result column="MEMBER_ID"		property="memberId" />
+		<result column="QNA_TITLE"		property="qnaTitle" />
+		<result column="QNA_CONTENT"	property="qnaContent" />
+		<result column="QNA_DATE"		property="qnaDate" />
+		<result column="QNA_STATUS"		property="qnaStatus" />
+	</resultMap>
+
+
 	<!-- 희재 -->
 	
 	
@@ -118,6 +147,97 @@
 		
 	
 	<!-- 유진 -->
+	<!-- 임시로그인 -->
+	<select id="selectMemberY" resultType="member">
+		SELECT
+				MEMBER_ID memberId,
+				MEMBER_PWD memberPwd,
+				MEMBER_NAME memberName,
+				MEMBER_EMAIL memberEmail,
+				NICKNAME nickName,
+				MEMBER_ENROLL_DATE memberEnrollDate,
+				MEMBER_STATUS memberStatus
+		  FROM
+		  		MEMBER
+		 WHERE
+		 		MEMBER_ID = 'user03'
+	</select>
+	
+	<!-- 토탈포인트 -->
+	<select id="selectTotalPoint" parameterType="string" resultType="_int">
+		SELECT A - B
+		  FROM (SELECT DISTINCT
+		               CASE WHEN (SELECT COUNT(*)
+		                            FROM POINT
+		                           WHERE POINT_STATUS = 'Y'
+		                             AND MEMBER_ID = #{memberId} ) > 0
+		                    THEN (SELECT DISTINCT SUM(POINT_SCORE) OVER(PARTITION BY POINT_STATUS ORDER BY POINT_STATUS)
+		                            FROM POINT
+		                           WHERE POINT_STATUS = 'Y'
+		                             AND MEMBER_ID = #{memberId} )
+		                    ELSE 0
+		                     END AS "A", MEMBER_ID
+		         FROM POINT
+		        WHERE MEMBER_ID = #{memberId} )
+		  JOIN (SELECT DISTINCT
+		                CASE WHEN (SELECT COUNT(*)
+		                             FROM POINT
+		                            WHERE POINT_STATUS = 'N'
+		                              AND MEMBER_ID = #{memberId} ) > 0 
+		                     THEN (SELECT DISTINCT SUM(POINT_SCORE) OVER(PARTITION BY POINT_STATUS ORDER BY POINT_STATUS)
+		                             FROM POINT
+		                            WHERE POINT_STATUS = 'N'
+		                              AND MEMBER_ID = #{memberId} )
+		                     ELSE 0
+		                      END AS "B", MEMBER_ID
+		         FROM POINT
+		        WHERE MEMBER_ID = #{memberId} ) USING (MEMBER_ID)
+	</select>
+
+	<!-- 마이페이지 메인 포인트내역(최신3개) -->
+	<select id="selectPointList3" parameterType="string" resultMap="pointResultSet">
+		SELECT *
+		  FROM (SELECT ROWNUM, A.*
+		          FROM (SELECT POINT_DETAIL, POINT_STATUS, POINT_SCORE
+		                  FROM POINT
+		                 WHERE MEMBER_ID = #{memberId}
+		                 ORDER
+		                    BY POINT_TIME DESC) A)
+		 WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+	
+	<!-- 마이페이지 메인 알림내역(최신5개) -->
+	<select id="selectAlarmList5" parameterType="string" resultMap="alarmResultSet">
+		SELECT *
+		  FROM (SELECT ROWNUM, A.*
+		          FROM (SELECT ALARM_CATEGORY, ALARM_BOARD_NO , SUBSTR(ALARM_NO, 1, 1) "ALARM_SORT", TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH:MI:SS') "ALARM_DATE"
+		                  FROM BOARD_ALARM
+		                 WHERE ALARM_MEMBER_ID = #{memberId}
+		                 UNION ALL
+		                SELECT ALARM_CATEGORY, ALARM_SB_NO, SUBSTR(ALARM_NO, 1, 1) "ALARM_SORT", TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH:MI:SS') "ALARM_DATE"
+		                  FROM BAND_ALARM
+		                 WHERE ALARM_MEMBER = #{memberId}
+		                 ORDER 
+		                    BY ALARM_DATE DESC) A)
+		 WHERE ROWNUM BETWEEN 1 AND 5
+	</select>
+
+	<!-- 문의글 수 가져오기 -->
+	<select id="selectQnaListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		  FROM QNA
+		 WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	
+	<!-- 문의글 리스트 가져오기 -->
+	<select id="selectQnaList" parameterType="string" resultMap="QnaResultSet">
+		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') "QNA_DATE", QNA_STATUS
+		  FROM QNA
+		 WHERE MEMBER_ID = #{memberId}
+		 ORDER
+		    BY QNA_NO DESC
+	</select>
 
 
 </mapper>

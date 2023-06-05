@@ -59,6 +59,10 @@
     height : 50px;
     margin-bottom: 10px;
 }
+#qna_left>button:hover{
+	color : #03c373;
+	border : 1.5px solid #03c373;
+}
 #qna_left, #qna_right{
     display: inline-block;
 }
@@ -97,6 +101,9 @@
 .post_block:last-child{
     border-bottom: none;
     margin-bottom: 0;
+}
+.post_block:hover{
+    background-color : rgb(207, 254, 227);
 }
 .post_top{
     height: 50px;
@@ -154,13 +161,9 @@ input[type=checkbox]{
 	color : rgb(3, 195, 115);
 	margin : 5px;
 	box-sizing : border-box;
+	text-align : center;
 }
-.paBtn > button:first-child{
-	background-color : rgb(3, 195, 115);
-	color : white;
-	border : none; 
-	box-sizing : border-box;
-}
+
 
 
 

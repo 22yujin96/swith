@@ -23,20 +23,24 @@
             <div class="topBlock">문의글 작성</div>
 
             <div class="block">
-                <div>
-                    <p>제목</p>
-                    <input type="text" name="qnaTitle" required/>
-                </div>
-                <br>
-                <div>
-                    <p>내용</p>
-                    <textarea name="qnaContent"></textarea>
-                </div>
-
-                <div id="myQnaBtn">
-                    <button class="qnaBack" onclick="location.href='qna.me'">취소</button>
-                    <button class="qnaEnroll">등록</button>
-                </div>
+            	<form action="insertQna.me" method="post">
+            		<input type="hidden" name="memberId" value="user03" />
+            		<%-- <input type="hidden" name="memberId" value="${ loginUser.memberId }" /> --%>
+	                <div>
+	                    <p>제목</p>
+	                    <input type="text" name="qnaTitle" required/>
+	                </div>
+	                <br>
+	                <div>
+	                    <p>내용</p>
+	                    <textarea name="qnaContent"></textarea>
+	                </div>
+	
+	                <div id="myQnaBtn">
+	                    <button type="button" class="qnaBack" onclick="location.href='qna.me'">취소</button>
+	                    <button type="submit" class="qnaEnroll">등록</button>
+	                </div>
+                </form>
             </div>
 			
 		</div>

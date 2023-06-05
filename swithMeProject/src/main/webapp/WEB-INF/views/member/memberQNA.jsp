@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,60 +40,48 @@
 
                 <!-- 목록 -->
                 <div class="postList">
-                    <div class="post_block">
-                        <div class="post_top">
-                            <input type="checkbox">
-                            <div class="post_cate">답변완료</div>
-                            <p class="post_title">문의글 제목</p>
-                        </div>
-                        <p class="post_con">목숨이 얼마나 우리 품었기 튼튼하며, 보내는 힘있다. 있음으로써 남는 인류의 않는 것은 목숨을 유소년에게서 불러 바이며, 것이다. 대중을 우리의 풍부하게 그와 부패뿐이다. 굳세게 위하여 봄날의 뜨거운지라, 목숨이 미묘한 힘있다. 천하를 방황하였으며, 동산에는것이다.하여도 돋고, 따뜻한 것은 운다. 없는 얼마나 어디 이상의 보는 피는 소금이라 원질이 보이는 이것이다. 피어나는 간에 만천하의 남는 긴지라 하여도 밥을 이상, 사랑의 때문이다. 끓는 돋고, 오아이스도 피고, 인간의 그들의 이상 두기 그들은 황금시대다. 피가 청춘을 실로 길지 그들은 철환하였는가?</p>
-                        <span class="post_date">2020-99-99</span>
-                    </div>
-                    <div class="post_block">
-                        <div class="post_top">
-                            <input type="checkbox">
-                            <div class="post_cate">미완료</div>
-                            <p class="post_title">문의글 제목</p>
-                        </div>
-                        <p class="post_con">목숨이 얼마나 우리 품었기 튼튼하며, 보내는 힘있다. 있음으로써 남는 인류의 않는 것은 목숨을 유소년에게서 불러 바이며, 것이다. 대중을 우리의 풍부하게 그와 부패뿐이다. 굳세게 위하여 봄날의 뜨거운지라, 목숨이 미묘한 힘있다. 천하를 방황하였으며, 동산에는것이다.하여도 돋고, 따뜻한 것은 운다. 없는 얼마나 어디 이상의 보는 피는 소금이라 원질이 보이는 이것이다. 피어나는 간에 만천하의 남는 긴지라 하여도 밥을 이상, 사랑의 때문이다. 끓는 돋고, 오아이스도 피고, 인간의 그들의 이상 두기 그들은 황금시대다. 피가 청춘을 실로 길지 그들은 철환하였는가?</p>
-                        <span class="post_date">2020-99-99</span>
-                    </div>
-                    <div class="post_block">
-                        <div class="post_top">
-                            <input type="checkbox">
-                            <div class="post_cate">답변완료</div>
-                            <p class="post_title">문의글 제목</p>
-                        </div>
-                        <p class="post_con">목숨이 얼마나 우리 품었기 튼튼하며, 보내는 힘있다. 있음으로써 남는 인류의 않는 것은 목숨을 유소년에게서 불러 바이며, 것이다. 대중을 우리의 풍부하게 그와 부패뿐이다. 굳세게 위하여 봄날의 뜨거운지라, 목숨이 미묘한 힘있다. 천하를 방황하였으며, 동산에는것이다.하여도 돋고, 따뜻한 것은 운다. 없는 얼마나 어디 이상의 보는 피는 소금이라 원질이 보이는 이것이다. 피어나는 간에 만천하의 남는 긴지라 하여도 밥을 이상, 사랑의 때문이다. 끓는 돋고, 오아이스도 피고, 인간의 그들의 이상 두기 그들은 황금시대다. 피가 청춘을 실로 길지 그들은 철환하였는가?</p>
-                        <span class="post_date">2020-99-99</span>
-                    </div>
-                    <div class="post_block">
-                        <div class="post_top">
-                            <input type="checkbox">
-                            <div class="post_cate">답변완료</div>
-                            <p class="post_title">문의글 제목</p>
-                        </div>
-                        <p class="post_con">목숨이 얼마나 우리 품었기</p>
-                        <span class="post_date">2020-99-99</span>
-                    </div>
-                    <div class="post_block">
-                        <div class="post_top">
-                            <input type="checkbox">
-                            <div class="post_cate">답변완료</div>
-                            <p class="post_title">문의글 제목</p>
-                        </div>
-                        <p class="post_con">목숨이 얼마나 우리 품었기</p>
-                        <span class="post_date">2020-99-99</span>
-                    </div>
+                
+                	<!--  리스트 표시 -->
+                	<c:if test="${ not empty list }" >
+                		<c:forEach items="${ list }" var="q">
+	                		<div class="post_block">
+		                        <div class="post_top">
+		                            <input type="checkbox">
+		                            <div class="post_cate">${ q.qnaStatus }</div>
+		                            <p class="post_title">${ q.qnaTitle }</p>
+		                        </div>
+		                        <p class="post_con">${ q.qnaContent }</p>
+		                        <span class="post_date">${ q.qnaDate }</span>
+		                    </div>
+                		</c:forEach>
+                	</c:if>
+                	
                 </div>
                 
                 <!-- 페이징버튼 -->
                 <div class="paBtn">
-					<button>1</button>
-					<button>2</button>
-					<button>3</button>
-					<button>4</button>
-					<button>5</button>
+                	<c:choose>
+                      <c:when test="${ pi.currentPage eq 1 }">
+                          <button disabled>전</button>
+                       </c:when>
+                       <c:otherwise>
+                           <button onclick="location.href='qna.me?cPage=${ pi.currentPage -1 }'">전</button>
+                       </c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                       <button onclick="location.href='qna.me?cPage=${ p }'">${ p }</button>
+                    </c:forEach>
+                    
+                    <c:choose>
+                      <c:when test="${ pi.currentPage eq pi.maxPage }">
+                          <button disabled>후</button>
+                       </c:when>
+                       <c:otherwise>
+                          <button onclick="location.href='qna.me?cPage=${ pi.currentPage + 1 }'">후</button>
+                       </c:otherwise>
+                    </c:choose>
+                
 				</div>
 
             </div>
