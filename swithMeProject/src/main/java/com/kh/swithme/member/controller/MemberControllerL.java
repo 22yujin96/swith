@@ -122,24 +122,25 @@ public class MemberControllerL {
 	 * @param m
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value="join.mem", produces="text/html; charset=UTF-8")
-	public String joinMember(Member m) {
+	
+	@RequestMapping("join.mem")
+	public ModelAndView joinMember(Member m, ModelAndView model, HttpSession session) {
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd()); //암호화
 		//System.out.println("암호문 : " + encPwd);
 		m.setMemberPwd(encPwd);
 		
-		String message = "";
 		
 			if(memberService.joinMember(m) > 0) { //회원가입 성공
 				memberService.joinPoint(m);
-					message = "<script>alert('환영합니다 ! 500p가 지급되었습니다 !');location.href='loginForm.me';</script>";
-							
+					session.setAttribute("alertMsg", "환영합니다 ! 500p가 지급되었습니다 !");
+					model.setViewName("member/loginForm");
 				}else {
-					message = "<script>alert('회원가입을 다시 시도해주세요.');location.href='memberEnrollForm.me';</script>";
-			}
-			return message;
+					//message = "<script>alert('회원가입을 다시 시도해주세요.');location.href='memberEnrollForm.me';</script>";
+					session.setAttribute("alertMsg", "회원가입을 다시 시도해주세요.");
+					model.setViewName("member/memberEnrollForm");
+				}
+			return model;
 		}
 	
 	
@@ -157,13 +158,13 @@ public class MemberControllerL {
 				
 				if(memberService.loginPointChk(m) == 0) {
 					memberService.loginPointInsert(m);
+					session.setAttribute("alertMsg", "환영합니다 ! 30p가 지급되었습니다."); //알럿 최초 로그인 한번만 뜸. 
 				}
-				//알럿 띄우고싶음.
+				
 				session.setAttribute("loginMember", loginMember);
-				                                        //session.setAttribute("alertMsg", "환영합니다 ! 30p가 지급되었습니다.");
 				model.setViewName("redirect:/");
 		}else {
-													
+				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");									
 				model.setViewName("member/loginForm");
 		}
 			return model;
