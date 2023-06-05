@@ -1,11 +1,17 @@
 package com.kh.swithme.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.swithme.common.model.vo.PageInfo;
 import com.kh.swithme.member.model.dao.MemberDao;
+import com.kh.swithme.member.model.vo.Alarm;
 import com.kh.swithme.member.model.vo.Member;
+import com.kh.swithme.member.model.vo.Point;
+import com.kh.swithme.member.model.vo.QNA;
 
 /**
  * @author user1
@@ -81,7 +87,54 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	
+	//유진 -----------------------------------------------------------------------------------
 	
+	// 임시 로그인
+	public Member selectMemberY() {
+		System.out.println("ㅇ나런이ㅏㅓ리ㅏㄴ어ㅣㄹ");
+		return memberDao.selectMemberY(sqlSession);
+	}
+	
+	// 총 포인트 가져오기
+	@Override
+	public int selectTotalPoint(String memberId) {
+		return memberDao.selectTotalPoint(sqlSession, memberId);
+	}
+
+	// 마이페이지 메인 - 포인트 내역(최신 3개)
+	@Override
+	public ArrayList<Point> selectPointList3(String memberId) {
+		return memberDao.selectPointList3(sqlSession, memberId);
+	}
+
+	@Override
+	public ArrayList<Point> selectPointList(String memberId) {
+		return null;
+	}
+
+	// 마이페이지 메인 - 알림 내역(최신 5개)
+	@Override
+	public ArrayList<Alarm> selectAlarmList5(String memberId) {
+		return memberDao.selectAlarmList5(sqlSession, memberId);
+	}
+	
+	
+	@Override
+	public ArrayList<Alarm> selectAlarmList(String memberId) {
+		return null;
+	}
+
+	// 문의글 수 가져오기
+	@Override
+	public int selecQnaListCount(String memberId) {
+		return memberDao.selecQnaListCount(sqlSession, memberId);
+	}
+
+	// 문의글 목록 가져오기
+	@Override
+	public ArrayList<QNA> selectQnaList(PageInfo pi, String memberId) {
+		return memberDao.selectQnaList(sqlSession, pi, memberId);
+	}
 	
 	
 	
