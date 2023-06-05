@@ -177,7 +177,7 @@
                             + '</td>'
                             + '</tr>' 
                             + '<tr>'
-                            + '<td colspan="5" style="height:100px; vertical-align:top;">' + result[i].reviewContent + '</td>'
+                            + '<td colspan="5" style="height:100px; vertical-align:top;" class="reviewContent">' + result[i].reviewContent + '</td>'
                             + '</tr>';
                         
     				}
@@ -222,8 +222,14 @@
     				reviewNo : $(this).next().val()
         		},
         		success : function(review){
-        			console.log(review);
+        			
+                    var value='';
+    					value += '<td colspan="5">'
+		                        + '<textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>'
+		                    	+ '</td>';
 
+    				$('#reviewArea tbody .reviewContent').html(value);
+    			
     					
         		},
         		error : function(){
