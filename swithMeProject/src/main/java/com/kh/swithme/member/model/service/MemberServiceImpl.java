@@ -21,6 +21,10 @@ import com.kh.swithme.member.model.vo.QNA;
  * @author user1
  *
  */
+/**
+ * @author user1
+ *
+ */
 @Service
 public class MemberServiceImpl implements MemberService{
 	
@@ -75,6 +79,10 @@ public class MemberServiceImpl implements MemberService{
 	public Member loginMember(Member m) {
 		return memberDao.loginMember(sqlSession, m);
 	}
+	
+	
+	
+	
 	
 	/**
 	 *로그인 시 포인트 지급
