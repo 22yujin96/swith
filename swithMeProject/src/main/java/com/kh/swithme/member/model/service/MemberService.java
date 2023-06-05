@@ -37,6 +37,9 @@ public interface MemberService {
 	int loginPointInsert(Member m);
 	
 	
+	// 로그인 찾기
+	Member memberSerchId(Member m);
+	
 	
 
 	//유진 -----------------------------------------------------------------------------------

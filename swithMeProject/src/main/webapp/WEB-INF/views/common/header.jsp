@@ -34,14 +34,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
- <c:if test = "${not empty alertMsg }">  
+ 
+ <c:if test = "${not empty alertMsg }">
  	<script>
     	alert('${alertMsg }');
  	
  	</script>
     </c:if>
-    
  <c:remove var = "alertMsg" scope="session"/> 
 
 

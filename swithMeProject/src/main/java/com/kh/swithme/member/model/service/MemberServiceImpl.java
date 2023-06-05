@@ -25,6 +25,10 @@ import com.kh.swithme.member.model.vo.QNA;
  * @author user1
  *
  */
+/**
+ * @author user1
+ *
+ */
 @Service
 public class MemberServiceImpl implements MemberService{
 	
@@ -80,7 +84,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.loginMember(sqlSession, m);
 	}
 	
-	//로그인 시 pointSelect	
+	
+	/**
+	 *로그인 시 pointSelect	
+	 */
 	@Override
 	public int loginPointChk(Member m) {
 		return memberDao.loginPointChk(sqlSession,m);
@@ -92,6 +99,14 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int loginPointInsert(Member m) {
 		return memberDao.loginPointInsert(sqlSession, m);
+	}
+	
+	/**
+	 *아이디 찾기
+	 */
+	@Override
+	public Member memberSerchId(Member m) {
+		return memberDao.memberSerchId(sqlSession, m);
 	}
 	
 	
@@ -145,7 +160,6 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<QNA> selectQnaList(PageInfo pi, String memberId) {
 		return memberDao.selectQnaList(sqlSession, pi, memberId);
 	}
-	
 	
 
 }
