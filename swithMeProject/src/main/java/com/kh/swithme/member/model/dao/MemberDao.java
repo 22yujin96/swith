@@ -1,9 +1,16 @@
 package com.kh.swithme.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.swithme.common.model.vo.PageInfo;
+import com.kh.swithme.member.model.vo.Alarm;
 import com.kh.swithme.member.model.vo.Member;
+import com.kh.swithme.member.model.vo.Point;
+import com.kh.swithme.member.model.vo.QNA;
 
 @Repository
 public class MemberDao {
@@ -31,6 +38,39 @@ public class MemberDao {
 	}
 	
 	
+	//유진 -----------------------------------------------------------------------------------
+	
+	// 임시로그인
+	public Member selectMemberY(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectMemberY");
+	}
+	
+	// 총 포인트 가져오기
+	public int selectTotalPoint(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.selectTotalPoint", memberId);
+	}
+	
+	// 마이페이지 메인 - 포인트 내역(최신 3개)
+	public ArrayList<Point> selectPointList3(SqlSessionTemplate sqlSession, String memberId){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectPointList3", memberId);
+	}
+	
+	// 마이페이지 메인 - 알림 내역(최신 5개)
+	public ArrayList<Alarm> selectAlarmList5(SqlSessionTemplate sqlSession, String memberId){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAlarmList5", memberId);
+	}
+	
+	// 문의글 수 가져오기
+	public int selecQnaListCount(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.selectQnaListCount", memberId);
+	}
+	
+	// 문의글 목록 가져오기
+	public ArrayList<QNA> selectQnaList(SqlSessionTemplate sqlSession, PageInfo pi, String memberId){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectQnaList", memberId, rowBounds);
+	}
 	
 	
 	
