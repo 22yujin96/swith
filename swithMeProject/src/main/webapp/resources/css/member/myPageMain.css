@@ -121,6 +121,11 @@ a:hover{
 	margin-top : 27px;
 	margin-bottom : 30px;
 }
+#PminiList{
+	width : 100%;
+	/* background-color : pink; */
+	height : 100px;
+}
 #PminiList>p{
 	font-size : 17px;
 	line-height : 33px;
@@ -128,6 +133,11 @@ a:hover{
 #mb3>h5{
 	color: rgb(94, 94, 94);
 	font-size : 17px;
+}
+#AminiList{
+	width : 100%;
+	/* background-color : pink; */
+	height : 177px;
 }
 #AminiList>p{
 	font-size : 17px;
